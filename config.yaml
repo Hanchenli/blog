@@ -1,0 +1,17 @@
+params:
+  defaultTheme: dark
+  homeInfoParams:
+    Title: Hi there wave
+    Content: Can be Info, links, about...
+
+  socialIcons: # optional
+    - name: "GitHub"
+      url: "https://github.com/Hanchenli"
+    - name: "LinkedIn"
+      url: "https://www.linkedin.com/in/hanchen-space/"
+    - name: "Twitter"
+      url: "https://twitter.com/hanchen_space"
+    - name: "Instagram"
+      url: "https://www.instagram.com/hanchen_space/"
+    - name: "Facebook"
+      url: "https://www.facebook.com/hanchen_space/"

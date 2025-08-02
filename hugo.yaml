@@ -1,4 +1,31 @@
 baseURL: https://example.org/
 languageCode: en-us
-title: My New Hugo Site
+title: Hanchen's Space Bar
 theme: ["PaperMod"]
+params:
+  defaultTheme: auto
+  homeInfoParams:
+    Title: Hi there wave
+    Content: Can be Info, links, about...
+
+  socialIcons: # optional
+    - name: "GitHub"
+      url: "https://github.com/Hanchenli"
+    - name: "Google Scholar"
+      url: "https://scholar.google.com/citations?user=25RFqZcAAAAJ&hl=en"
+    - name: "LinkedIn"
+      url: "https://www.linkedin.com/in/hanchen-li-79936a1a7/"
+    - name: "X"
+      url: "https://x.com/lihanc02"    
+
+  label:
+    icon: "images/logo.jpg" # Path relative to the assets directory
+    iconHeight: 70
+  
+  showBackgroundImage: false
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON # necessary for search
