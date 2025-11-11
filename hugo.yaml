@@ -5,7 +5,7 @@ theme: ["PaperMod"]
 params:
   defaultTheme: auto
   homeInfoParams:
-    Title: Just Random Blogs
+    Title: Blogs & Thoughts
     Content: | 
       Astronauts' favorite key on keyboard created by human and AI.
 
