@@ -1,5 +1,5 @@
 ---
-title: "LLM Agent Inference is repetitive"
+title: "LLM Agent Serving #1: KV cache"
 date: 2025-11-11
 description: "Blog Post Demonstrating the Benefits of KV Cache Sharing in Agent Serving"
 tags: ["LLM", "serving", "Agent", "LMCache"]
