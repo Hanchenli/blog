@@ -22,6 +22,7 @@ params:
   label:
     icon: "images/logo.png" # Path relative to the assets directory
     iconHeight: 70
+    disableResize: true # Disable resizing to preserve logo quality
   
   showBackgroundImage: false
 

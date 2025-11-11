@@ -15,3 +15,10 @@ iframe {
 .entry-cover img {
     border: 1px solid var(--border);
 }
+
+/* Improve logo rendering quality */
+.logo img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: auto;
+    -ms-interpolation-mode: bicubic;
+}
