@@ -1,8 +1,8 @@
 params:
   defaultTheme: dark
   homeInfoParams:
-    Title: Hi there wave
-    Content: Can be Info, links, about...
+    Title: Astronauts' Favorite Key on the Keyboard
+    Content: Credit to Hanchen Li and his AI tools.
 
   socialIcons: # optional
     - name: "GitHub"

@@ -5,14 +5,15 @@ theme: ["PaperMod"]
 params:
   defaultTheme: auto
   homeInfoParams:
-    Title: Hi there wave
-    Content: Can be Info, links, about...
+    Title: Just Random Blogs
+    Content: | 
+      Astronauts' favorite key on keyboard created by human and AI.
 
   socialIcons: # optional
     - name: "GitHub"
       url: "https://github.com/Hanchenli"
     - name: "Google Scholar"
-      url: "https://scholar.google.com/citations?user=25RFqZcAAAAJ&hl=en"
+      url: "https://hanchenli.github.io/"
     - name: "LinkedIn"
       url: "https://www.linkedin.com/in/hanchen-li-79936a1a7/"
     - name: "X"
