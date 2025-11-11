@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Example on Hanchen&#39;s Space Bar</title>
-    <link>http://localhost:64015/tags/example/</link>
+    <link>http://localhost:1313/blogs/tags/example/</link>
     <description>Recent content in Example on Hanchen&#39;s Space Bar</description>
     <generator>Hugo -- 0.152.2</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 11 Nov 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:64015/tags/example/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/blogs/tags/example/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Example Post</title>
-      <link>http://localhost:64015/posts/example_post/</link>
+      <link>http://localhost:1313/blogs/posts/example_post/</link>
       <pubDate>Mon, 11 Nov 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:64015/posts/example_post/</guid>
+      <guid>http://localhost:1313/blogs/posts/example_post/</guid>
       <description>This is an example post demonstrating the blog setup</description>
     </item>
   </channel>
