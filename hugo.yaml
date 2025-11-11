@@ -19,7 +19,7 @@ params:
       url: "https://x.com/lihanc02"    
 
   label:
-    icon: "images/logo.jpg" # Path relative to the assets directory
+    icon: "images/logo.png" # Path relative to the assets directory
     iconHeight: 70
   
   showBackgroundImage: false

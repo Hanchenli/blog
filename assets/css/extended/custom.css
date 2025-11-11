@@ -16,8 +16,10 @@ iframe {
     border: 1px solid var(--border);
 }
 
-body {
-    background-image: url("/images/background.jpg");
+/* Background for post pages */
+body:has(.post-single),
+body:has(.post-content) {
+    background-image: url("/images/background.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
