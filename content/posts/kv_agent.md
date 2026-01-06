@@ -42,13 +42,26 @@ However, as the adoption of these agents grows, the efficiency of their operatio
 This directly improves the Return-On-Investment (ROI) for users and makes these tools more accessible to a broader audience.
 
 ## The Fundamental Inefficiency of Agents
-<!-- talk about kv cache sharing problem -->
+In order to understand why agents are so expensive to run, we need to look at how they operate fundamentally.
+We analyze trace from Claude Code and mini-swe-agent to give a brief overview.
+
+As we can see .
 
 ## Why is Current KV Cache Offloading Not Enough?
-<!-- talk about how KV cache sharing can make it better -->
+90+% Prefix Cache hit rate? Why not just run KV Cache Offloading and save 10x?
 
-## More Challenges, yet Juicier Rewards
+<!-- talk about how KV cache sharing can make it better -->
+However, there are three further considerations here: 
+1. **Contention for Space**: DRAM not enough
+2. **Queueling Delay in Scheduling**: queueing delay in continuum
+3. **Remaining Compute**: Still lots of decode and prefill
+
+Some research works including [Continuum]() have demonstrated by mitigating the first two issues, KV cache offloading can bring significant speedup and cost reduction for serving LLMs.
+However, for agents, the remaining compute issue becomes more prominent due to the high number of calls made to the LLM.
+
+## Looking Forward: Beyond KV Cache
 <!-- We will talk more about improvement beyond KV Cache Offloading. -->
+
 
 ## Conclusion
 We have discussed the inefficiencies of current agent systems and how KV cache sharing can help alleviate some of these issues.
