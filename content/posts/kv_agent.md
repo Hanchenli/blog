@@ -1,6 +1,6 @@
 ---
 title: "Why Agents are Efficiency Nightmares and How to Fix them?"
-date: 2025-11-11
+date: 2025-1-07
 description: "Blog Post Demonstrating the Benefits of KV Cache Sharing in Agent Serving"
 author: "Hanchen Li, Xiaokun Chen, Jingzhuo Hu, and Collaborators"
 tags: ["LLM", "Inference", "Agent", "KV Cache","LMCache"]
@@ -24,10 +24,11 @@ However, the efficiency of these agents has just rised to our attention.
 In this blog post, we will discuss why agents are efficiency nightmares, how we can make them (somewhat) better with KV cache management, 
 and where we could be going for these tasks.
 
-<img src="/assets/images/agent_kv/front.png" alt="Agent Efficiency" style="width: 60%; display: block; margin: 0 auto;">
 
-## Wonderful Agents Draining Your Bank Account.
-[Claude Code](https://www.claude.com/product/claude-code) has quietly become one of the most interesting & widely-adopted real-world agentic systems available to normal developers.
+## Wonderful Agents; But Draining Bank Account.
+Everyone said 2025 was the year of agents. With continuous improment in base model and emerging techniques like reinforcement learning, coding agents including [Cursor](https://www.cursor.com/), [Claude Code](https://www.claude.com/product/claude-code) have become much more powerful and automated compared with the start of the year. Quantitatively, the score on [SWE-Bench](https://www.swebench.com/) has risen from 20% as in Aug 2024 to over 70% for frontier models. 
+
+ quietly become one of the most interesting & widely-adopted real-world agentic systems available to normal developers.
 <!-- Talk about agent applicaitons, some benchmarks on the cost -->
 
 
@@ -43,3 +44,5 @@ and where we could be going for these tasks.
 ## Conclusion
 We have discussed the inefficiencies of current agent systems and how KV cache sharing can help alleviate some of these issues.
 We explained
+
+Disclaimer: This blog post was created with help from Gemini, VSCode copilot. Views are solely those of the authors and do not reflect employer values.
