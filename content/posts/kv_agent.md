@@ -70,7 +70,14 @@ However, for agents, the remaining compute issue becomes more prominent due to t
 
 ## Looking Forward: Beyond KV Cache
 <!-- We will talk more about improvement beyond KV Cache Offloading. -->
+As we have discussed, while KV cache offloading can help alleviate some of the inefficiencies in agent operation, it is not a complete solution.
+To further improve the efficiency of agents, we need to look beyond just KV cache management.
+Some potential directions include:
+1. **Model Optimization**: Developing more efficient models with smaller footprints during long context.
+2. **Adaptive Context Management**: do not append unncessary context to the main loop
 
+Fundamentally memory bound.
+We need better algorithm and system co-design to make agents more efficient and accessible.
 
 ## Conclusion
 We have discussed the inefficiencies of current agent systems and how KV cache sharing can help alleviate some of these issues.
