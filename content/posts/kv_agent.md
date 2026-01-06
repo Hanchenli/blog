@@ -44,9 +44,18 @@ This directly improves the Return-On-Investment (ROI) for users and makes these 
 ## The Fundamental Inefficiency of Agents
 In order to understand why agents are so expensive to run, we need to look at how they operate fundamentally.
 We analyze trace from Claude Code and mini-swe-agent to give a brief overview.
+We used each agent to solve a coding task from [SWE-bench_Verified](https://www.swebench.com/) dataset and recorded the message history sent.
 
-As we can see .
+### Overview Statistics
 
+
+### Microscopic View
+In order to understand the behaviors, we will zoom in into the .
+
+### Key Observations
+1. **High number of calls**: 
+2. **Appending Context**: 
+3. **Interruptive Nature**: 
 ## Why is Current KV Cache Offloading Not Enough?
 90+% Prefix Cache hit rate? Why not just run KV Cache Offloading and save 10x?
 
