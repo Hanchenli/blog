@@ -1,6 +1,6 @@
 ---
 title: "Why Agents are Efficiency Nightmares and How to Fix them?"
-date: 2025-1-07
+date: 2025-01-07
 description: "Blog Post Demonstrating the Benefits of KV Cache Sharing in Agent Serving"
 author: "Hanchen Li, Xiaokun Chen, Jingzhuo Hu, and Collaborators"
 tags: ["LLM", "Inference", "Agent", "KV Cache","LMCache"]
