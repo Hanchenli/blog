@@ -5,6 +5,10 @@ description: "Blog Post Demonstrating the Benefits of KV Cache Sharing in Agent 
 author: "Hanchen Li, Xiaokun Chen, Jingzhuo Hu, and Collaborators"
 tags: ["LLM", "Inference", "Agent", "KV Cache","LMCache"]
 categories: ["general"]
+cover:
+    image: images/agent_kv/front.png
+    alt: "Agent Efficiency"
+    relative: false
 ShowToc: true
 TocOpen: false
 ---
@@ -14,20 +18,28 @@ In the same time, it charges 20 USD per month for a subscription license.
 Why do we still get to use them? 
 Maybe the price war, maybe the crazy debts some companies upstream are carrying, maybe the implicit labeling you are carrying out for the providers.
 
-But regardless of the reason behind the pricing created by the giants, we want to use agents so we can sit back and enjoy a sip of the coffee.
+But regardless of the reason behind the pricing, we want to use more these powerful agents.
+Current models and applications are already capable of handling many complex tasks with minimal human intervention.
+However, the efficiency of these agents has just rised to our attention. 
+In this blog post, we will discuss why agents are efficiency nightmares, how we can make them (somewhat) better with KV cache management, 
+and where we could be going for these tasks.
 
+![Agent Efficiency](/images/agent_kv/front.png)
 
-
-## Wonderful Agents Marching Towards Automation. 
+## Wonderful Agents Draining Your Bank Account. 
 [Claude Code](https://www.claude.com/product/claude-code) has quietly become one of the most interesting & widely-adopted real-world agentic systems available to normal developers.
+<!-- Talk about agent applicaitons, some benchmarks on the cost -->
 
 
-
-## Why the LLM inference were not designed for Agents?
+## The Fundamental Inefficiency of Agents
 <!-- talk about kv cache sharing problem -->
 
-## How to make it better?
+## Why is Current KV Cache Offloading Not Enough?
 <!-- talk about how KV cache sharing can make it better -->
 
-## The Inefficiency dilemma of Agents
+## More Challenges, yet Juicier Rewards
 <!-- We will talk more about improvement beyond KV Cache Offloading. -->
+
+## Conclusion
+We have discussed the inefficiencies of current agent systems and how KV cache sharing can help alleviate some of these issues.
+We explained
