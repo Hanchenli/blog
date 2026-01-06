@@ -26,11 +26,20 @@ and where we could be going for these tasks.
 
 
 ## Wonderful Agents; But Draining Bank Account.
-Everyone said 2025 was the year of agents. With continuous improment in base model and emerging techniques like reinforcement learning, coding agents including [Cursor](https://www.cursor.com/), [Claude Code](https://www.claude.com/product/claude-code) have become much more powerful and automated compared with the start of the year. Quantitatively, the score on [SWE-Bench](https://www.swebench.com/) has risen from 20% as in Aug 2024 to over 70% for frontier models. 
+Everyone said 2025 was the year of agents. With continuous improment in base model and emerging techniques like reinforcement learning, coding agents including [Cursor](https://www.cursor.com/), [Claude Code](https://www.claude.com/product/claude-code) have become much more powerful and automated compared with the start of the year. Quantitatively, the score on [SWE-Bench](https://www.swebench.com/) has risen from 20% as in Aug 2024 to over 70% for frontier models with a simple agent scaffold. 
 
- quietly become one of the most interesting & widely-adopted real-world agentic systems available to normal developers.
-<!-- Talk about agent applicaitons, some benchmarks on the cost -->
+However, the cost of running these agents is still prohibitively high. 
+We conducted a simple benchmark experiment running Claude Code with APIs to get a quantitative measure of the actual token cost.
+<!-- jingzhuo can you add some things here -->
 
+We found that handling a single issue in a mid-sized public repository costs around 1 USD when using Claude Code via API.
+This is in stark contrast to the subscription license cost of 20 USD per month.
+There could be various reasons behind this pricing discrepancy, such as market dynamics, provider strategies, or the implicit value of the labeling work being done by the users.
+However, despite the high costs, the capabilities of these agents make them indispensable for many users.
+As proved by the usage-based pricing model adopted by [Manus](https://manus.im/), many users are willing to pay for the advanced functionalities provided by these agents, even at a premium.
+
+However, as the adoption of these agents grows, the efficiency of their operation becomes increasingly important.
+This directly improves the Return-On-Investment (ROI) for users and makes these tools more accessible to a broader audience.
 
 ## The Fundamental Inefficiency of Agents
 <!-- talk about kv cache sharing problem -->
