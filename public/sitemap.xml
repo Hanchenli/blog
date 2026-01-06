@@ -2,57 +2,57 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://hanchenli.github.io/blogs/tags/agent/</loc>
+    <loc>http://localhost:1313/blogs/tags/agent/</loc>
     <lastmod>2025-12-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://hanchenli.github.io/blogs/categories/</loc>
+    <loc>http://localhost:1313/blogs/categories/</loc>
     <lastmod>2025-12-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://hanchenli.github.io/blogs/tags/claude-code/</loc>
+    <loc>http://localhost:1313/blogs/tags/claude-code/</loc>
     <lastmod>2025-12-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://hanchenli.github.io/blogs/tags/context-engineering/</loc>
+    <loc>http://localhost:1313/blogs/tags/context-engineering/</loc>
     <lastmod>2025-12-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://hanchenli.github.io/blogs/posts/claude_code/</loc>
+    <loc>http://localhost:1313/blogs/posts/claude_code/</loc>
     <lastmod>2025-12-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://hanchenli.github.io/blogs/categories/general/</loc>
+    <loc>http://localhost:1313/blogs/categories/general/</loc>
     <lastmod>2025-12-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://hanchenli.github.io/blogs/</loc>
+    <loc>http://localhost:1313/blogs/</loc>
     <lastmod>2025-12-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://hanchenli.github.io/blogs/tags/llm/</loc>
+    <loc>http://localhost:1313/blogs/tags/llm/</loc>
     <lastmod>2025-12-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://hanchenli.github.io/blogs/posts/</loc>
+    <loc>http://localhost:1313/blogs/posts/</loc>
     <lastmod>2025-12-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://hanchenli.github.io/blogs/tags/reuse-pattern/</loc>
+    <loc>http://localhost:1313/blogs/tags/reuse-pattern/</loc>
     <lastmod>2025-12-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://hanchenli.github.io/blogs/tags/</loc>
+    <loc>http://localhost:1313/blogs/tags/</loc>
     <lastmod>2025-12-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://hanchenli.github.io/blogs/tags/inference/</loc>
+    <loc>http://localhost:1313/blogs/tags/inference/</loc>
     <lastmod>2025-01-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://hanchenli.github.io/blogs/tags/kv-cache/</loc>
+    <loc>http://localhost:1313/blogs/tags/kv-cache/</loc>
     <lastmod>2025-01-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://hanchenli.github.io/blogs/tags/lmcache/</loc>
+    <loc>http://localhost:1313/blogs/tags/lmcache/</loc>
     <lastmod>2025-01-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://hanchenli.github.io/blogs/posts/kv_agent/</loc>
+    <loc>http://localhost:1313/blogs/posts/kv_agent/</loc>
     <lastmod>2025-01-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://hanchenli.github.io/blogs/archives.fr/</loc>
+    <loc>http://localhost:1313/blogs/archives.fr/</loc>
   </url><url>
-    <loc>https://hanchenli.github.io/blogs/archives/</loc>
+    <loc>http://localhost:1313/blogs/archives/</loc>
   </url><url>
-    <loc>https://hanchenli.github.io/blogs/search/</loc>
+    <loc>http://localhost:1313/blogs/search/</loc>
   </url><url>
-    <loc>https://hanchenli.github.io/blogs/search.fr/</loc>
+    <loc>http://localhost:1313/blogs/search.fr/</loc>
   </url>
 </urlset>

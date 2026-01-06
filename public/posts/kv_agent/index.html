@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><meta charset="utf-8">
+<head><script src="/blogs/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=blogs/livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, nofollow">
 <title>Why Agents are Efficiency Nightmares and How to Fix them? | Hanchen&#39;s Space Bar</title>
 <meta name="keywords" content="LLM, Inference, Agent, KV Cache, LMCache">
-<meta name="description" content="Blog Post Demonstrating the Benefits of KV Cache Sharing in Agent Serving">
+<meta name="description" content="Demonstrating the Benefits of KV Cache Sharing in Agent Serving and Future Directions">
 <meta name="author" content="Hanchen Li, Xiaokun Chen, Jingzhuo Hu, and Collaborators">
-<link rel="canonical" href="https://hanchenli.github.io/blogs/posts/kv_agent/">
+<link rel="canonical" href="http://localhost:1313/blogs/posts/kv_agent/">
 <link crossorigin="anonymous" href="/blogs/assets/css/stylesheet.12d075fb361717557fefde57d93db59c2ce2143ebfcc84ea38467edf4e444ce7.css" integrity="sha256-EtB1&#43;zYXF1V/795X2T21nCziFD6/zITqOEZ&#43;305ETOc=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://hanchenli.github.io/blogs/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://hanchenli.github.io/blogs/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://hanchenli.github.io/blogs/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://hanchenli.github.io/blogs/apple-touch-icon.png">
-<link rel="mask-icon" href="https://hanchenli.github.io/blogs/safari-pinned-tab.svg">
+<link rel="icon" href="http://localhost:1313/blogs/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/blogs/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/blogs/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/blogs/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/blogs/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://hanchenli.github.io/blogs/posts/kv_agent/">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/blogs/posts/kv_agent/">
 <noscript>
     <style>
         #theme-toggle,
@@ -67,80 +67,7 @@
         background-position: center;
     }
 </style>
- <meta property="og:url" content="https://hanchenli.github.io/blogs/posts/kv_agent/">
-  <meta property="og:site_name" content="Hanchen&#39;s Space Bar">
-  <meta property="og:title" content="Why Agents are Efficiency Nightmares and How to Fix them?">
-  <meta property="og:description" content="Blog Post Demonstrating the Benefits of KV Cache Sharing in Agent Serving">
-  <meta property="og:locale" content="en-us">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2025-01-07T00:00:00+00:00">
-    <meta property="article:modified_time" content="2025-01-07T00:00:00+00:00">
-    <meta property="article:tag" content="LLM">
-    <meta property="article:tag" content="Inference">
-    <meta property="article:tag" content="Agent">
-    <meta property="article:tag" content="KV Cache">
-    <meta property="article:tag" content="LMCache">
-    <meta property="og:image" content="https://hanchenli.github.io/blogs/images/agent_kv/front.png">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://hanchenli.github.io/blogs/images/agent_kv/front.png">
-<meta name="twitter:title" content="Why Agents are Efficiency Nightmares and How to Fix them?">
-<meta name="twitter:description" content="Blog Post Demonstrating the Benefits of KV Cache Sharing in Agent Serving">
 
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://hanchenli.github.io/blogs/posts/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "Why Agents are Efficiency Nightmares and How to Fix them?",
-      "item": "https://hanchenli.github.io/blogs/posts/kv_agent/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "Why Agents are Efficiency Nightmares and How to Fix them?",
-  "name": "Why Agents are Efficiency Nightmares and How to Fix them?",
-  "description": "Blog Post Demonstrating the Benefits of KV Cache Sharing in Agent Serving",
-  "keywords": [
-    "LLM", "Inference", "Agent", "KV Cache", "LMCache"
-  ],
-  "articleBody": "Agents are EXPENSIVE. Claude Code takes 1 USD to handle a single issue in a mid-sized public repository when using API. In the same time, it charges 20 USD per month for a subscription license. Why do we still get to use them? Maybe the price war, maybe the crazy debts some companies upstream are carrying, maybe the implicit labeling you are carrying out for the providers.\nBut regardless of the reason behind the pricing, we want to use more these powerful agents. Current models and applications are already capable of handling many complex tasks with minimal human intervention. However, the efficiency of these agents has just rised to our attention. In this blog post, we will discuss why agents are efficiency nightmares, how we can make them (somewhat) better with KV cache management, and where we could be going for these tasks.\nPrerequisite: LLM inference basics. Suggested reading: LLM Inference; KV Cache Offloading\nWonderful Agents; But Draining Bank Account. Everyone said 2025 was the year of agents. With continuous improment in base model and emerging techniques like reinforcement learning, coding agents including Cursor, Claude Code have become much more powerful and automated compared with the start of the year. Quantitatively, the score on SWE-Bench has risen from 20% as in Aug 2024 to over 70% for frontier models with a simple agent scaffold.\nHowever, the cost of running these agents is still prohibitively high. We conducted a simple benchmark experiment running Claude Code with APIs to get a quantitative measure of the actual token cost.\nWe found that handling a single issue in a mid-sized public repository costs around 1 USD when using Claude Code via API. This is in stark contrast to the subscription license cost of 20 USD per month. There could be various reasons behind this pricing discrepancy, such as market dynamics, provider strategies, or the implicit value of the labeling work being done by the users. However, despite the high costs, the capabilities of these agents make them indispensable for many users. As proved by the usage-based pricing model adopted by Manus, many users are willing to pay for the advanced functionalities provided by these agents, even at a premium.\nHowever, as the adoption of these agents grows, the efficiency of their operation becomes increasingly important. This directly improves the Return-On-Investment (ROI) for users and makes these tools more accessible to a broader audience.\nThe Fundamental Inefficiency of Agents In order to understand why agents are so expensive to run, we need to look at how they operate fundamentally. We analyze trace from Claude Code and mini-swe-agent to give a brief overview. We used each agent to solve a coding task from SWE-bench_Verified dataset and recorded the message history sent.\nOverview Statistics We report some high-level statistics from the traces below:\nMethod Average Total Tokens Average Cost ($) Average Calls to LLM Prefix Cache Hit Rate Claude Code 15,000 1.0 45 92% Mini-SWE-Agent - - 30 88% Microscopic View We randomly select one task (#80) from the SWE-bench_Verified dataset. The problem setup is to fix an issue in the django/django repo from commit 2e0f04507b17362239ba49830d26fec504d46978.\nProblem statement:\n“JSONField are not properly displayed in admin when they are readonly.\nDescription: JSONField values are displayed as dict when readonly in the admin. For example, {\"foo\": \"bar\"} would be displayed as {'foo': 'bar'}, which is not valid JSON.\nI believe the fix would be to add a special case in django.contrib.admin.utils.display_for_field to call the prepare_value of the JSONField (not calling json.dumps directly to take care of the InvalidJSONInput case).”\nAnd this is exactly the prompt that Claude Code received.\nSurprisingly, before any fancy reasoning, Claude Code ran a couple of “warm-up” steps (trace ID #2, #3, #4) before the actual task. Warm-up steps do nothing but input the prompt for:\nTool list (#2) Explore subagent (#3) Plan subagent (#4) Warm-up steps are used for caching purposes—later when those tools and subagents are called, the cache will be hit, resulting in faster response time. The summarization agent (#1) and new topic agent (#5) are used for summarizing the context and generating a new title for display—just as the ChatGPT sidebar works.\nThe main agent (#6) comes with a huge system prompt, including git history, status, tool list, etc. The 18 tools in the tool list not only have the ability to use normal tool calls like Bash, Grep, Read, WebFetch, AskUserQuestion, etc., but also the ability to invoke and delegate certain tasks to subagents like:\nExplore subagent (#7) Plan subagent (#46) These subagents will invoke tool calls from their own tool lists.\nImmediately after the main agent (#6), it invokes the Explore (also called file search agent) subagent (#7), which will invoke tool calls from its tool list to explore the codebase. It starts with a different system prompt where its main goal is to explore the codebase:\nYou are Claude Code, Anthropic’s official CLI for Claude. You are a file search specialist for Claude Code, Anthropic’s official CLI for Claude. You excel at thoroughly navigating and exploring codebases.\nInterestingly, the Explore subagent (#7) is not the only subagent that Claude Code can invoke. Instead, it invokes 3 Explore subagents in parallel to explore the codebase, each with a different goal:\nExplore JSONField implementation (lifespan: #7-#26) Explore admin display_for_field (lifespan: #8-#37) Explore readonly field rendering (lifespan: #9-#45) The context of the main agent (#6) is not carried to the subagents, which is beneficial for the subagents to have a fresh start. Each Explore subagent can invoke 1-3 tools in parallel, where the tools are from the tool list of the Explore subagent—a subset (10/18) of the main agent’s tool list.\nThe ReAct mechanism is used here: the Explore subagent will invoke a tool call, then based on the tool output, it will observe and invoke another tool call to explore the codebase further until it deems it has explored enough.\nFinally, after the slowest Explore subagent finishes its exploration at step #45, at step #46, the main agent appends the findings (summarizations) from all 3 Explore subagents to the context, and then invokes the Plan subagent (#47) to plan the fix.\nSimilar to the Explore Agent, the Plan Agent (#47) also has a different system prompt, where its main goal is to plan the fix:\nYou are Claude Code, Anthropic’s official CLI for Claude. You are a software architect and planning specialist for Claude Code. Your role is to explore the codebase and design implementation plans.\nThe Plan Agent did not carry all the context from the main agent nor the Explore subagents, which is beneficial for the Plan Agent to have a fresh start. Instead, it only contains the summarization of the Explore subagents’ findings. The toolbox is a subset (10/18) of the main agent’s tool list. The goal for the Plan Agent is to design an implementation plan that:\nPlease design an implementation plan that:\nIdentifies the exact changes needed to display_for_field Considers whether we need to instantiate a form field from the model field or if there’s a better approach Identifies any edge cases or potential issues Recommends the best approach given Django’s architecture Similarly, the Plan Agent also follows the ReAct pattern and loops through tool calling from #47 to #72, where the context accumulates from 11,552 tokens to 38,819 tokens. After having a good plan (see details in #72), the Plan Agent will return to the main agent (#73) with the plan.\nThe main agent will then invoke a series of tool calls to:\nReview the plan (#73) Ask user for clarification (#74) Write the plan into a markdown file (#75) Finally, the main agent will exit the plan mode (#76) and enter the execute mode (#77) to execute the plan after interactively asking the user for plan approval (#76-#77).\nThe execution phase (#77-#91) still follows the ReAct pattern. The main agent will use the plan markdown file as a todo list:\nAdd json import to utils.py Add JSONField handling to display_for_field() Add tests to test_admin_utils.py Run the tests to verify After executing some tool calls to read or edit files, it will cross out the todo items in the plan markdown file. Once all the todo items are crossed out, the main agent will end with a conclusion message (#92).\nDuring this phase, there are some other subagents being invoked—e.g., the Extract Bash Command subagent (#93), where there’s only a one-shot prompt template for the subagent to extract the bash command in order to not run dangerous commands like rm without user confirmation by accident.\nAnd this is the whole diagram of the claude code trace:\nKey Observations We highlight three key observations from the trace analysis above that contribute to the inefficiency of agents:\nHigh number of calls: Agents make a large number of calls to the LLM server due to the need to repetitive get actions and report status. Each call incurs incremental prefill and may cause KV cache miss that requires recomputation. Appending Context: Agents often append new context to the existing conversation history, leading to longer input sequences and increased computational load for each call. Why is Current KV Cache Offloading Not Enough? From the table above, we can see that both agents have a high prefix cache hit rate (around 90%). Readers with background may wonder: 90+% Prefix Cache hit rate? Why not just run KV Cache Offloading and save 10x?\nHowever, there are three further considerations here:\nContention for Space: Due to the appending context behavior, the KV cache space is highly contended among different agent programs due to long context. Queueling Delay in Scheduling: While the current agent program is waiting on the tool, if the sched- uler allocates the GPU memory to other requests to maximize throughput, the KV cache for the current program will be removed from GPU memory. This incurs a queueing delay for each request when the program resumes after tool execution. Remaining Compute: As mentioned above, each call still requires prefill compute even with KV cache hit. With a high number of calls, the remaining compute becomes non-negligible. Some research works have demonstrated by mitigating the first two issues, KV cache offloading can bring significant speedup and cost reduction for serving LLMs. For example, Continuum proposes to reuse the Time-to-live (TTL) concept to preserve the KV cache for programs that are likely to be resumed soon to mitigate the first two problems.\nHowever, for agents, the remaining compute issue becomes more prominent due to the high number of calls made to the LLM.\nLooking Forward: Beyond KV Cache As we have discussed, while KV cache offloading can help alleviate some of the inefficiencies in agent operation, it is not a complete solution. To further improve the efficiency of agents, we need to look beyond just KV cache management. Some potential directions include:\nModel Optimization: Developing more efficient models with smaller footprints during long context. Adaptive Context Management: do not append unncessary context to the main loop Fundamentally memory bound. We need better algorithm and system co-design to make agents more efficient and accessible.\nConclusion We have discussed the inefficiencies of current agent systems and how KV cache sharing can help alleviate some of these issues. We explained\nDisclaimer: This blog post was created with help from Gemini, VSCode copilot. Views are solely those of the authors and do not reflect employer values.\n",
-  "wordCount" : "1890",
-  "inLanguage": "en",
-  "image":"https://hanchenli.github.io/blogs/images/agent_kv/front.png","datePublished": "2025-01-07T00:00:00Z",
-  "dateModified": "2025-01-07T00:00:00Z",
-  "author":{
-    "@type": "Person",
-    "name": "Hanchen Li, Xiaokun Chen, Jingzhuo Hu, and Collaborators"
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://hanchenli.github.io/blogs/posts/kv_agent/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Hanchen's Space Bar",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://hanchenli.github.io/blogs/favicon.ico"
-    }
-  }
-}
-</script>
 </head>
 
 <body class="" id="top">
@@ -158,8 +85,8 @@
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://hanchenli.github.io/blogs/" accesskey="h" title="Hanchen&#39;s Space Bar (Alt + H)">
-                    <img src="https://hanchenli.github.io/blogs/images/logo.png" alt="" aria-label="logo"
+            <a href="http://localhost:1313/blogs/" accesskey="h" title="Hanchen&#39;s Space Bar (Alt + H)">
+                    <img src="http://localhost:1313/blogs/images/logo.png" alt="" aria-label="logo"
                         height="70">Hanchen&#39;s Space Bar</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
@@ -198,19 +125,14 @@
       Why Agents are Efficiency Nightmares and How to Fix them?
     </h1>
     <div class="post-description">
-      Blog Post Demonstrating the Benefits of KV Cache Sharing in Agent Serving
+      Demonstrating the Benefits of KV Cache Sharing in Agent Serving and Future Directions
     </div>
     <div class="post-meta"><span title='2025-01-07 00:00:00 +0000 UTC'>January 7, 2025</span>&nbsp;·&nbsp;Hanchen Li, Xiaokun Chen, Jingzhuo Hu, and Collaborators
 
 </div>
   </header> 
 <figure class="entry-cover">
-            <img loading="eager"
-                srcset='https://hanchenli.github.io/blogs/images/agent_kv/front_hu_fa46cf8edd5d380.png 360w,https://hanchenli.github.io/blogs/images/agent_kv/front_hu_2f76abe8cd56071b.png 480w,https://hanchenli.github.io/blogs/images/agent_kv/front_hu_7bfae818024d28f9.png 720w,https://hanchenli.github.io/blogs/images/agent_kv/front_hu_fe340089b1024ccf.png 1080w,https://hanchenli.github.io/blogs/images/agent_kv/front_hu_80628cb2967374c0.png 1500w,https://hanchenli.github.io/blogs/images/agent_kv/front.png 1510w'
-                src="https://hanchenli.github.io/blogs/images/agent_kv/front.png"
-                sizes="(min-width: 768px) 720px, 100vw"
-                width="1510" height="1342"
-                alt="Agent Efficiency">
+            <img loading="eager" src="http://localhost:1313/blogs/images/agent_kv/front.png" alt="Agent Efficiency">
         
 </figure><div class="toc">
     <details >
@@ -234,7 +156,7 @@
                 <li>
                     <a href="#why-is-current-kv-cache-offloading-not-enough" aria-label="Why is Current KV Cache Offloading Not Enough?">Why is Current KV Cache Offloading Not Enough?</a></li>
                 <li>
-                    <a href="#looking-forward-beyond-kv-cache" aria-label="Looking Forward: Beyond KV Cache">Looking Forward: Beyond KV Cache</a></li>
+                    <a href="#looking-forward-beyond-kv-cache-management" aria-label="Looking Forward: Beyond KV Cache Management">Looking Forward: Beyond KV Cache Management</a></li>
                 <li>
                     <a href="#conclusion" aria-label="Conclusion">Conclusion</a>
                 </li>
@@ -268,7 +190,7 @@ As proved by the usage-based pricing model adopted by <a href="https://manus.im/
 This directly improves the Return-On-Investment (ROI) for users and makes these tools more accessible to a broader audience.</p>
 <h2 id="the-fundamental-inefficiency-of-agents">The Fundamental Inefficiency of Agents<a hidden class="anchor" aria-hidden="true" href="#the-fundamental-inefficiency-of-agents">#</a></h2>
 <p>In order to understand why agents are so expensive to run, we need to look at how they operate fundamentally.
-We analyze trace from Claude Code and mini-swe-agent to give a brief overview.
+We analyze trace from Claude Code using Claude-4.5-sonnet and mini-swe-agent using GPT-5 to give a brief overview.
 We used each agent to solve a coding task from <a href="https://www.swebench.com/">SWE-bench_Verified</a> dataset and recorded the message history sent.</p>
 <h3 id="overview-statistics">Overview Statistics<a hidden class="anchor" aria-hidden="true" href="#overview-statistics">#</a></h3>
 <p>We report some high-level statistics from the traces below:</p>
@@ -384,21 +306,24 @@ We used each agent to solve a coding task from <a href="https://www.swebench.com
 <h2 id="why-is-current-kv-cache-offloading-not-enough">Why is Current KV Cache Offloading Not Enough?<a hidden class="anchor" aria-hidden="true" href="#why-is-current-kv-cache-offloading-not-enough">#</a></h2>
 <p>From the table above, we can see that both agents have a high prefix cache hit rate (around 90%).
 Readers with background may wonder: <strong>90+%</strong> Prefix Cache hit rate? Why not just run KV Cache Offloading and save 10x?</p>
-<!-- raw HTML omitted -->
+<p><img alt="Two Problems that Continuum tries to prevent" loading="lazy" src="/blogs/images/agent_kv/problem.png"></p>
 <p>However, there are three further considerations here:</p>
 <ol>
 <li><strong>Contention for Space</strong>: Due to the appending context behavior, the KV cache space is highly contended among different agent programs due to long context.</li>
 <li><strong>Queueling Delay in Scheduling</strong>:  While
-the current agent program is waiting on the tool, if the sched-
+the current agent program is waiting on the tool, if the sched
 uler allocates the GPU memory to other requests to maximize
 throughput, the KV cache for the current program will be
 removed from GPU memory. This incurs a queueing delay for each request when the program resumes after tool execution.</li>
 <li><strong>Remaining Compute</strong>: As mentioned above, each call still requires prefill compute even with KV cache hit. With a high number of calls, the remaining compute becomes non-negligible.</li>
 </ol>
-<p>Some research works have demonstrated by mitigating the first two issues, KV cache offloading can bring significant speedup and cost reduction for serving LLMs.
-For example, <a href="https://arxiv.org/abs/2511.02230">Continuum</a> proposes to reuse the Time-to-live (TTL) concept to preserve the KV cache for programs that are likely to be resumed soon to mitigate the first two problems.</p>
+<p>Some research works have demonstrated by mitigating the first two issues, KV cache offloading can bring significant speedup and cost reduction for serving LLMs.</p>
+<p><img alt="TTL-based Eviction Policy" loading="lazy" src="/blogs/images/agent_kv/ttl.png"></p>
+<p>For example, <a href="https://arxiv.org/abs/2511.02230">Continuum</a> proposes to reuse the Time-to-live (TTL) concept to preserve the KV cache for programs that are likely to be resumed soon to mitigate the first two problems. This changes the eviction policy from LRU to TTL-based, which is more suitable for agent workloads.</p>
+<p>As demonstrated by their experiments, Continuum can bring up to 3.66x improvement for serving LLM agent traces with long context on SWE-Bench and Berkeley Function Calling Leaderboard workloads.</p>
+<p><img alt="Evaluation Results of Continuum" loading="lazy" src="/blogs/images/agent_kv/eval.png"></p>
+<h2 id="looking-forward-beyond-kv-cache-management">Looking Forward: Beyond KV Cache Management<a hidden class="anchor" aria-hidden="true" href="#looking-forward-beyond-kv-cache-management">#</a></h2>
 <p>However, for agents, the remaining compute issue becomes more prominent due to the high number of calls made to the LLM.</p>
-<h2 id="looking-forward-beyond-kv-cache">Looking Forward: Beyond KV Cache<a hidden class="anchor" aria-hidden="true" href="#looking-forward-beyond-kv-cache">#</a></h2>
 <p>As we have discussed, while KV cache offloading can help alleviate some of the inefficiencies in agent operation, it is not a complete solution.
 To further improve the efficiency of agents, we need to look beyond just KV cache management.
 Some potential directions include:</p>
@@ -418,18 +343,18 @@ We explained</p>
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://hanchenli.github.io/blogs/tags/llm/">LLM</a></li>
-      <li><a href="https://hanchenli.github.io/blogs/tags/inference/">Inference</a></li>
-      <li><a href="https://hanchenli.github.io/blogs/tags/agent/">Agent</a></li>
-      <li><a href="https://hanchenli.github.io/blogs/tags/kv-cache/">KV Cache</a></li>
-      <li><a href="https://hanchenli.github.io/blogs/tags/lmcache/">LMCache</a></li>
+      <li><a href="http://localhost:1313/blogs/tags/llm/">LLM</a></li>
+      <li><a href="http://localhost:1313/blogs/tags/inference/">Inference</a></li>
+      <li><a href="http://localhost:1313/blogs/tags/agent/">Agent</a></li>
+      <li><a href="http://localhost:1313/blogs/tags/kv-cache/">KV Cache</a></li>
+      <li><a href="http://localhost:1313/blogs/tags/lmcache/">LMCache</a></li>
     </ul>
   </footer>
 </article>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2026 <a href="https://hanchenli.github.io/blogs/">Hanchen&#39;s Space Bar</a></span> · 
+        <span>&copy; 2026 <a href="http://localhost:1313/blogs/">Hanchen&#39;s Space Bar</a></span> · 
 
     <span>
         Powered by

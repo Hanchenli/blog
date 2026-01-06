@@ -1,7 +1,7 @@
 ---
 title: "Why Agents are Efficiency Nightmares and How to Fix them?"
 date: 2025-01-07
-description: "Blog Post Demonstrating the Benefits of KV Cache Sharing in Agent Serving"
+description: "Demonstrating the Benefits of KV Cache Sharing in Agent Serving and Future Directions"
 author: "Hanchen Li, Xiaokun Chen, Jingzhuo Hu, and Collaborators"
 tags: ["LLM", "Inference", "Agent", "KV Cache","LMCache"]
 categories: ["general"]
@@ -46,7 +46,7 @@ This directly improves the Return-On-Investment (ROI) for users and makes these 
 
 ## The Fundamental Inefficiency of Agents
 In order to understand why agents are so expensive to run, we need to look at how they operate fundamentally.
-We analyze trace from Claude Code and mini-swe-agent to give a brief overview.
+We analyze trace from Claude Code using Claude-4.5-sonnet and mini-swe-agent using GPT-5 to give a brief overview.
 We used each agent to solve a coding task from [SWE-bench_Verified](https://www.swebench.com/) dataset and recorded the message history sent.
 
 ### Overview Statistics
@@ -162,24 +162,32 @@ Readers with background may wonder: **90+%** Prefix Cache hit rate? Why not just
 
 <!-- talk about how KV cache sharing can make it better -->
 
-<embed src="/images/agent_kv/kv.pdf" width="100%" height="600" type="application/pdf">
+![Two Problems that Continuum tries to prevent](/blogs/images/agent_kv/problem.png)
 
 However, there are three further considerations here: 
 1. **Contention for Space**: Due to the appending context behavior, the KV cache space is highly contended among different agent programs due to long context.
 2. **Queueling Delay in Scheduling**:  While
-the current agent program is waiting on the tool, if the sched-
+the current agent program is waiting on the tool, if the sched
 uler allocates the GPU memory to other requests to maximize
 throughput, the KV cache for the current program will be
 removed from GPU memory. This incurs a queueing delay for each request when the program resumes after tool execution.
 3. **Remaining Compute**: As mentioned above, each call still requires prefill compute even with KV cache hit. With a high number of calls, the remaining compute becomes non-negligible.
 
 Some research works have demonstrated by mitigating the first two issues, KV cache offloading can bring significant speedup and cost reduction for serving LLMs.
-For example, [Continuum](https://arxiv.org/abs/2511.02230) proposes to reuse the Time-to-live (TTL) concept to preserve the KV cache for programs that are likely to be resumed soon to mitigate the first two problems.
 
+![TTL-based Eviction Policy](/blogs/images/agent_kv/ttl.png)
+
+
+For example, [Continuum](https://arxiv.org/abs/2511.02230) proposes to reuse the Time-to-live (TTL) concept to preserve the KV cache for programs that are likely to be resumed soon to mitigate the first two problems. This changes the eviction policy from LRU to TTL-based, which is more suitable for agent workloads.
+
+
+As demonstrated by their experiments, Continuum can bring up to 3.66x improvement for serving LLM agent traces with long context on SWE-Bench and Berkeley Function Calling Leaderboard workloads.
+
+![Evaluation Results of Continuum](/blogs/images/agent_kv/eval.png)
+
+## Looking Forward: Beyond KV Cache Management
 However, for agents, the remaining compute issue becomes more prominent due to the high number of calls made to the LLM.
 
-## Looking Forward: Beyond KV Cache
-<!-- We will talk more about improvement beyond KV Cache Offloading. -->
 As we have discussed, while KV cache offloading can help alleviate some of the inefficiencies in agent operation, it is not a complete solution.
 To further improve the efficiency of agents, we need to look beyond just KV cache management.
 Some potential directions include:

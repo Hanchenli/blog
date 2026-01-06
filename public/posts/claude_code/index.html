@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><meta charset="utf-8">
+<head><script src="/blogs/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=blogs/livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, nofollow">
 <title>Context Engineering &amp; Reuse Pattern Under the Hood of Claude Code | Hanchen&#39;s Space Bar</title>
 <meta name="keywords" content="LLM, Agent, Claude Code, Context Engineering, Reuse Pattern">
 <meta name="description" content="Recently, we ran a tiny one-shot experiment, and found that Claude Code has a high context reuse rate of 92%.">
 <meta name="author" content="">
-<link rel="canonical" href="https://hanchenli.github.io/blogs/posts/claude_code/">
+<link rel="canonical" href="http://localhost:1313/blogs/posts/claude_code/">
 <link crossorigin="anonymous" href="/blogs/assets/css/stylesheet.12d075fb361717557fefde57d93db59c2ce2143ebfcc84ea38467edf4e444ce7.css" integrity="sha256-EtB1&#43;zYXF1V/795X2T21nCziFD6/zITqOEZ&#43;305ETOc=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://hanchenli.github.io/blogs/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://hanchenli.github.io/blogs/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://hanchenli.github.io/blogs/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://hanchenli.github.io/blogs/apple-touch-icon.png">
-<link rel="mask-icon" href="https://hanchenli.github.io/blogs/safari-pinned-tab.svg">
+<link rel="icon" href="http://localhost:1313/blogs/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/blogs/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/blogs/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/blogs/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/blogs/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://hanchenli.github.io/blogs/posts/claude_code/">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/blogs/posts/claude_code/">
 <noscript>
     <style>
         #theme-toggle,
@@ -67,74 +67,7 @@
         background-position: center;
     }
 </style>
- <meta property="og:url" content="https://hanchenli.github.io/blogs/posts/claude_code/">
-  <meta property="og:site_name" content="Hanchen&#39;s Space Bar">
-  <meta property="og:title" content="Context Engineering & Reuse Pattern Under the Hood of Claude Code">
-  <meta property="og:description" content="Recently, we ran a tiny one-shot experiment, and found that Claude Code has a high context reuse rate of 92%.">
-  <meta property="og:locale" content="en-us">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2025-12-21T00:00:00+00:00">
-    <meta property="article:modified_time" content="2025-12-21T00:00:00+00:00">
-    <meta property="article:tag" content="LLM">
-    <meta property="article:tag" content="Agent">
-    <meta property="article:tag" content="Claude Code">
-    <meta property="article:tag" content="Context Engineering">
-    <meta property="article:tag" content="Reuse Pattern">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Context Engineering &amp; Reuse Pattern Under the Hood of Claude Code">
-<meta name="twitter:description" content="Recently, we ran a tiny one-shot experiment, and found that Claude Code has a high context reuse rate of 92%.">
 
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://hanchenli.github.io/blogs/posts/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "Context Engineering \u0026 Reuse Pattern Under the Hood of Claude Code",
-      "item": "https://hanchenli.github.io/blogs/posts/claude_code/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "Context Engineering \u0026 Reuse Pattern Under the Hood of Claude Code",
-  "name": "Context Engineering \u0026 Reuse Pattern Under the Hood of Claude Code",
-  "description": "Recently, we ran a tiny one-shot experiment, and found that Claude Code has a high context reuse rate of 92%.",
-  "keywords": [
-    "LLM", "Agent", "Claude Code", "Context Engineering", "Reuse Pattern"
-  ],
-  "articleBody": "Context Engineering \u0026 Reuse Pattern Under the Hood of Claude Code Over the last few months, Claude Code has quietly become one of the most interesting \u0026 widely-adopted real-world agentic systems available to normal developers.\nUnlike cloud-only agents whose internals remain hidden behind API gateways like Perplexity, Devin, or Manus, nor as fully open source agents like Mini SWE Agent or Terminus 2 where you can deploy locally with source code, Claude Code runs partially locally — it has a open-sourced client repo running on the local machine, which gives us a rare opportunity: to inject the traffic it sends and reverse engineering to see every single LLM call, every intermediate tool invocation, every tiny decision the agent makes.\nRecently, we ran a tiny one-shot experiment (one random task from the SWE-bench_Verified dataset) with Claude Code and captured everything into a raw log file with only LLM input\u0026output: claude_code_trace.jsonl. If you paste this trace into the visualizer, you can see the trace details.\nKey metrics:\n92 LLM calls (#1-#92) ~2M input tokens consumed 13 minutes total duration 92% prefix reuse rate The goal was simple:\nIf you give Claude Code one small task, what exactly happens behind the scenes?\nWhich LLM calls get made? In what order?\nWhere does context get reused? And how much of the prompt is stable prefix(seen) vs incremental content(new)?\nThis is our walk-through of that trace.\n1. What “Actually Happens” When Claude Code Runs a Simple Task Claude Code feels straightforward as a product — you type a request in your editor, it edits files or runs some bash commands. But under the hood, even a simple one-step request decomposes into a surprisingly structured internal loop.\nWe randomly select one task (#80) from the SWE-bench_Verified dataset. The problem setup is to fix an issue in the django/django repo from commit 2e0f04507b17362239ba49830d26fec504d46978.\nProblem statement:\n“JSONField are not properly displayed in admin when they are readonly.\nDescription: JSONField values are displayed as dict when readonly in the admin. For example, {\"foo\": \"bar\"} would be displayed as {'foo': 'bar'}, which is not valid JSON.\nI believe the fix would be to add a special case in django.contrib.admin.utils.display_for_field to call the prepare_value of the JSONField (not calling json.dumps directly to take care of the InvalidJSONInput case).”\nAnd this is exactly the prompt that Claude Code received.\nSurprisingly, before any fancy reasoning, Claude Code ran a couple of “warm-up” steps (trace ID #2, #3, #4) before the actual task. Warm-up steps do nothing but input the prompt for:\nTool list (#2) Explore subagent (#3) Plan subagent (#4) Warm-up steps are used for caching purposes—later when those tools and subagents are called, the cache will be hit, resulting in faster response time. The summarization agent (#1) and new topic agent (#5) are used for summarizing the context and generating a new title for display—just as the ChatGPT sidebar works.\nThe main agent (#6) comes with a huge system prompt, including git history, status, tool list, etc. The 18 tools in the tool list not only have the ability to use normal tool calls like Bash, Grep, Read, WebFetch, AskUserQuestion, etc., but also the ability to invoke and delegate certain tasks to subagents like:\nExplore subagent (#7) Plan subagent (#46) These subagents will invoke tool calls from their own tool lists.\nImmediately after the main agent (#6), it invokes the Explore (also called file search agent) subagent (#7), which will invoke tool calls from its tool list to explore the codebase. It starts with a different system prompt where its main goal is to explore the codebase:\nYou are Claude Code, Anthropic’s official CLI for Claude. You are a file search specialist for Claude Code, Anthropic’s official CLI for Claude. You excel at thoroughly navigating and exploring codebases.\nInterestingly, the Explore subagent (#7) is not the only subagent that Claude Code can invoke. Instead, it invokes 3 Explore subagents in parallel to explore the codebase, each with a different goal:\nExplore JSONField implementation (lifespan: #7-#26) Explore admin display_for_field (lifespan: #8-#37) Explore readonly field rendering (lifespan: #9-#45) The context of the main agent (#6) is not carried to the subagents, which is beneficial for the subagents to have a fresh start. Each Explore subagent can invoke 1-3 tools in parallel, where the tools are from the tool list of the Explore subagent—a subset (10/18) of the main agent’s tool list.\nThe ReAct mechanism is used here: the Explore subagent will invoke a tool call, then based on the tool output, it will observe and invoke another tool call to explore the codebase further until it deems it has explored enough.\nFinally, after the slowest Explore subagent finishes its exploration at step #45, at step #46, the main agent appends the findings (summarizations) from all 3 Explore subagents to the context, and then invokes the Plan subagent (#47) to plan the fix.\nSimilar to the Explore Agent, the Plan Agent (#47) also has a different system prompt, where its main goal is to plan the fix:\nYou are Claude Code, Anthropic’s official CLI for Claude. You are a software architect and planning specialist for Claude Code. Your role is to explore the codebase and design implementation plans.\nThe Plan Agent did not carry all the context from the main agent nor the Explore subagents, which is beneficial for the Plan Agent to have a fresh start. Instead, it only contains the summarization of the Explore subagents’ findings. The toolbox is a subset (10/18) of the main agent’s tool list. The goal for the Plan Agent is to design an implementation plan that:\nPlease design an implementation plan that:\nIdentifies the exact changes needed to display_for_field Considers whether we need to instantiate a form field from the model field or if there’s a better approach Identifies any edge cases or potential issues Recommends the best approach given Django’s architecture Similarly, the Plan Agent also follows the ReAct pattern and loops through tool calling from #47 to #72, where the context accumulates from 11,552 tokens to 38,819 tokens. After having a good plan (see details in #72), the Plan Agent will return to the main agent (#73) with the plan.\nThe main agent will then invoke a series of tool calls to:\nReview the plan (#73) Ask user for clarification (#74) Write the plan into a markdown file (#75) Finally, the main agent will exit the plan mode (#76) and enter the execute mode (#77) to execute the plan after interactively asking the user for plan approval (#76-#77).\nThe execution phase (#77-#91) still follows the ReAct pattern. The main agent will use the plan markdown file as a todo list:\nAdd json import to utils.py Add JSONField handling to display_for_field() Add tests to test_admin_utils.py Run the tests to verify After executing some tool calls to read or edit files, it will cross out the todo items in the plan markdown file. Once all the todo items are crossed out, the main agent will end with a conclusion message (#92).\nDuring this phase, there are some other subagents being invoked—e.g., the Extract Bash Command subagent (#93), where there’s only a one-shot prompt template for the subagent to extract the bash command in order to not run dangerous commands like rm without user confirmation by accident.\nAnd this is the whole diagram of the claude code trace:\n2. The Secret Pattern: Claude Code Is a Prefix Reuse Machine During our trace analysis, one phenomenon was so consistent it deserves its own section:\nClaude Code’s prompts are extremely prefix-heavy.\nPrefix reuse means that one part of the prompt prefix is seen in the previous prompts’ prefix. Across all phases, the prompt reuse rate is extremely high: 92%. For ReAct-based subagent loops, it’s even higher. If we run prefix-length analysis in particular sections:\nTrace ID Total Tokens Shared Prefix % Notes #1-#6 47,177 0.22% Warm-up and initial phase #7-#45 546,104 92.06% Explore subagent phase #47-#72 528,286 93.23% Plan subagent phase #73-#92 827,411 97.83% Main agent execution phase What does this mean? Claude Code’s architecture practically optimizes itself for KV cache reusage, even without explicitly trying.\n3. What is prefix caching and why should I care? At the heart of Large Language Model inference lies the KV cache (key-value cache) — a mechanism that stores intermediate attention computation results for previously processed tokens. During autoregressive generation, each new token needs to attend to all previous tokens, requiring expensive matrix multiplications. The KV cache stores the key and value matrices computed for earlier tokens, so they don’t need to be recomputed with each new token.\nPrefix caching leverages this by recognizing that when multiple requests share the same prompt prefix (like system instructions or document context), their KV cache computations are identical and can be reused across requests.\nMajor LLM providers have turned this into significant cost savings:\nOpenAI's Prompt Caching handles prefix caching automatically — it detects common prefixes longer than 1,024 tokens and caches them transparently, offering a 90% discount on cached input tokens (e.g., GPT-5.2 drops from $1.75 to $0.175 per million cached tokens) Anthropic's cache hit pricing gives developers explicit control over which prompt blocks to cache using special cache_control markers, charging a slightly higher cache write cost (1.25x base price for 5-minute cache, 2x for 1-hour cache) but delivering the same 90% discount on cache reads (Claude Sonnet 4.5: $0.30 per million tokens for cache reads versus $3.00 for base input), allowing fine-grained optimization for complex multi-turn conversations or document-heavy workflows To put this in perspective with Claude Code’s 92% prefix reuse pattern: processing 2M input tokens (our consumption for the experiment) without caching would cost $6.00 (2M × $3/MTok), but with prefix caching, the cost drops to just $1.152 (1.84M cache hits × $0.30/MTok + 0.16M cache writes × $3.75/MTok) — a savings of $4.85 (81% reduction) over one simple task.\nOpen-source inference engines have also embraced this paradigm:\nvLLM's automatic prefix caching transparently caches shared prefixes using its PagedAttention mechanism SGLang's RadixAttention employs a radix tree data structure to efficiently match and reuse the longest common prefixes across requests LMCache takes distributed KV caching even further by pooling cache storage across multiple nodes to maximize reuse at scale Beyond cost savings, prefix cache hits dramatically reduce TTFT (time to first token) — since the model can skip recomputing the entire prefix and only process the unique suffix, latency for subsequent requests with shared context can drop by 5-10x, making conversational agents and document-grounded applications far more responsive.\n4. What We Learned from This Tiny Trace Even though the task was trivial, the trace reveals a lot about Claude Code as a system:\nThe main system prompt is huge\nIt contains: Complete git repository state and history + full tool specifications (18 tools for main agent) + finally, execution phase instructions The prompt alone is 20,000+ tokens without conversation history Claude Code is built around specialized subagents\nSubagents receive only role-specific context, reducing bloat Separation of context allows the main agent to only run on the summarized subagent responses Parallel execution is used to maximize exploration efficiency\nSubagents are spawned in parallel with different search goals under their own ReAct loop This separation allows clean context and focused subtasks, distributing context evenly Tool calls are also run in parallel for the same benefits “Warm-up” calls prime the cache before real work begins\nThey load tool specifications into cache, prime subagent system prompts, and establish stable prefix baselines These calls drastically accelerate subsequent subagent invocations Claude works well with KV cache reuse\nClaude reaches up to 92% overall prefix reuse, perfect for KV cache reuse optimization Results in a significant cost savings of $4.85 (81% reduction) over one simple task Interactive planning improves transparency\nGives users control over what changes will be made Creates a natural breakpoint prompting the user for approval Responses allow the system to create a more refined executable todo list, improving workflow 5. Beyond Prefix Caching: Can We Do Better? Recently, there are some interesting research papers that try to improve non-prefix caching efficiency, such as CacheBlend, where optimizations can be made even on non-prefix (substring) caching.\nIn our trace, we can see that the subagents have a tool list that is a subset of the main agent’s tool list, which means that the subagents can reuse the main agent’s tool list descriptions. This is a good example of how to improve non-prefix caching efficiency.\nAnother scenario in our trace is that if the same file was read multiple times, the file content can be cached and reused, even though the file content is not a prefix. This can be extremely helpful when the file content is large and the file is read multiple times.\n",
-  "wordCount" : "2112",
-  "inLanguage": "en",
-  "datePublished": "2025-12-21T00:00:00Z",
-  "dateModified": "2025-12-21T00:00:00Z",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://hanchenli.github.io/blogs/posts/claude_code/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Hanchen's Space Bar",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://hanchenli.github.io/blogs/favicon.ico"
-    }
-  }
-}
-</script>
 </head>
 
 <body class="" id="top">
@@ -152,8 +85,8 @@
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://hanchenli.github.io/blogs/" accesskey="h" title="Hanchen&#39;s Space Bar (Alt + H)">
-                    <img src="https://hanchenli.github.io/blogs/images/logo.png" alt="" aria-label="logo"
+            <a href="http://localhost:1313/blogs/" accesskey="h" title="Hanchen&#39;s Space Bar (Alt + H)">
+                    <img src="http://localhost:1313/blogs/images/logo.png" alt="" aria-label="logo"
                         height="70">Hanchen&#39;s Space Bar</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
@@ -427,18 +360,18 @@
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://hanchenli.github.io/blogs/tags/llm/">LLM</a></li>
-      <li><a href="https://hanchenli.github.io/blogs/tags/agent/">Agent</a></li>
-      <li><a href="https://hanchenli.github.io/blogs/tags/claude-code/">Claude Code</a></li>
-      <li><a href="https://hanchenli.github.io/blogs/tags/context-engineering/">Context Engineering</a></li>
-      <li><a href="https://hanchenli.github.io/blogs/tags/reuse-pattern/">Reuse Pattern</a></li>
+      <li><a href="http://localhost:1313/blogs/tags/llm/">LLM</a></li>
+      <li><a href="http://localhost:1313/blogs/tags/agent/">Agent</a></li>
+      <li><a href="http://localhost:1313/blogs/tags/claude-code/">Claude Code</a></li>
+      <li><a href="http://localhost:1313/blogs/tags/context-engineering/">Context Engineering</a></li>
+      <li><a href="http://localhost:1313/blogs/tags/reuse-pattern/">Reuse Pattern</a></li>
     </ul>
   </footer>
 </article>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2026 <a href="https://hanchenli.github.io/blogs/">Hanchen&#39;s Space Bar</a></span> · 
+        <span>&copy; 2026 <a href="http://localhost:1313/blogs/">Hanchen&#39;s Space Bar</a></span> · 
 
     <span>
         Powered by

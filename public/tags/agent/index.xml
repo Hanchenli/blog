@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Agent on Hanchen&#39;s Space Bar</title>
-    <link>https://hanchenli.github.io/blogs/tags/agent/</link>
+    <link>http://localhost:1313/blogs/tags/agent/</link>
     <description>Recent content in Agent on Hanchen&#39;s Space Bar</description>
     <generator>Hugo -- 0.152.2</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 21 Dec 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://hanchenli.github.io/blogs/tags/agent/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/blogs/tags/agent/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Context Engineering &amp; Reuse Pattern Under the Hood of Claude Code</title>
-      <link>https://hanchenli.github.io/blogs/posts/claude_code/</link>
+      <link>http://localhost:1313/blogs/posts/claude_code/</link>
       <pubDate>Sun, 21 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>https://hanchenli.github.io/blogs/posts/claude_code/</guid>
+      <guid>http://localhost:1313/blogs/posts/claude_code/</guid>
       <description>Recently, we ran a tiny one-shot experiment, and found that Claude Code has a high context reuse rate of 92%.</description>
     </item>
     <item>
       <title>Why Agents are Efficiency Nightmares and How to Fix them?</title>
-      <link>https://hanchenli.github.io/blogs/posts/kv_agent/</link>
+      <link>http://localhost:1313/blogs/posts/kv_agent/</link>
       <pubDate>Tue, 07 Jan 2025 00:00:00 +0000</pubDate>
-      <guid>https://hanchenli.github.io/blogs/posts/kv_agent/</guid>
+      <guid>http://localhost:1313/blogs/posts/kv_agent/</guid>
       <description>Blog Post Demonstrating the Benefits of KV Cache Sharing in Agent Serving</description>
     </item>
   </channel>
