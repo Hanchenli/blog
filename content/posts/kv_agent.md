@@ -24,9 +24,9 @@ However, the efficiency of these agents has just rised to our attention.
 In this blog post, we will discuss why agents are efficiency nightmares, how we can make them (somewhat) better with KV cache management, 
 and where we could be going for these tasks.
 
-![Agent Efficiency](/images/agent_kv/front.png)
+<img src="/assets/images/agent_kv/front.png" alt="Agent Efficiency" style="width: 60%; display: block; margin: 0 auto;">
 
-## Wonderful Agents Draining Your Bank Account. 
+## Wonderful Agents Draining Your Bank Account.
 [Claude Code](https://www.claude.com/product/claude-code) has quietly become one of the most interesting & widely-adopted real-world agentic systems available to normal developers.
 <!-- Talk about agent applicaitons, some benchmarks on the cost -->
 
