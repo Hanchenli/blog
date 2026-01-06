@@ -65,7 +65,7 @@ However, there are three further considerations here:
 2. **Queueling Delay in Scheduling**: queueing delay in continuum
 3. **Remaining Compute**: Still lots of decode and prefill
 
-Some research works including [Continuum]() have demonstrated by mitigating the first two issues, KV cache offloading can bring significant speedup and cost reduction for serving LLMs.
+Some research works including [Continuum](https://arxiv.org/abs/2511.02230) have demonstrated by mitigating the first two issues, KV cache offloading can bring significant speedup and cost reduction for serving LLMs.
 However, for agents, the remaining compute issue becomes more prominent due to the high number of calls made to the LLM.
 
 ## Looking Forward: Beyond KV Cache
