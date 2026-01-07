@@ -53,8 +53,8 @@ We report some high-level statistics from the traces below:
 
 | Method | Average Total Tokens | Average Cost ($) | Average Calls to LLM | Prefix Cache Hit Rate | 
 | :--- | :--- | :--- | :--- | :--- |
-| Claude Code | 15,000 | 1.0 | 45 | 92% |
-| Mini-SWE-Agent | - | - | 30 | 88% |
+| Claude Code | 1,765,565.63 | 0.74 | 74.17 | 96.3% |
+| Mini-SWE-Agent | 230,709.64 | 2.054063 | 17.916  | 94.559% |
 
 
 ### Microscopic View
