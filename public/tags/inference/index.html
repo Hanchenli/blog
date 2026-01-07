@@ -58,6 +58,25 @@
     </style>
 </noscript>
 <style>
+    body {
+        background: url('/blogs/images/background.png') no-repeat center center fixed !important;
+        -webkit-background-size: cover !important;
+        -moz-background-size: cover !important;
+        -o-background-size: cover !important;
+        background-size: cover !important;
+    }
+</style>
+
+<style>
+    body.dark {
+        background: url('/blogs/images/dark_bg.png') no-repeat center center fixed !important;
+        -webkit-background-size: cover !important;
+        -moz-background-size: cover !important;
+        -o-background-size: cover !important;
+        background-size: cover !important;
+    }
+</style>
+<style>
      
     body:has(.post-single),
     body:has(.post-content) {
@@ -66,6 +85,10 @@
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-position: center;
+    }
+    body.dark:has(.post-single),
+    body.dark:has(.post-content) {
+        background-image: url('/blogs/images/dark_bg.png');
     }
 </style>
 

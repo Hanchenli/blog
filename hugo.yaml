@@ -24,7 +24,7 @@ params:
     iconHeight: 70
     disableResize: true # Disable resizing to preserve logo quality
   
-  showBackgroundImage: false
+  showBackgroundImage: true
 
 outputs:
   home:

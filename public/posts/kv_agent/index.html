@@ -57,6 +57,25 @@
     </style>
 </noscript>
 <style>
+    body {
+        background: url('/blogs/images/background.png') no-repeat center center fixed !important;
+        -webkit-background-size: cover !important;
+        -moz-background-size: cover !important;
+        -o-background-size: cover !important;
+        background-size: cover !important;
+    }
+</style>
+
+<style>
+    body.dark {
+        background: url('/blogs/images/dark_bg.png') no-repeat center center fixed !important;
+        -webkit-background-size: cover !important;
+        -moz-background-size: cover !important;
+        -o-background-size: cover !important;
+        background-size: cover !important;
+    }
+</style>
+<style>
      
     body:has(.post-single),
     body:has(.post-content) {
@@ -65,6 +84,10 @@
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-position: center;
+    }
+    body.dark:has(.post-single),
+    body.dark:has(.post-content) {
+        background-image: url('/blogs/images/dark_bg.png');
     }
 </style>
 
@@ -303,6 +326,7 @@ We used each agent to solve a coding task from <a href="https://www.swebench.com
 <li><strong>High number of calls</strong>: Agents make a large number of calls to the LLM server due to the need to repetitive get actions and report status. Each call incurs incremental prefill and may cause KV cache miss that requires recomputation.</li>
 <li><strong>Appending Context</strong>: Agents often append new context to the existing conversation history, leading to longer input sequences and increased computational load for each call.</li>
 </ol>
+<p>Fundamentally, due to the need to fully incorporate the context of the task into the LLM inputs and the heavy intermediate states (KV cache) related to these contexts, agents are highly memory-bound workloads. Sadly, memory bandwidth and capacity have not improved as fast as compute (FLOPS) in recent years.</p>
 <h2 id="why-is-current-kv-cache-offloading-not-enough">Why is Current KV Cache Offloading Not Enough?<a hidden class="anchor" aria-hidden="true" href="#why-is-current-kv-cache-offloading-not-enough">#</a></h2>
 <p>From the table above, we can see that both agents have a high prefix cache hit rate (around 90%).
 Readers with background may wonder: <strong>90+%</strong> Prefix Cache hit rate? Why not just run KV Cache Offloading and save 10x?</p>
@@ -323,20 +347,19 @@ removed from GPU memory. This incurs a queueing delay for each request when the 
 <p>As demonstrated by their experiments, Continuum can bring up to 3.66x improvement for serving LLM agent traces with long context on SWE-Bench and Berkeley Function Calling Leaderboard workloads.</p>
 <p><img alt="Evaluation Results of Continuum" loading="lazy" src="/blogs/images/agent_kv/eval.png"></p>
 <h2 id="looking-forward-beyond-kv-cache-management">Looking Forward: Beyond KV Cache Management<a hidden class="anchor" aria-hidden="true" href="#looking-forward-beyond-kv-cache-management">#</a></h2>
-<p>However, for agents, the remaining compute issue becomes more prominent due to the high number of calls made to the LLM.</p>
-<p>As we have discussed, while KV cache offloading can help alleviate some of the inefficiencies in agent operation, it is not a complete solution.
-To further improve the efficiency of agents, we need to look beyond just KV cache management.
+<p>However, as shown in the graphs, each agent execution still takes significant time even with KV cache offloading.
+Even without any contention, each call still requires multiple long prefill and decode operations throughput the trace. These computations add up in the end.</p>
+<p>To further improve the efficiency of agents, we need to look beyond just KV cache management.
 Some potential directions include:</p>
 <ol>
-<li><strong>Model Optimization</strong>: Developing more efficient models with smaller footprints during long context.</li>
-<li><strong>Adaptive Context Management</strong>: do not append unncessary context to the main loop</li>
+<li><strong>Model Optimization</strong>: Researchers have been proposing methods that reduces memory footprint for intermediate states recorded in the agent trace. Examples include <a href="https://github.com/NVIDIA/kvpress">KV cache compressions</a>, and more efficient attention mechanisms like <a href="https://arxiv.org/abs/2006.16236">linear attention</a>, <a href="https://arxiv.org/pdf/2312.00752">Mamba</a> mechanisms.</li>
+<li><strong>Adaptive Context Management</strong>: As a recent trend, agentic context engineering (<a href="https://arxiv.org/abs/2510.04618">ACE</a>) has been growing popularity. Many work proposes to filter the input text before feeding them into the LLM. Example works include <a href="https://arxiv.org/pdf/2509.13313">ReSum</a>, <a href="https://arxiv.org/pdf/2510.24699">AgentFold</a>, and Manus&rsquo;s <a href="https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus">Context Engineering Report</a>&hellip;  These methods prevents unncessary context from flooding the LLM context window, reducing computation from the source.</li>
 </ol>
-<p>Fundamentally memory bound.
-We need better algorithm and system co-design to make agents more efficient and accessible.</p>
+<p>Going forward, agents are and will probably remain memory-bound for the foreseeable future. Addressing this fundamental bottleneck requires a careful co-design of algorithms and systems. This enables not only powerful but efficient future agents. After all, ROI is the key metric for GenAI to succeed in the real industry in the long run.</p>
 <h2 id="conclusion">Conclusion<a hidden class="anchor" aria-hidden="true" href="#conclusion">#</a></h2>
 <p>We have discussed the inefficiencies of current agent systems and how KV cache sharing can help alleviate some of these issues.
 We explained</p>
-<p>Disclaimer: This blog post was created with help from Gemini, VSCode copilot. Views are solely those of the authors and do not reflect employer values.</p>
+<p>Disclaimer: This blog post was created with help from Gemini, VSCode copilot. Views are solely from the authors and do not reflect employer values.</p>
 
 
   </div>
