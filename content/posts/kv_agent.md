@@ -202,4 +202,4 @@ Going forward, agents are and will probably remain memory-bound for the foreseea
 We have discussed the inefficiencies of current agent systems and how KV cache sharing can help alleviate some of these issues.
 We explained
 
-Disclaimer: This blog post was created with help from Gemini, VSCode copilot. Views are solely those of the authors and do not reflect employer values.
+Disclaimer: This blog post was created with help from Gemini, VSCode copilot. Views are solely from the authors and do not reflect employer values.
