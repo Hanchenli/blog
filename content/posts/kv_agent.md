@@ -156,6 +156,8 @@ We highlight three key observations from the trace analysis above that contribut
 1. **High number of calls**: Agents make a large number of calls to the LLM server due to the need to repetitive get actions and report status. Each call incurs incremental prefill and may cause KV cache miss that requires recomputation.
 2. **Appending Context**: Agents often append new context to the existing conversation history, leading to longer input sequences and increased computational load for each call.
 
+Fundamentally, due to the need to fully incorporate the context of the task into the LLM inputs and the heavy intermediate states (KV cache) related to these contexts, agents are highly memory-bound workloads. Sadly, memory bandwidth and capacity have not improved as fast as compute (FLOPS) in recent years.
+
 ## Why is Current KV Cache Offloading Not Enough?
 From the table above, we can see that both agents have a high prefix cache hit rate (around 90%).
 Readers with background may wonder: **90+%** Prefix Cache hit rate? Why not just run KV Cache Offloading and save 10x?
@@ -186,16 +188,15 @@ As demonstrated by their experiments, Continuum can bring up to 3.66x improvemen
 ![Evaluation Results of Continuum](/blogs/images/agent_kv/eval.png)
 
 ## Looking Forward: Beyond KV Cache Management
-However, for agents, the remaining compute issue becomes more prominent due to the high number of calls made to the LLM.
+However, as shown in the graphs, each agent execution still takes significant time even with KV cache offloading.
+Even without any contention, each call still requires multiple long prefill and decode operations throughput the trace. These computations add up in the end.
 
-As we have discussed, while KV cache offloading can help alleviate some of the inefficiencies in agent operation, it is not a complete solution.
 To further improve the efficiency of agents, we need to look beyond just KV cache management.
 Some potential directions include:
-1. **Model Optimization**: Developing more efficient models with smaller footprints during long context.
-2. **Adaptive Context Management**: do not append unncessary context to the main loop
+1. **Model Optimization**: Researchers have been proposing methods that reduces memory footprint for intermediate states recorded in the agent trace. Examples include [KV cache compressions](https://github.com/NVIDIA/kvpress), and more efficient attention mechanisms like [linear attention](https://arxiv.org/abs/2006.16236), [Mamba](https://arxiv.org/pdf/2312.00752) mechanisms.
+2. **Adaptive Context Management**: As a recent trend, agentic context engineering ([ACE](https://arxiv.org/abs/2510.04618)) has been growing popularity. Many work proposes to filter the input text before feeding them into the LLM. Example works include [ReSum](https://arxiv.org/pdf/2509.13313), [AgentFold](https://arxiv.org/pdf/2510.24699), and Manus's [Context Engineering Report](https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus)...  These methods prevents unncessary context from flooding the LLM context window, reducing computation from the source.
 
-Fundamentally memory bound.
-We need better algorithm and system co-design to make agents more efficient and accessible.
+Going forward, agents are and will probably remain memory-bound for the foreseeable future. Addressing this fundamental bottleneck requires a careful co-design of algorithms and systems. This enables not only powerful but efficient future agents. After all, ROI is the key metric for GenAI to succeed in the real industry in the long run.
 
 ## Conclusion
 We have discussed the inefficiencies of current agent systems and how KV cache sharing can help alleviate some of these issues.
