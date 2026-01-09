@@ -32,8 +32,7 @@ Suggested reading:
 Everyone said 2025 was the year of agents. With continuous improment in base model and emerging techniques like reinforcement learning, coding agents including [Cursor](https://www.cursor.com/), [Claude Code](https://www.claude.com/product/claude-code) have become much more powerful and automated compared with the start of the year. Quantitatively, the score on [SWE-Bench](https://www.swebench.com/) has risen from 20% as in Aug 2024 to over 70% for frontier models with a simple agent scaffold. 
 
 However, the cost of running these agents is still prohibitively high. 
-We conducted a simple benchmark experiment running Claude Code with APIs to get a quantitative measure of the actual token cost.
-<!-- jingzhuo can you add some things here -->
+We conducted a simple benchmark experiment running Claude Code with APIs to get a quantitative measure of the actual token cost. Our experiment with 30 random verified tasks from SWE-bench revealed some eye-opening numbers. The agent achieved a 63.3% resolution rate, successfully fixing 19 out of 30 complex repository issues autonomously. However, this performance comes with a cost: while the average expense was $0.74 per issue, a single complex Django bug could spike the cost to over $3.20. Most interestingly, over 90% of the token volume was spent on 'cache reads,' indicating that the agent spent the vast majority of its budget repeatedly re-scanning the codebase to verify its steps.
 
 We found that handling a single issue in a mid-sized public repository costs around 1 USD when using Claude Code via API.
 This is in stark contrast to the subscription license cost of 20 USD per month.
@@ -54,8 +53,8 @@ We report some high-level statistics from the traces below:
 
 | Method | Average Total Tokens | Average Cost ($) | Average Calls to LLM | Prefix Cache Hit Rate | 
 | :--- | :--- | :--- | :--- | :--- |
-| Claude Code | 15,000 | 1.0 | 45 | 92% |
-| Mini-SWE-Agent | - | - | 30 | 88% |
+| Claude Code | 1,765,565.63 | 0.74 | 74.17 | 96.3% |
+| Mini-SWE-Agent | 230,709.64 | 2.054063 | 17.916  | 94.559% |
 
 
 ### Microscopic View
