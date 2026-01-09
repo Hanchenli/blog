@@ -47,7 +47,7 @@ This directly improves the Return-On-Investment (ROI) for users and makes these 
 In order to understand why agents are so expensive to run, we need to look at how they operate fundamentally.
 We analyze trace from Claude Code using Claude-4.5-sonnet and mini-swe-agent using GPT-5 to give a brief overview.
 We used each agent to solve a coding task from [SWE-bench_Verified](https://www.swebench.com/) dataset and recorded the message history sent.
-
+The cost report is based on token usage from the API responses and actual bills.
 ### Overview Statistics
 We report some high-level statistics from the traces below: 
 
