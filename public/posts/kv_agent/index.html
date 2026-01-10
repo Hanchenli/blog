@@ -165,7 +165,7 @@
 
         <div class="inner"><ul>
                 <li>
-                    <a href="#wonderful-agents-but-draining-bank-account" aria-label="Wonderful Agents; But Draining Bank Account.">Wonderful Agents; But Draining Bank Account.</a></li>
+                    <a href="#powerful-agents-but-draining-bank-account" aria-label="Powerful Agents; But Draining Bank Account.">Powerful Agents; But Draining Bank Account.</a></li>
                 <li>
                     <a href="#the-fundamental-inefficiency-of-agents" aria-label="The Fundamental Inefficiency of Agents">The Fundamental Inefficiency of Agents</a><ul>
                         
@@ -200,10 +200,10 @@ and where we could be going for these tasks.</p>
 <p>Prerequisite: LLM inference basics.
 Suggested reading:
 <a href="https://arpitbhayani.me/blogs/how-llm-inference-works/">LLM Inference</a>;   <a href="https://blog.lmcache.ai/en/2024/09/17/lmcache-turboboosting-vllm-with-7x-faster-access-to-100x-more-kv-caches/">KV Cache Offloading</a></p>
-<h2 id="wonderful-agents-but-draining-bank-account">Wonderful Agents; But Draining Bank Account.<a hidden class="anchor" aria-hidden="true" href="#wonderful-agents-but-draining-bank-account">#</a></h2>
+<h2 id="powerful-agents-but-draining-bank-account">Powerful Agents; But Draining Bank Account.<a hidden class="anchor" aria-hidden="true" href="#powerful-agents-but-draining-bank-account">#</a></h2>
 <p>Everyone said 2025 was the year of agents. With continuous improment in base model and emerging techniques like reinforcement learning, coding agents including <a href="https://www.cursor.com/">Cursor</a>, <a href="https://www.claude.com/product/claude-code">Claude Code</a> have become much more powerful and automated compared with the start of the year. Quantitatively, the score on <a href="https://www.swebench.com/">SWE-Bench</a> has risen from 20% as in Aug 2024 to over 70% for frontier models with a simple agent scaffold.</p>
 <p>However, the cost of running these agents is still prohibitively high.
-We conducted a simple benchmark experiment running Claude Code with APIs to get a quantitative measure of the actual token cost.</p>
+We conducted a simple benchmark experiment running Claude Code with APIs to get a quantitative measure of the actual token cost. Our experiment with 30 random verified tasks from SWE-bench revealed some eye-opening numbers. The agent achieved a 63.3% resolution rate, successfully fixing 19 out of 30 complex repository issues autonomously. However, this performance comes with a cost: while the average expense was $0.74 per issue, a single complex Django bug could spike the cost to over $3.20. Most interestingly, over 90% of the token volume was spent on &lsquo;cache reads,&rsquo; indicating that the agent spent the vast majority of its budget repeatedly re-scanning the codebase to verify its steps.</p>
 <p>We found that handling a single issue in a mid-sized public repository costs around 1 USD when using Claude Code via API.
 This is in stark contrast to the subscription license cost of 20 USD per month.
 There could be various reasons behind this pricing discrepancy, such as market dynamics, provider strategies, or the implicit value of the labeling work being done by the users.
@@ -214,7 +214,8 @@ This directly improves the Return-On-Investment (ROI) for users and makes these 
 <h2 id="the-fundamental-inefficiency-of-agents">The Fundamental Inefficiency of Agents<a hidden class="anchor" aria-hidden="true" href="#the-fundamental-inefficiency-of-agents">#</a></h2>
 <p>In order to understand why agents are so expensive to run, we need to look at how they operate fundamentally.
 We analyze trace from Claude Code using Claude-4.5-sonnet and mini-swe-agent using GPT-5 to give a brief overview.
-We used each agent to solve a coding task from <a href="https://www.swebench.com/">SWE-bench_Verified</a> dataset and recorded the message history sent.</p>
+We used each agent to solve a coding task from <a href="https://www.swebench.com/">SWE-bench_Verified</a> dataset and recorded the message history sent.
+The cost report is based on token usage from the API responses and actual bills.</p>
 <h3 id="overview-statistics">Overview Statistics<a hidden class="anchor" aria-hidden="true" href="#overview-statistics">#</a></h3>
 <p>We report some high-level statistics from the traces below:</p>
 <table>
@@ -230,17 +231,17 @@ We used each agent to solve a coding task from <a href="https://www.swebench.com
   <tbody>
       <tr>
           <td style="text-align: left">Claude Code</td>
-          <td style="text-align: left">15,000</td>
-          <td style="text-align: left">1.0</td>
-          <td style="text-align: left">45</td>
-          <td style="text-align: left">92%</td>
+          <td style="text-align: left">1,765,565.63</td>
+          <td style="text-align: left">0.74</td>
+          <td style="text-align: left">74.17</td>
+          <td style="text-align: left">96.3%</td>
       </tr>
       <tr>
           <td style="text-align: left">Mini-SWE-Agent</td>
-          <td style="text-align: left">-</td>
-          <td style="text-align: left">-</td>
-          <td style="text-align: left">30</td>
-          <td style="text-align: left">88%</td>
+          <td style="text-align: left">230,709.64</td>
+          <td style="text-align: left">0.192</td>
+          <td style="text-align: left">17.916</td>
+          <td style="text-align: left">94.559%</td>
       </tr>
   </tbody>
 </table>
@@ -330,7 +331,7 @@ We used each agent to solve a coding task from <a href="https://www.swebench.com
 <h2 id="why-is-current-kv-cache-offloading-not-enough">Why is Current KV Cache Offloading Not Enough?<a hidden class="anchor" aria-hidden="true" href="#why-is-current-kv-cache-offloading-not-enough">#</a></h2>
 <p>From the table above, we can see that both agents have a high prefix cache hit rate (around 90%).
 Readers with background may wonder: <strong>90+%</strong> Prefix Cache hit rate? Why not just run KV Cache Offloading and save 10x?</p>
-<p><img alt="Two Problems that Continuum tries to prevent" loading="lazy" src="/blogs/images/agent_kv/problem.png"></p>
+<p><img alt="Two Problems that Continuum tries to prevent" loading="lazy" src="../../images/agent_kv/problem.png"></p>
 <p>However, there are three further considerations here:</p>
 <ol>
 <li><strong>Contention for Space</strong>: Due to the appending context behavior, the KV cache space is highly contended among different agent programs due to long context.</li>
@@ -341,11 +342,13 @@ throughput, the KV cache for the current program will be
 removed from GPU memory. This incurs a queueing delay for each request when the program resumes after tool execution.</li>
 <li><strong>Remaining Compute</strong>: As mentioned above, each call still requires prefill compute even with KV cache hit. With a high number of calls, the remaining compute becomes non-negligible.</li>
 </ol>
+<p><img alt="Total Waiting Time" loading="lazy" src="../../images/agent_kv/delay.png"></p>
+<p>These issue limits agents from fully benefitting from KV cache offloading. For example, in the graph above, we enabled vLLM with LMCache to serve agent traces under a certain jps. However, due to the high contention and queueling delay, each agent still incurs significant waiting time even with KV cache offloading enabled.</p>
+<p><img alt="TTL-based Eviction Policy" loading="lazy" src="../../images/agent_kv/ttl.png"></p>
 <p>Some research works have demonstrated by mitigating the first two issues, KV cache offloading can bring significant speedup and cost reduction for serving LLMs.</p>
-<p><img alt="TTL-based Eviction Policy" loading="lazy" src="/blogs/images/agent_kv/ttl.png"></p>
 <p>For example, <a href="https://arxiv.org/abs/2511.02230">Continuum</a> proposes to reuse the Time-to-live (TTL) concept to preserve the KV cache for programs that are likely to be resumed soon to mitigate the first two problems. This changes the eviction policy from LRU to TTL-based, which is more suitable for agent workloads.</p>
-<p>As demonstrated by their experiments, Continuum can bring up to 3.66x improvement for serving LLM agent traces with long context on SWE-Bench and Berkeley Function Calling Leaderboard workloads.</p>
-<p><img alt="Evaluation Results of Continuum" loading="lazy" src="/blogs/images/agent_kv/eval.png"></p>
+<p><img alt="Evaluation Results of Continuum" loading="lazy" src="../../images/agent_kv/eval.png"></p>
+<p>As demonstrated by the experiments, Continuum can bring up to 3.66x improvement for serving LLM agent traces with long context on SWE-Bench and Berkeley Function Calling Leaderboard workloads. The above graph shows the evaluations results. Each method is paired with LMCache as the base system. For A100 GPUs, we pair 100GB DRAM per GPU and for B200 GPUs, we pair 200GB DRAM per GPU. We set TP=4 for 70B model. The requests arrive according to a Poisson process with a certain JPS. The graphs show the average latency per request under different JPS.</p>
 <h2 id="looking-forward-beyond-kv-cache-management">Looking Forward: Beyond KV Cache Management<a hidden class="anchor" aria-hidden="true" href="#looking-forward-beyond-kv-cache-management">#</a></h2>
 <p>However, as shown in the graphs, each agent execution still takes significant time even with KV cache offloading.
 Even without any contention, each call still requires multiple long prefill and decode operations throughput the trace. These computations add up in the end.</p>

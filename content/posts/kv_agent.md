@@ -28,7 +28,7 @@ Prerequisite: LLM inference basics.
 Suggested reading:
 [LLM Inference](https://arpitbhayani.me/blogs/how-llm-inference-works/);   [KV Cache Offloading](https://blog.lmcache.ai/en/2024/09/17/lmcache-turboboosting-vllm-with-7x-faster-access-to-100x-more-kv-caches/)
 
-## Wonderful Agents; But Draining Bank Account.
+## Powerful Agents; But Draining Bank Account.
 Everyone said 2025 was the year of agents. With continuous improment in base model and emerging techniques like reinforcement learning, coding agents including [Cursor](https://www.cursor.com/), [Claude Code](https://www.claude.com/product/claude-code) have become much more powerful and automated compared with the start of the year. Quantitatively, the score on [SWE-Bench](https://www.swebench.com/) has risen from 20% as in Aug 2024 to over 70% for frontier models with a simple agent scaffold. 
 
 However, the cost of running these agents is still prohibitively high. 
@@ -163,7 +163,7 @@ Readers with background may wonder: **90+%** Prefix Cache hit rate? Why not just
 
 <!-- talk about how KV cache sharing can make it better -->
 
-![Two Problems that Continuum tries to prevent](/blogs/images/agent_kv/problem.png)
+![Two Problems that Continuum tries to prevent](../../images/agent_kv/problem.png)
 
 However, there are three further considerations here: 
 1. **Contention for Space**: Due to the appending context behavior, the KV cache space is highly contended among different agent programs due to long context.
@@ -174,17 +174,21 @@ throughput, the KV cache for the current program will be
 removed from GPU memory. This incurs a queueing delay for each request when the program resumes after tool execution.
 3. **Remaining Compute**: As mentioned above, each call still requires prefill compute even with KV cache hit. With a high number of calls, the remaining compute becomes non-negligible.
 
+![Total Waiting Time](../../images/agent_kv/delay.png)
+
+These issue limits agents from fully benefitting from KV cache offloading. For example, in the graph above, we enabled vLLM with LMCache to serve agent traces under a certain jps. However, due to the high contention and queueling delay, each agent still incurs significant waiting time even with KV cache offloading enabled.
+
+![TTL-based Eviction Policy](../../images/agent_kv/ttl.png)
+
+
 Some research works have demonstrated by mitigating the first two issues, KV cache offloading can bring significant speedup and cost reduction for serving LLMs.
-
-![TTL-based Eviction Policy](/blogs/images/agent_kv/ttl.png)
-
 
 For example, [Continuum](https://arxiv.org/abs/2511.02230) proposes to reuse the Time-to-live (TTL) concept to preserve the KV cache for programs that are likely to be resumed soon to mitigate the first two problems. This changes the eviction policy from LRU to TTL-based, which is more suitable for agent workloads.
 
+![Evaluation Results of Continuum](../../images/agent_kv/eval.png)
 
-As demonstrated by their experiments, Continuum can bring up to 3.66x improvement for serving LLM agent traces with long context on SWE-Bench and Berkeley Function Calling Leaderboard workloads.
+As demonstrated by the experiments, Continuum can bring up to 3.66x improvement for serving LLM agent traces with long context on SWE-Bench and Berkeley Function Calling Leaderboard workloads. The above graph shows the evaluations results. Each method is paired with LMCache as the base system. For A100 GPUs, we pair 100GB DRAM per GPU and for B200 GPUs, we pair 200GB DRAM per GPU. We set TP=4 for 70B model. The requests arrive according to a Poisson process with a certain JPS. The graphs show the average latency per request under different JPS.
 
-![Evaluation Results of Continuum](/blogs/images/agent_kv/eval.png)
 
 ## Looking Forward: Beyond KV Cache Management
 However, as shown in the graphs, each agent execution still takes significant time even with KV cache offloading.
