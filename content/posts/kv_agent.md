@@ -176,7 +176,7 @@ removed from GPU memory. This incurs a queueing delay for each request when the 
 
 ![Total Waiting Time](../../images/agent_kv/delay.png)
 
-These issue limits agents from fully benefitting from KV cache offloading. For example, in the graph above, we enabled vLLM with LMCache to serve agent traces under a certain jps. However, due to the high contention and queueling delay, each agent still incurs significant waiting time even with KV cache offloading enabled.
+These issue limits agents from fully benefitting from KV cache offloading. For example, in the graph above, we enabled [vLLM](https://github.com/vllm-project/vllm) with [LMCache](https://github.com/LMCache/LMCache) to serve agent traces under a certain jps. However, due to the high contention and queueling delay, each agent still incurs significant waiting time even with KV cache offloading enabled.
 
 ![TTL-based Eviction Policy](../../images/agent_kv/ttl.png)
 
@@ -188,6 +188,8 @@ For example, [Continuum](https://arxiv.org/abs/2511.02230) proposes to reuse the
 ![Evaluation Results of Continuum](../../images/agent_kv/eval.png)
 
 As demonstrated by the experiments, Continuum can bring up to 3.66x improvement for serving LLM agent traces with long context on SWE-Bench and Berkeley Function Calling Leaderboard workloads. The above graph shows the evaluations results. Each method is paired with LMCache as the base system. For A100 GPUs, we pair 100GB DRAM per GPU and for B200 GPUs, we pair 200GB DRAM per GPU. We set TP=4 for 70B model. The requests arrive according to a Poisson process with a certain JPS. The graphs show the average latency per request under different JPS.
+
+The paper arxiv links is here: [Continuum Paper](https://arxiv.org/abs/2511.02230), and a preview version of code is available at: [Continuum Code](https://github.com/Hanchenli/vllm-continuum).
 
 
 ## Looking Forward: Beyond KV Cache Management
