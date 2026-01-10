@@ -204,7 +204,9 @@ Some potential directions include:
 Going forward, agents are and will probably remain memory-bound for the foreseeable future. Addressing this fundamental bottleneck requires a careful co-design of algorithms and systems. This enables not only powerful but efficient future agents. After all, ROI is the key metric for GenAI to succeed in the real industry in the long run.
 
 ## Conclusion
-We have discussed the inefficiencies of current agent systems and how KV cache sharing can help alleviate some of these issues.
-We explained
+In this blog post, we discussed why these powerful agents are actually efficiency nightmares. The agents frequent sends LLM requests, have long context histories leading to large intermediate states, and incurs heavy use of GPU resources. Prefix caching provides a promising solution to prevent repetitive prefill but naive policies may not be sufficient. We demonstrated how KV cache sharing techniques like Continuum can help mitigate some of the inefficiencies. However, we also highlighted that further improvements are needed beyond KV cache management due to the memory-bound nature of long context inference, including model optimizations and adaptive context management strategies.
+
+## Acknowledgements
+We would like to thank authors of Continuum and folks from LMCache and Tensormesh for their valuable discussions and feedback on this blog post.
 
 Disclaimer: This blog post was created with help from Gemini, VSCode copilot. Views are solely from the authors and do not reflect employer values.
