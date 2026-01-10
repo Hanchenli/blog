@@ -1,6 +1,6 @@
 ---
 title: "Context Engineering & Reuse Pattern Under the Hood of Claude Code"
-date: 2025-12-21
+date: 2069-12-21
 description: "Recently, we ran a tiny one-shot experiment, and found that Claude Code has a high context reuse rate of 92%."
 tags: ["LLM", "Agent", "Claude Code", "Context Engineering", "Reuse Pattern"]
 categories: ["general"]
