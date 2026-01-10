@@ -21,12 +21,12 @@ Maybe the price war, maybe the crazy debts some companies upstream are carrying,
 But regardless of the reason behind the pricing, we want to use more these powerful agents.
 Current models and applications are already capable of handling many complex tasks with minimal human intervention.
 However, the efficiency of these agents has just rised to our attention. 
-In this blog post, we will discuss why agents are efficiency nightmares, how we can make them (somewhat) better with KV cache management, 
-and where we could be going for these tasks.
+In this blog post, we will discuss why agents are efficiency nightmares, how we can make them (somewhat) better with KV cache management tool like LMCache, 
+and where we could be moving forward for improving agents.
 
 Prerequisite: LLM inference basics. 
 Suggested reading:
-[LLM Inference](https://arpitbhayani.me/blogs/how-llm-inference-works/);   [KV Cache Offloading](https://blog.lmcache.ai/en/2024/09/17/lmcache-turboboosting-vllm-with-7x-faster-access-to-100x-more-kv-caches/)
+[LLM Inference](https://arpitbhayani.me/blogs/how-llm-inference-works/);   [KV Cache Offloading with LMCache](https://blog.lmcache.ai/en/2024/09/17/lmcache-turboboosting-vllm-with-7x-faster-access-to-100x-more-kv-caches/)
 
 ## Powerful Agents; But Draining Bank Account.
 Everyone said 2025 was the year of agents. With continuous improment in base model and emerging techniques like reinforcement learning, coding agents including [Cursor](https://www.cursor.com/), [Claude Code](https://www.claude.com/product/claude-code) have become much more powerful and automated compared with the start of the year. Quantitatively, the score on [SWE-Bench](https://www.swebench.com/) has risen from 20% as in Aug 2024 to over 70% for frontier models with a simple agent scaffold. 
@@ -180,14 +180,13 @@ These issue limits agents from fully benefitting from KV cache offloading. For e
 
 ![TTL-based Eviction Policy](../../images/agent_kv/ttl.png)
 
-
 Some research works have demonstrated by mitigating the first two issues, KV cache offloading can bring significant speedup and cost reduction for serving LLMs.
 
 For example, [Continuum](https://arxiv.org/abs/2511.02230) proposes to reuse the Time-to-live (TTL) concept to preserve the KV cache for programs that are likely to be resumed soon to mitigate the first two problems. This changes the eviction policy from LRU to TTL-based, which is more suitable for agent workloads.
 
 ![Evaluation Results of Continuum](../../images/agent_kv/eval.png)
 
-As demonstrated by the experiments, Continuum can bring up to 3.66x improvement for serving LLM agent traces with long context on SWE-Bench and Berkeley Function Calling Leaderboard workloads. The above graph shows the evaluations results. Each method is paired with LMCache as the base system. For A100 GPUs, we pair 100GB DRAM per GPU and for B200 GPUs, we pair 200GB DRAM per GPU. We set TP=4 for 70B model. The requests arrive according to a Poisson process with a certain JPS. The graphs show the average latency per request under different JPS.
+As demonstrated by the experiments, Continuum can bring up to 3.66x improvement for serving LLM agent traces with long context on SWE-Bench and Berkeley Function Calling Leaderboard workloads by improving upon naive KV cache offloading. The above graph shows the evaluations results. In the graph, each method represents a scheduling policy using vLLM and using KV cache offloading with LMCache. For A100 GPUs, we pair 100GB DRAM per GPU and for B200 GPUs, we pair 200GB DRAM per GPU. We set TP=4 for 70B model. The requests arrive according to a Poisson process with a certain JPS. The graphs show the average latency per request under different JPS.
 
 The paper arxiv links is here: [Continuum Paper](https://arxiv.org/abs/2511.02230), and a preview version of code is available at: [Continuum Code](https://github.com/Hanchenli/vllm-continuum).
 
