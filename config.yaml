@@ -15,3 +15,5 @@ params:
       url: "https://www.instagram.com/hanchen_space/"
     - name: "Facebook"
       url: "https://www.facebook.com/hanchen_space/"
+
+googleAnalytics: "G-JEDR6E5EV4"
