@@ -19,4 +19,4 @@ params:
 googleAnalytics: "G-JEDR6E5EV4"
 services:
   googleAnalytics:
-    ID: G-JEDR6E5EV4
+    ID: "G-JEDR6E5EV4"
