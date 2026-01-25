@@ -32,3 +32,7 @@ outputs:
     - HTML
     - RSS
     - JSON # necessary for search
+
+services:
+  googleAnalytics:
+    ID: G-JEDR6E5EV4
