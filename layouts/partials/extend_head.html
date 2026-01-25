@@ -34,4 +34,6 @@
     }
 </style>
 
-{{ partial "google_analytics.html" . }}
+{{- if hugo.IsProduction | or (eq site.Params.env "production") }}
+{{ template "_internal/google_analytics.html" . }}
+{{- end }}

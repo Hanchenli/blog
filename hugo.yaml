@@ -4,6 +4,7 @@ languageCode: en-us
 title: Hanchen's Space Bar
 theme: ["PaperMod"]
 params:
+  env: production
   defaultTheme: auto
   homeInfoParams:
     Title: Blogs & Thoughts
