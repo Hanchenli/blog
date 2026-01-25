@@ -17,3 +17,6 @@ params:
       url: "https://www.facebook.com/hanchen_space/"
 
 googleAnalytics: "G-JEDR6E5EV4"
+services:
+  googleAnalytics:
+    ID: G-JEDR6E5EV4
