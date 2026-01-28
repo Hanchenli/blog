@@ -58,14 +58,24 @@ Let's now assume we are the CTO of NVidia. Given the previous calculations, you 
 
 ![Proposed Architecture](../../images/agent_future/arch.png)
 
-Overall, the architecture we are proposing two components: 1. Prefill node, which uses the compute optimized GPUs as compute units for incremental prefill and connects to many storage devices to store KV cache for long contexts. 2. Decoding node, which uses specialized hardware that opimizes for memory access to achieve fast decoding. Below, we will do a simulation demonstrating how this architecture can potentially speed up agent inference from over minutes (now) to real-time (future).
+Overall, the architecture we are proposing two components:
 
+1. Prefill node, which uses the compute optimized GPUs as compute units for incremental prefill and connects to many storage devices to store KV cache for long contexts.
+2. Decoding node, which uses specialized hardware that opimizes for memory access to achieve fast decoding.
 
+Below, we will do a simulation demonstrating how this architecture can potentially speed up agent inference from over minutes (now) to real-time (future).
 
+## Challenges for Realizing the Proposed Architecture
+We outline some of the immediate challenges that come to authors' minds for realizing the proposed architecture:
+1. The integration between NVidia's GPU platform and Groq's LPU architecture. This includes architecture design, data transfer protocols, and other compatibility issues. Author does not work on hardware design and thus cannot comment too much on the specific hardware. But it remains unclear how we can expose software APIs to allow seamless data transfer between the two hardwares.
+
+2. The software stack for coordinating prefill and decoding nodes. Although the idea of ICMS is promising, software stack for efficiently coordinating between prefill and decoding nodes is non-trivial. This includes design of different caching policies, scheduling systems for balancing delay and throughput under agentic scenarios, and other system-level optimizations. There have been initial effort on software stack for LLM inference such as vLLM, SGLang, LMCache... But customizing them for these specialized hardware workloads will remain challenging. 
 
 
 
 ## Conclusion
+
+The convergence of NVidia's massive compute scale with Groq's specialized decoding speed brings many future opportunites.  By combining the newly released inference context management storage system for reusing KV cache and groq's SRAM for rapid decoding, NVidia potentially can overcome the latency bottlenecks that currently plague complex agentic workflows. While our proposed architecture is theoretical, the strategic moves at CES 2026 suggest this is the direction the industry is heading. Real-time, context-aware agents are no longer just a software ambition; the hardware foundation is finally being laid to make them a reality.
 
 
 
