@@ -31,17 +31,19 @@ From the authors' point of view, the new Rubin architecture is basically adding 
 
 On the Groq side, this acqui-hire may be a defensive move for NVidia to reduce competitors. But regardless, ultra-low latency inference is crucial for real-time agents. Groq's architecture is well-suited for this purpose and potentially can be integrated into future NVIDIA platforms.
 
-These movements demonstrate NVidia's investments into inference, which it has been talking about since 2025. This aligns with the problem faced by NVidia's biggest end customer: Frontier Labs including OpenAI, Anthropic, ...  One of the main doubts for these frontier labs before they raise more capital is their profitability. While people are racing for the best capability on benchmarks and providing training services like [Tinker](https://thinkingmachines.ai/tinker/), so far inference is the only cash cow for them. Gross margin of Anthropic and OpenAI are rumored to be around 40%% according to [The Information](https://www.theinformation.com/articles/anthropic-lowers-profit-margin-projection-revenue-skyrockets), leaving plenty of room for improvement.
+These movements demonstrate NVidia's investments into inference, which it has been talking about since 2025. This aligns with the problem faced by NVidia's biggest end customer: Frontier Labs including OpenAI, Anthropic, ...  One of the main doubts for these frontier labs before they raise more capital is their profitability. While people are racing for the best capability on benchmarks and providing training services like [Tinker](https://thinkingmachines.ai/tinker/), so far inference is the only cash cow for them. Gross margin of Anthropic and OpenAI are rumored to be around 40% according to [The Information](https://www.theinformation.com/articles/anthropic-lowers-profit-margin-projection-revenue-skyrockets), leaving plenty of room for improvement.
 
 
 ## Importance of KV Cache Hits
 In our previous blog [post](https://hanchenli.github.io/blog/posts/kv_agent/), we disussed the significance of KV cache hits in enhancing the efficiency of LLM agents. By storing previously computed key-value pairs, agents can avoid redundant computations, leading to faster response times and reduced computational load.
 
-The danger of a cache non-hit for any agent LLM trace is that it has to do the prefill for all the previous tokens again. For example, if an agent misses the previous KV cache for a 100K token context, it has to redo the prefill for ... tokens. Since prefill is not batched, this will also block other tasks on the same GPU from being scheduled. 
+The danger of a cache non-hit for any agent LLM trace is that it has to do the prefill for all the previous tokens again. For example, if an agent misses the previous KV cache for a 100K token context, it has to redo the prefill. On xx GPU with balba, prefill takes xx seconds. Since prefill is not batched, this will also block other tasks on the same GPU from being scheduled. Given that each agent can easily go over 20 turns, a few times of KV cache re-prefill can easily inflate the total latency by multiple times.
 
-
+However, if we are able to save and reuse the KV cache for long contexts, we can significantly reduce the full prefill time. For each round of the agents, we only need to do incremental prefill for the newly added user and agent messages. This can lead to substantial speedups by reduced computation.
 
 ## Why Decoding Speed is the True Killer
+What we did not discuss in the previous post is the improvement of decoding in agent inference.
+
 Depending on the task, agents often contain long decoding phases. We give a brief breakdown of the time spent in prefill and decoding for a SWE-agent task assuming this is the only task on the set of GPUs. 
 
 <!-- Put a graph here on decode and prefill -->
@@ -52,12 +54,17 @@ Depending on the task, agents often contain long decoding phases. We give a brie
 
 
 ## Why NVidia has the Potential to be the First to achieve real-time agents
-Given the previous calculation, let's assume we are the CTO of NVidia. What would we build with the Context Memory Storage Platform and newly acquiredGroq's technology? Context Memory Storage Platform can be used to store KV cache for long contexts to optimize for prefill speed. Groq's SRAM-based architecture can be used to optimize decoding speed. What is the limit given these two building blocks now and what will be the limit in the future?
+Let's now assume we are the CTO of NVidia. Given the previous calculations, you will suddenly realize that if we just put the two pieces together: ICMS for KV cache hits and Groq's SRAM-based architecture for decoding speed, we can potentially achieve real-time agents. Here is a rough sketch of the proposed architecture:
+
+![Proposed Architecture](../../images/agent_future/architecture.png)
+
+
+
+Inference Context Memory Storage Platform can be used to store KV cache for long contexts to optimize for prefill speed. Groq's SRAM-based architecture can be used to optimize decoding speed. What is the limit given these two building blocks now and what will be the limit in the future?
 
 
 ## Conclusion
 
 
 
-References:
 
