@@ -2,57 +2,57 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/blogs/tags/agent/</loc>
-    <lastmod>2025-12-21T00:00:00+00:00</lastmod>
+    <loc>http://localhost:1313/blog/</loc>
+    <lastmod>2069-12-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/blogs/categories/</loc>
-    <lastmod>2025-12-21T00:00:00+00:00</lastmod>
+    <loc>http://localhost:1313/blog/posts/</loc>
+    <lastmod>2069-12-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/blogs/tags/claude-code/</loc>
-    <lastmod>2025-12-21T00:00:00+00:00</lastmod>
+    <loc>http://localhost:1313/blog/tags/agent/</loc>
+    <lastmod>2025-02-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/blogs/tags/context-engineering/</loc>
-    <lastmod>2025-12-21T00:00:00+00:00</lastmod>
+    <loc>http://localhost:1313/blog/categories/</loc>
+    <lastmod>2025-02-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/blogs/posts/claude_code/</loc>
-    <lastmod>2025-12-21T00:00:00+00:00</lastmod>
+    <loc>http://localhost:1313/blog/posts/evolving/</loc>
+    <lastmod>2025-02-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/blogs/categories/general/</loc>
-    <lastmod>2025-12-21T00:00:00+00:00</lastmod>
+    <loc>http://localhost:1313/blog/categories/general/</loc>
+    <lastmod>2025-02-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/blogs/</loc>
-    <lastmod>2025-12-21T00:00:00+00:00</lastmod>
+    <loc>http://localhost:1313/blog/tags/inference/</loc>
+    <lastmod>2025-02-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/blogs/tags/llm/</loc>
-    <lastmod>2025-12-21T00:00:00+00:00</lastmod>
+    <loc>http://localhost:1313/blog/tags/kv-cache/</loc>
+    <lastmod>2025-02-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/blogs/posts/</loc>
-    <lastmod>2025-12-21T00:00:00+00:00</lastmod>
+    <loc>http://localhost:1313/blog/tags/llm/</loc>
+    <lastmod>2025-02-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/blogs/tags/reuse-pattern/</loc>
-    <lastmod>2025-12-21T00:00:00+00:00</lastmod>
+    <loc>http://localhost:1313/blog/tags/lmcache/</loc>
+    <lastmod>2025-02-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/blogs/tags/</loc>
-    <lastmod>2025-12-21T00:00:00+00:00</lastmod>
+    <loc>http://localhost:1313/blog/tags/</loc>
+    <lastmod>2025-02-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/blogs/tags/inference/</loc>
+    <loc>http://localhost:1313/blog/posts/fast_agent/</loc>
+    <lastmod>2025-01-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/blog/tags/memory/</loc>
+    <lastmod>2025-01-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/blog/tags/sram/</loc>
+    <lastmod>2025-01-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/blog/posts/kv_agent/</loc>
     <lastmod>2025-01-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/blogs/tags/kv-cache/</loc>
-    <lastmod>2025-01-07T00:00:00+00:00</lastmod>
+    <loc>http://localhost:1313/blog/archives.fr/</loc>
   </url><url>
-    <loc>http://localhost:1313/blogs/tags/lmcache/</loc>
-    <lastmod>2025-01-07T00:00:00+00:00</lastmod>
+    <loc>http://localhost:1313/blog/archives/</loc>
   </url><url>
-    <loc>http://localhost:1313/blogs/posts/kv_agent/</loc>
-    <lastmod>2025-01-07T00:00:00+00:00</lastmod>
+    <loc>http://localhost:1313/blog/search/</loc>
   </url><url>
-    <loc>http://localhost:1313/blogs/archives.fr/</loc>
-  </url><url>
-    <loc>http://localhost:1313/blogs/archives/</loc>
-  </url><url>
-    <loc>http://localhost:1313/blogs/search/</loc>
-  </url><url>
-    <loc>http://localhost:1313/blogs/search.fr/</loc>
+    <loc>http://localhost:1313/blog/search.fr/</loc>
   </url>
 </urlset>

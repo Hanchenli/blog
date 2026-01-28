@@ -2,17 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>KV Cache on Hanchen&#39;s Space Bar</title>
-    <link>http://localhost:1313/blogs/tags/kv-cache/</link>
+    <link>http://localhost:1313/blog/tags/kv-cache/</link>
     <description>Recent content in KV Cache on Hanchen&#39;s Space Bar</description>
     <generator>Hugo -- 0.152.2</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 07 Jan 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/blogs/tags/kv-cache/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 20 Feb 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/blog/tags/kv-cache/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Evolving Agents are Secretly Overfitting, and It Might Actually be Better</title>
+      <link>http://localhost:1313/blog/posts/evolving/</link>
+      <pubDate>Thu, 20 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/posts/evolving/</guid>
+      <description>&lt;p&gt;Evol&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>CES and Groq Acqui-hire Reflection: NVidia&#39;s Ambition to Build Real Time Agents</title>
+      <link>http://localhost:1313/blog/posts/fast_agent/</link>
+      <pubDate>Mon, 27 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/posts/fast_agent/</guid>
+      <description>A deep dive into NVidia&amp;#39;s recent CES announcements, exploring their strategy to enhance LLM inference speed and efficiency through innovative hardware and software solutions.</description>
+    </item>
     <item>
       <title>Why Agents are Efficiency Nightmares and How to Fix them?</title>
-      <link>http://localhost:1313/blogs/posts/kv_agent/</link>
+      <link>http://localhost:1313/blog/posts/kv_agent/</link>
       <pubDate>Tue, 07 Jan 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blogs/posts/kv_agent/</guid>
+      <guid>http://localhost:1313/blog/posts/kv_agent/</guid>
       <description>Demonstrating the Benefits of KV Cache Sharing in Agent Serving and Future Directions</description>
     </item>
   </channel>
