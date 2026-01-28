@@ -56,11 +56,13 @@ Depending on the task, agents often contain long decoding phases. We give a brie
 ## Why NVidia has the Potential to be the First to achieve real-time agents
 Let's now assume we are the CTO of NVidia. Given the previous calculations, you will suddenly realize that if we just put the two pieces together: ICMS for KV cache hits and Groq's SRAM-based architecture for decoding speed, we can potentially achieve real-time agents. Here is a rough sketch of the proposed architecture:
 
-![Proposed Architecture](../../images/agent_future/architecture.png)
+![Proposed Architecture](../../images/agent_future/arch.png)
+
+Overall, the architecture we are proposing two components: 1. Prefill node, which uses the compute optimized GPUs as compute units for incremental prefill and connects to many storage devices to store KV cache for long contexts. 2. Decoding node, which uses specialized hardware that opimizes for memory access to achieve fast decoding. Below, we will do a simulation demonstrating how this architecture can potentially speed up agent inference from over minutes (now) to real-time (future).
 
 
 
-Inference Context Memory Storage Platform can be used to store KV cache for long contexts to optimize for prefill speed. Groq's SRAM-based architecture can be used to optimize decoding speed. What is the limit given these two building blocks now and what will be the limit in the future?
+
 
 
 ## Conclusion
