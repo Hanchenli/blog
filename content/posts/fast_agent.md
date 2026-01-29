@@ -48,13 +48,16 @@ However, if we are able to save and reuse the KV cache for long contexts, we can
 ## Story of Decoding Speed and the Memory Bottleneck
 However, we did not go into full depth of decoding in agent inference.
 
-Depending on the task, agents often contain long decoding phases. We give a brief breakdown of the time spent in prefill and decoding for a SWE-agent task assuming this is the only task on the set of GPUs. 
+Agents on many categories often have . We give a brief breakdown of the time spent in prefill and decoding for a SWE-agent task assuming this is the only task on the set of GPUs. Although decoding is often executed in batched manner to increase total throughput of the system, the latency experienced by each individual user will still be very long if there are many decoding tokens. 
 
+Below is a breakdown of time spent in prefill and decoding for a SWE-agent task assuming this is the only task on the set of GPUs.
 <!-- Put a graph here on decode and prefill -->
 
+The key bottleneck for decoding speed is the memory access pattern. During decoding, the model needs to frequently load the model weights as well as KV cache. This results in a minimal delay of total_memory / HBM bandwidth for each generated token. 
 
+Speculative decoding as discussed in this [blog](https://developer.nvidia.com/blog/an-introduction-to-speculative-decoding-for-reducing-latency-in-ai-inference/) can help reduce the number of memory accesses by generating multiple tokens in one forward pass. However, the fundamental bottleneck remains: each forward pass still requires loading weights and KV cache from memory.
 
-
+Groq's LPU architecture, which utilizes SRAM for storing model weights, offers a potential solution to this bottleneck. SRAM provides significantly faster access times compared to traditional memory types like HBM or DDR by directly storing things on chip. This allows them to have 80TB/s bandwidth.
 
 
 ## Why NVidia has the Potential to be the First to achieve real-time agents
@@ -77,7 +80,7 @@ Below, we will do a simulation demonstrating how this architecture can potential
 We outline some of the immediate challenges that come to authors' minds for realizing the proposed architecture:
 1. The integration between NVidia's GPU platform and Groq's LPU architecture. This includes architecture design, data transfer protocols, and other compatibility issues. Author does not work on hardware design and thus cannot comment too much on the specific hardware. But it remains unclear how we can expose software APIs to allow seamless data transfer between the two hardwares.
 
-2. The software stack for coordinating prefill and decoding nodes. Although the idea of ICMS is promising, software stack for efficiently coordinating between prefill and decoding nodes is non-trivial. This includes design of different caching policies, scheduling systems for balancing delay and throughput under agentic scenarios, and other system-level optimizations. There have been initial effort on software stack for LLM inference such as vLLM, SGLang, LMCache... But customizing them for these specialized hardware workloads will remain challenging. 
+2. The software stack for coordinating prefill and decoding nodes. Although the idea of ICMS is promising, software stack for efficiently coordinating between prefill and decoding nodes is non-trivial. This includes design of different caching policies, scheduling systems for balancing delay and throughput under agentic scenarios, and other system-level optimizations. There have been initial effort on software stack for LLM inference such as vLLM, SGLang, LMCache... But customizing them for these specialized hardware workloads will remain challenging. Moreover, utilizing speculative decoding in the new architecture will also require significant software engineering efforts.
 
 
 ## Conclusion
