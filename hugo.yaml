@@ -9,7 +9,7 @@ params:
   homeInfoParams:
     Title: Blogs & Thoughts
     Content: | 
-      Astronauts' favorite key on keyboard created by human and AI.
+      Astronauts' favorite key on keyboard.
 
   socialIcons: # optional
     - name: "GitHub"
