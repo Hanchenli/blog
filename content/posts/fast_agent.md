@@ -17,6 +17,10 @@ TocOpen: false
 In this blog post, we will discuss NVidia's recent announcements at CES and their acquisition of Groq, focusing on their strategy to enhance LLM agent inference.
 We will explore three main aspects: the importance of KV cache hits, the role of SRAM in improving decoding speed, and a proposed hardware-software architecture that potentially speeds up agent inference from task-based to real-time.
 
+Prerequisite: LLM inference basics. 
+Suggested reading:
+[LLM Inference](https://arpitbhayani.me/blogs/how-llm-inference-works/);   [KV Cache Offloading with LMCache](https://blog.lmcache.ai/en/2024/09/17/lmcache-turboboosting-vllm-with-7x-faster-access-to-100x-more-kv-caches/); [LLM Agent with KV Cache](https://hanchenli.github.io/blog/posts/kv_agent/)
+
 ## CES Announcements and Groq Acquisition
 In CES 2026, NVIDIA introduced the Rubin architecture. As described by this [announcement](https://nvidianews.nvidia.com/news/rubin-platform-ai-supercomputer) This new GPU architecture is designed to significantly boost the performance of large language model (LLM) inference by 10x. It incorporates NVIDIA Vera CPU, Rubin GPU, NVLink 6 Switch, ConnectX-9 SuperNIC, BlueField-4 DPU and Spectrum-6 Ethernet Switch. It natively supports the Inference Context Memory Storage Platform [ICMS](https://developer.nvidia.com/blog/introducing-nvidia-bluefield-4-powered-inference-context-memory-storage-platform-for-the-next-frontier-of-ai/), which stores KV cache for contexts that allow future reuse.
 
@@ -41,8 +45,8 @@ The danger of a cache non-hit for any agent LLM trace is that it has to do the p
 
 However, if we are able to save and reuse the KV cache for long contexts, we can significantly reduce the full prefill time. For each round of the agents, we only need to do incremental prefill for the newly added user and agent messages. This can lead to substantial speedups by reduced computation.
 
-## Why Decoding Speed is the True Killer
-What we did not discuss in the previous post is the improvement of decoding in agent inference.
+## Story of Decoding Speed and the Memory Bottleneck
+However, we did not go into full depth of decoding in agent inference.
 
 Depending on the task, agents often contain long decoding phases. We give a brief breakdown of the time spent in prefill and decoding for a SWE-agent task assuming this is the only task on the set of GPUs. 
 
@@ -65,12 +69,15 @@ Overall, the architecture we are proposing two components:
 
 Below, we will do a simulation demonstrating how this architecture can potentially speed up agent inference from over minutes (now) to real-time (future).
 
+<!-- Need another graph showing improvement -->
+
+
 ## Challenges for Realizing the Proposed Architecture
+
 We outline some of the immediate challenges that come to authors' minds for realizing the proposed architecture:
 1. The integration between NVidia's GPU platform and Groq's LPU architecture. This includes architecture design, data transfer protocols, and other compatibility issues. Author does not work on hardware design and thus cannot comment too much on the specific hardware. But it remains unclear how we can expose software APIs to allow seamless data transfer between the two hardwares.
 
 2. The software stack for coordinating prefill and decoding nodes. Although the idea of ICMS is promising, software stack for efficiently coordinating between prefill and decoding nodes is non-trivial. This includes design of different caching policies, scheduling systems for balancing delay and throughput under agentic scenarios, and other system-level optimizations. There have been initial effort on software stack for LLM inference such as vLLM, SGLang, LMCache... But customizing them for these specialized hardware workloads will remain challenging. 
-
 
 
 ## Conclusion
