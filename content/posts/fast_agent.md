@@ -39,7 +39,9 @@ These movements demonstrate NVidia's investments into inference, which it has be
 
 
 ## Importance of KV Cache Hits
-In our previous blog [post](https://hanchenli.github.io/blog/posts/kv_agent/), we disussed the significance of KV cache hits in enhancing the efficiency of LLM agents. By storing previously computed key-value pairs, agents can avoid redundant computations, leading to faster response times and reduced computational load.
+In our previous blog [post](https://hanchenli.github.io/blog/posts/kv_agent/), we disussed the significance of KV cache hits in enhancing the efficiency of LLM agents. By storing previously computed KV Cache, agents can avoid redundant computations, leading to faster response times and reduced computational load.
+
+![SWE Agent](../../images/agent_future/trace.png)
 
 The danger of a cache non-hit for any agent LLM trace is that it has to do the prefill for all the previous tokens again. For example, if an agent misses the previous KV cache for a 100K token context, it has to redo the prefill. On xx GPU with balba, prefill takes xx seconds. Since prefill is not batched, this will also block other tasks on the same GPU from being scheduled. Given that each agent can easily go over 20 turns, a few times of KV cache re-prefill can easily inflate the total latency by multiple times.
 
