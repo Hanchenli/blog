@@ -54,9 +54,14 @@ Below is a breakdown of time spent in prefill and decoding for a SWE-agent task 
 
 <!-- Put a graph here on decode and prefill -->
 
-The key bottleneck for decoding speed is the memory access pattern. During decoding, the model needs to frequently load the model weights as well as KV cache. This results in a minimal delay of total_memory / HBM bandwidth for each generated token. 
+The key bottleneck for decoding speed is the memory access pattern. During decoding, the model needs to frequently load the model weights as well as KV cache. This results in a minimal delay of total_memory / HBM bandwidth for each generated token. Below is a graph on the roofline model for GPU computations. Decoding falls into the memory bound regime, meaning that the execution time is dominated by memory access rather than how fast you can do the computations like matrix multiplication.
+
+![Roofline Model](../../images/agent_future/roofline.png)
+
 
 Admittedly, speculative decoding as discussed in this [blog](https://developer.nvidia.com/blog/an-introduction-to-speculative-decoding-for-reducing-latency-in-ai-inference/) can help reduce the number of memory accesses by generating multiple tokens in one forward pass. However, the fundamental bottleneck remains: each forward pass still requires loading weights and KV cache from memory.
+
+
 
 Groq's LPU architecture, which utilizes SRAM for storing model weights, offers a potential solution to this bottleneck. SRAM provides significantly faster access times compared to traditional memory types like HBM or DDR by directly putting memory on chip. This allows them to have 80TB/s bandwidth for SRAM as discussed by the [blog](https://groq.com/blog/the-groq-lpu-explained). This allows them to have much faster vanilla (without speculative decoding) speed compared to traditional GPU architectures.
 
