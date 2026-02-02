@@ -1,6 +1,6 @@
 ---
 title: "CES and Groq Acqui-hire Reflection: NVidia's Potential to Build Real Time Agents"
-date: 2025-01-27
+date: 2055-01-27
 description: "A deep dive into NVidia's recent CES announcements, exploring their strategy to enhance LLM inference speed and efficiency through innovative hardware and software solutions."
 author: "Hanchen Li, and Collaborators"
 tags: ["LLM", "Inference", "Agent", "KV Cache","LMCache", "Memory", "SRAM"]
@@ -60,7 +60,6 @@ The key bottleneck for decoding speed is the memory access pattern. During decod
 
 ![Roofline Model](../../images/agent_future/roofline.png)
 
-
 Admittedly, speculative decoding as discussed in this [blog](https://developer.nvidia.com/blog/an-introduction-to-speculative-decoding-for-reducing-latency-in-ai-inference/) can help reduce the number of memory accesses by generating multiple tokens in one forward pass. However, the fundamental bottleneck remains: each forward pass still requires loading weights and KV cache from memory.
 
 
@@ -69,7 +68,7 @@ Groq's LPU architecture, which utilizes SRAM for storing model weights, offers a
 
 
 ## Why NVidia has the Potential to be the First to achieve real-time agents
-Let's now assume we are the CTO of NVidia. Given the previous calculations, you will suddenly realize that if we just put the two pieces together: ICMS for KV cache hits and Groq's SRAM-based architecture for decoding speed, we can potentially achieve real-time agents. Here is a rough sketch of the proposed architecture:
+Let's now assume we are designing the next generation agent inference platform for NVidia. Given the previous calculations, you will suddenly realize that if we just put the two pieces together: ICMS for KV cache hits and Groq's SRAM-based architecture for decoding speed, we can potentially achieve real-time agents. Here is a rough sketch of the proposed architecture:
 
 ![Proposed Architecture](../../images/agent_future/arch.png)
 
