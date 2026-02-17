@@ -1,7 +1,7 @@
 ---
-title: "CES and Groq Acqui-hire Reflection: Nvidia's Plan to Build Real Time Agents?"
+title: "CES and Groq \"Acqui-hire\" Reflection: Nvidia's Plan to Build Real Time Agents?"
 date: 2026-02-16
-description: "Discussion into Nvidia's recent CES announcements and Groq acqui-hire, explaining how they potentially enhance LLM agent inference speed."
+description: "Discussion into Nvidia's recent CES announcements and Groq \"acqui-hire\", explaining how they potentially enhance LLM agent inference speed."
 author: "Hanchen Li, and Collaborators"
 tags: ["LLM", "Inference", "Agent", "KV Cache","LMCache", "Memory", "SRAM", "AI Infra", "Nvidia"]
 categories: ["general"]
@@ -14,7 +14,7 @@ TocOpen: false
 
 ---
 
-In this blog post, we will discuss Nvidia's recent announcements at CES and their acquisition of Groq, focusing on their strategy to enhance LLM agent inference.
+In this blog post, we will discuss Nvidia's recent announcements at CES and their strategic partnership with Groq, focusing on their strategy to enhance LLM agent inference.
 We will explore three main aspects: the importance of KV cache hits, the role of SRAM in improving decoding speed, and a proposed hardware-software architecture that potentially speeds up agent inference to real-time.
 
 Prerequisite: LLM inference basics. 
@@ -24,7 +24,7 @@ Suggested reading:
 ## CES Announcements and Groq Acquisition
 In CES 2026, NVIDIA introduced the Rubin architecture. As described by this [announcement](https://nvidianews.nvidia.com/news/rubin-platform-ai-supercomputer) This new GPU architecture is designed to significantly boost the performance of large language model (LLM) inference by 10x. It incorporates NVIDIA Vera CPU, Rubin GPU, NVLink 6 Switch, ConnectX-9 SuperNIC, BlueField-4 DPU and Spectrum-6 Ethernet Switch. It natively supports the Inference Context Memory Storage Platform [ICMS](https://developer.nvidia.com/blog/introducing-nvidia-bluefield-4-powered-inference-context-memory-storage-platform-for-the-next-frontier-of-ai/), which stores KV cache for contexts that allow future reuse.
 
-Moreover, NVIDIA announced the acqui-hire of Groq, a company known for its high-performance AI accelerators. Utilizing SRAM extensively, Groq's LPU architecture is highly optimized for low-latency inference. making it a perfect fit for real-time applications. This acquisition is expected to enhance NVIDIA's capabilities in delivering fast and efficient LLM inference.
+Moreover, NVIDIA announced a strategic partnership with Groq, including a non-exclusive technology licensing agreement. Groq, a company known for its high-performance AI accelerators utilizing SRAM extensively, has an LPU architecture highly optimized for low-latency inference. This collaboration allows NVIDIA to integrate similar low-latency technologies into their ecosystem.
 
 
 ## Immediate Comments on the News
