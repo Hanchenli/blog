@@ -6,55 +6,41 @@
     <description>Recent content in Tags on Hanchen&#39;s Space Bar</description>
     <generator>Hugo -- 0.152.2</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 27 Jan 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 07 Jan 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/blog/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Agent</title>
       <link>http://localhost:1313/blog/tags/agent/</link>
-      <pubDate>Mon, 27 Jan 2025 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 07 Jan 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/blog/tags/agent/</guid>
       <description></description>
     </item>
     <item>
       <title>Inference</title>
       <link>http://localhost:1313/blog/tags/inference/</link>
-      <pubDate>Mon, 27 Jan 2025 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 07 Jan 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/blog/tags/inference/</guid>
       <description></description>
     </item>
     <item>
       <title>KV Cache</title>
       <link>http://localhost:1313/blog/tags/kv-cache/</link>
-      <pubDate>Mon, 27 Jan 2025 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 07 Jan 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/blog/tags/kv-cache/</guid>
       <description></description>
     </item>
     <item>
       <title>LLM</title>
       <link>http://localhost:1313/blog/tags/llm/</link>
-      <pubDate>Mon, 27 Jan 2025 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 07 Jan 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/blog/tags/llm/</guid>
       <description></description>
     </item>
     <item>
       <title>LMCache</title>
       <link>http://localhost:1313/blog/tags/lmcache/</link>
-      <pubDate>Mon, 27 Jan 2025 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 07 Jan 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/blog/tags/lmcache/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Memory</title>
-      <link>http://localhost:1313/blog/tags/memory/</link>
-      <pubDate>Mon, 27 Jan 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/tags/memory/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>SRAM</title>
-      <link>http://localhost:1313/blog/tags/sram/</link>
-      <pubDate>Mon, 27 Jan 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/tags/sram/</guid>
       <description></description>
     </item>
   </channel>
