@@ -25,6 +25,12 @@ params:
     icon: "images/logo.png" # Path relative to the assets directory
     iconHeight: 70
     disableResize: true # Disable resizing to preserve logo quality
+
+  assets:
+    favicon: "images/website_logo.png"
+    favicon16x16: "images/website_logo.png"
+    favicon32x32: "images/website_logo.png"
+    apple_touch_icon: "images/website_logo.png"
   
   showBackgroundImage: true
 

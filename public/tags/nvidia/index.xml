@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>NVidia on Hanchen&#39;s Space Bar</title>
+    <title>Nvidia on Hanchen&#39;s Space Bar</title>
     <link>http://localhost:1313/blog/tags/nvidia/</link>
-    <description>Recent content in NVidia on Hanchen&#39;s Space Bar</description>
+    <description>Recent content in Nvidia on Hanchen&#39;s Space Bar</description>
     <generator>Hugo -- 0.152.2</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 16 Feb 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/blog/tags/nvidia/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>CES and Groq Acqui-hire Reflection: NVidia&#39;s Plan to Build Real Time Agents?</title>
+      <title>CES and Groq &#34;Acqui-hire&#34; Reflection: Nvidia&#39;s Plan to Build Real Time Agents?</title>
       <link>http://localhost:1313/blog/posts/fast_agent/</link>
       <pubDate>Mon, 16 Feb 2026 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/blog/posts/fast_agent/</guid>
-      <description>A deep dive into NVidia&amp;#39;s recent CES announcements, explaining how they potentially enhance LLM agent inference speed.</description>
+      <description>Discussion into Nvidia&amp;#39;s recent CES announcements and Groq &amp;#34;acqui-hire&amp;#34;, explaining how they potentially enhance LLM agent inference speed.</description>
     </item>
   </channel>
 </rss>
