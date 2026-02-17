@@ -1,9 +1,9 @@
 ---
-title: "CES and Groq Acqui-hire Reflection: NVidia's Plan to Build Real Time Agents?"
+title: "CES and Groq Acqui-hire Reflection: Nvidia's Plan to Build Real Time Agents?"
 date: 2026-02-16
-description: "A deep dive into NVidia's recent CES announcements, explaining how they potentially enhance LLM agent inference speed."
+description: "Discussion into Nvidia's recent CES announcements and Groq acqui-hire, explaining how they potentially enhance LLM agent inference speed."
 author: "Hanchen Li, and Collaborators"
-tags: ["LLM", "Inference", "Agent", "KV Cache","LMCache", "Memory", "SRAM", "AI Infra", "NVidia"]
+tags: ["LLM", "Inference", "Agent", "KV Cache","LMCache", "Memory", "SRAM", "AI Infra", "Nvidia"]
 categories: ["general"]
 cover:
     image: images/agent_future/main.png
@@ -14,8 +14,8 @@ TocOpen: false
 
 ---
 
-In this blog post, we will discuss NVidia's recent announcements at CES and their acquisition of Groq, focusing on their strategy to enhance LLM agent inference.
-We will explore three main aspects: the importance of KV cache hits, the role of SRAM in improving decoding speed, and a proposed hardware-software architecture that potentially speeds up agent inference from task-based to real-time.
+In this blog post, we will discuss Nvidia's recent announcements at CES and their acquisition of Groq, focusing on their strategy to enhance LLM agent inference.
+We will explore three main aspects: the importance of KV cache hits, the role of SRAM in improving decoding speed, and a proposed hardware-software architecture that potentially speeds up agent inference to real-time.
 
 Prerequisite: LLM inference basics. 
 Suggested reading:
@@ -29,13 +29,15 @@ Moreover, NVIDIA announced the acqui-hire of Groq, a company known for its high-
 
 ## Immediate Comments on the News
 
-From the authors' point of view, the new architecture is basically adding a KV cache layer to the existing GPU platform. The ideas are similar to the previous post about LMCache, but NVidia have also added some additional hardware components such as the DPUs (Data Processing Unit). 
+From the authors' point of view, the new architecture is basically adding a KV cache layer to the existing GPU platform. The ideas are similar to the previous post about LMCache, but Nvidia have also added some additional hardware components such as the DPUs (Data Processing Unit). 
 
 ![KV architecture](../../images/agent_future/storage.png)
 
-On the Groq side, this acqui-hire may be a defensive move for NVidia to reduce competitors. But regardless, ultra-low latency inference is crucial for real-time agents. Groq's architecture is well-suited for this purpose and potentially can be integrated into future NVIDIA platforms.
+On the Groq side, this acqui-hire may be a defensive move for Nvidia to reduce competitors. But regardless, ultra-low latency inference is crucial for real-time agents. Groq's architecture is well-suited for this purpose and potentially can be integrated into future NVIDIA platforms.
 
-These movements demonstrate NVidia's investments into inference, which it has been talking about since 2025. This aligns with the problem faced by NVidia's biggest end customer: Frontier Labs including OpenAI, Anthropic, ...  One of the main doubts for these frontier labs before they raise more capital is their profitability. While people are racing for the best capability on benchmarks and providing training services like [Tinker](https://thinkingmachines.ai/tinker/), so far inference is the only cash cow for them. Gross margin of Anthropic and OpenAI are rumored to be around 40% according to [The Information](https://www.theinformation.com/articles/anthropic-lowers-profit-margin-projection-revenue-skyrockets), leaving plenty of room for improvement.
+These movements demonstrate Nvidia's investments into inference, which it has been talking about since 2025. This aligns with the problem faced by Nvidia's biggest end customer: Frontier Labs including OpenAI, Anthropic, ...  One of the main doubts for these frontier labs before they raise more capital is their profitability. While people are racing for the best capability on benchmarks and providing training services like [Tinker](https://thinkingmachines.ai/tinker/), so far inference is the only cash cow for them. Moreover, the newest release of Opus-4.6 and GPT-5.3-Codex both have fast-inference deployment options on Cerebras. This suggests that the industry is moving towards real-time agents. 
+
+There is usually a tradeoff between speed and cost. For example, Opus-4.6 fast is ~5x more expensive than the regular version on Cursor. As the biggest chip provider, Nvidia sits at the best position to attain the best speed-cost tradeoff for real-time agents by providing the most optimized hardware and software stack for inference. We will expand into the discussion on how we can potentially build out the next generation agent inference platform by hardware-software co-design for both Prefill and Decode stages.
 
 
 ## Importance of KV Cache Hits
@@ -68,7 +70,7 @@ Groq's LPU architecture, which utilizes SRAM for storing model weights, offers a
 
 
 ## What if We Combine these Two?
-Let's now assume we are designing the next generation agent inference platform for NVidia. Given the previous calculations, you will suddenly realize that if we just put the two pieces together: ICMS for KV cache hits and Groq's SRAM-based architecture for decoding speed, we can potentially achieve real-time agents. Here is a rough sketch of the proposed architecture:
+Let's now assume we are designing the next generation agent inference platform for Nvidia. Given the previous calculations, you will suddenly realize that if we just put the two pieces together: ICMS for KV cache hits and Groq's SRAM-based architecture for decoding speed, we can potentially achieve real-time agents. Here is a rough sketch of the proposed architecture:
 
 ![Proposed Architecture](../../images/agent_future/arch.png)
 
@@ -89,11 +91,11 @@ The simulated results are quite promising. By enabling full KV cache hits, we re
 ## Challenges for Realizing the Proposed Architecture
 
 We outline some of the immediate challenges for realizing the proposed architecture:
-1. The integration between NVidia's GPU platform and Groq's LPU architecture. This includes architecture design, data transfer protocols, and other compatibility issues. Author does not work on hardware design and thus cannot comment too much on the specific hardware. But it remains unclear how we can expose software APIs to allow seamless data transfer between the two hardwares.
+1. The integration between Nvidia's GPU platform and Groq's LPU architecture. This includes architecture design, data transfer protocols, and other compatibility issues. Author does not work on hardware design and thus cannot comment too much on the specific hardware. But it remains unclear how we can expose software APIs to allow seamless data transfer between the two hardwares.
 
 2. The software stack for coordinating prefill and decoding nodes. Although the idea of ICMS is promising, software stack for efficiently coordinating between prefill and decoding nodes is non-trivial. This includes design of different caching policies, scheduling systems for balancing delay and throughput under agentic scenarios, and other system-level optimizations. There have been initial effort on software stack for LLM inference such as vLLM, SGLang, LMCache... But customizing them for these specialized hardware workloads will remain challenging. Moreover, utilizing speculative decoding in the new architecture will also require significant software engineering efforts.
 
 
 ## Conclusion
 
-There is a natural synergy between NVidia's two latest movements.  By combining the newly released inference context management storage system for reusing KV cache and groq's SRAM for rapid decoding, NVidia actually can achieve significant improvements in agent inference speed. While our proposed architecture is purely theoretical, the recent trends of frontier labs like Anthropic or OpenAI deploying on Cerebras suggest that the industry is moving towards real-time agents. We believe real-time, context-aware agents will soon be no longer a trial product but massively deployed in the next few years with the growing technology.
+There is a natural synergy between Nvidia's two latest movements.  By combining the newly released inference context management storage system for reusing KV cache and groq's SRAM for rapid decoding, Nvidia actually can achieve significant improvements in agent inference speed. While our proposed architecture is purely theoretical, the recent trends of frontier labs like Anthropic or OpenAI deploying on Cerebras suggest that the industry is moving towards real-time agents. We believe real-time, context-aware agents will soon be no longer a trial product but massively deployed in the next few years with the growing technology.

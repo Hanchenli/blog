@@ -6,8 +6,15 @@
     <description>Recent content in Posts on Hanchen&#39;s Space Bar</description>
     <generator>Hugo -- 0.152.2</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 07 Jan 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 16 Feb 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CES and Groq Acqui-hire Reflection: NVidia&#39;s Plan to Build Real Time Agents?</title>
+      <link>http://localhost:1313/blog/posts/fast_agent/</link>
+      <pubDate>Mon, 16 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/posts/fast_agent/</guid>
+      <description>A deep dive into NVidia&amp;#39;s recent CES announcements, explaining how they potentially enhance LLM agent inference speed.</description>
+    </item>
     <item>
       <title>Why Agents are Efficiency Nightmares and How to Fix them?</title>
       <link>http://localhost:1313/blog/posts/kv_agent/</link>
