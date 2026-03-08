@@ -2,60 +2,84 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/blog/</loc>
+    <loc>http://localhost:57765/blog/</loc>
     <lastmod>2069-12-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/blog/posts/</loc>
+    <loc>http://localhost:57765/blog/posts/</loc>
     <lastmod>2069-12-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/blog/tags/agent/</loc>
+    <loc>http://localhost:57765/blog/tags/agent/</loc>
+    <lastmod>2026-03-08T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:57765/blog/tags/ai-agents/</loc>
+    <lastmod>2026-03-08T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:57765/blog/tags/behavioral-analysis/</loc>
+    <lastmod>2026-03-08T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:57765/blog/categories/</loc>
+    <lastmod>2026-03-08T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:57765/blog/tags/coderforge/</loc>
+    <lastmod>2026-03-08T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:57765/blog/tags/llm/</loc>
+    <lastmod>2026-03-08T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:57765/blog/categories/research/</loc>
+    <lastmod>2026-03-08T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:57765/blog/tags/software-engineering/</loc>
+    <lastmod>2026-03-08T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:57765/blog/tags/swe-bench/</loc>
+    <lastmod>2026-03-08T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:57765/blog/tags/</loc>
+    <lastmod>2026-03-08T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:57765/blog/tags/trace-analysis/</loc>
+    <lastmod>2026-03-08T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:57765/blog/posts/swe_hypo_blog/</loc>
+    <lastmod>2026-03-08T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:57765/blog/tags/ai-infra/</loc>
     <lastmod>2026-02-16T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/blog/tags/ai-infra/</loc>
+    <loc>http://localhost:57765/blog/posts/fast_agent/</loc>
     <lastmod>2026-02-16T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/blog/categories/</loc>
+    <loc>http://localhost:57765/blog/categories/general/</loc>
     <lastmod>2026-02-16T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/blog/posts/fast_agent/</loc>
+    <loc>http://localhost:57765/blog/tags/inference/</loc>
     <lastmod>2026-02-16T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/blog/categories/general/</loc>
+    <loc>http://localhost:57765/blog/tags/kv-cache/</loc>
     <lastmod>2026-02-16T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/blog/tags/inference/</loc>
+    <loc>http://localhost:57765/blog/tags/lmcache/</loc>
     <lastmod>2026-02-16T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/blog/tags/kv-cache/</loc>
+    <loc>http://localhost:57765/blog/tags/memory/</loc>
     <lastmod>2026-02-16T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/blog/tags/llm/</loc>
+    <loc>http://localhost:57765/blog/tags/nvidia/</loc>
     <lastmod>2026-02-16T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/blog/tags/lmcache/</loc>
+    <loc>http://localhost:57765/blog/tags/sram/</loc>
     <lastmod>2026-02-16T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/blog/tags/memory/</loc>
-    <lastmod>2026-02-16T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/blog/tags/nvidia/</loc>
-    <lastmod>2026-02-16T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/blog/tags/sram/</loc>
-    <lastmod>2026-02-16T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/blog/tags/</loc>
-    <lastmod>2026-02-16T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/blog/posts/kv_agent/</loc>
+    <loc>http://localhost:57765/blog/posts/kv_agent/</loc>
     <lastmod>2025-01-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/blog/archives.fr/</loc>
+    <loc>http://localhost:57765/blog/archives.fr/</loc>
   </url><url>
-    <loc>http://localhost:1313/blog/archives/</loc>
+    <loc>http://localhost:57765/blog/archives/</loc>
   </url><url>
-    <loc>http://localhost:1313/blog/search/</loc>
+    <loc>http://localhost:57765/blog/search/</loc>
   </url><url>
-    <loc>http://localhost:1313/blog/search.fr/</loc>
+    <loc>http://localhost:57765/blog/search.fr/</loc>
   </url>
 </urlset>

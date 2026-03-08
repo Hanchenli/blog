@@ -2,24 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>LLM on Hanchen&#39;s Space Bar</title>
-    <link>http://localhost:1313/blog/tags/llm/</link>
+    <link>http://localhost:57765/blog/tags/llm/</link>
     <description>Recent content in LLM on Hanchen&#39;s Space Bar</description>
     <generator>Hugo -- 0.152.2</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 16 Feb 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/blog/tags/llm/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 08 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:57765/blog/tags/llm/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>We Analyzed 413,000 AI Agent Traces. Here&#39;s What Separates the Ones That Succeed.</title>
+      <link>http://localhost:57765/blog/posts/swe_hypo_blog/</link>
+      <pubDate>Sun, 08 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:57765/blog/posts/swe_hypo_blog/</guid>
+      <description>A systematic behavioral analysis of 413K SWE agent trajectories totaling ~17 billion tokens — revealing which human SWE principles transfer to AI agents, which ones reverse, and why the most obvious analysis is dead wrong.</description>
+    </item>
     <item>
       <title>CES and Groq &#34;Acqui-hire&#34; Reflection: Nvidia&#39;s Plan to Build Real Time Agents?</title>
-      <link>http://localhost:1313/blog/posts/fast_agent/</link>
+      <link>http://localhost:57765/blog/posts/fast_agent/</link>
       <pubDate>Mon, 16 Feb 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/posts/fast_agent/</guid>
+      <guid>http://localhost:57765/blog/posts/fast_agent/</guid>
       <description>Discussion into Nvidia&amp;#39;s recent CES announcements and Groq &amp;#34;acqui-hire&amp;#34;, explaining how they potentially enhance LLM agent inference speed.</description>
     </item>
     <item>
       <title>Why Agents are Efficiency Nightmares and How to Fix them?</title>
-      <link>http://localhost:1313/blog/posts/kv_agent/</link>
+      <link>http://localhost:57765/blog/posts/kv_agent/</link>
       <pubDate>Tue, 07 Jan 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/posts/kv_agent/</guid>
+      <guid>http://localhost:57765/blog/posts/kv_agent/</guid>
       <description>Demonstrating the Benefits of KV Cache Sharing in Agent Serving and Future Directions</description>
     </item>
   </channel>
