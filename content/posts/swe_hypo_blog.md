@@ -41,7 +41,7 @@ The most surprising finding? **Most human SWE best practices don't transfer to A
 
 ## The Scale: 17 Billion Tokens Nobody Has Looked At
 
-![Dataset Overview](/images/swe_hypo/dataset_overview.png)
+![Dataset Overview](../../images/swe_hypo/dataset_overview.png)
 
 The CoderForge-Preview dataset is, to our knowledge, the largest public collection of structured AI agent behavioral data. It contains four splits, each capturing trajectories of agents attempting real GitHub issues:
 
@@ -65,7 +65,7 @@ Before showing what works, we need to explain a trap that invalidates most naive
 
 The most natural first analysis is straightforward: compare aggregate statistics between passing and failing traces.
 
-![Trace Length Distribution](/images/swe_hypo/trace_length_dist.png)
+![Trace Length Distribution](../../images/swe_hypo/trace_length_dist.png)
 
 Across all three splits with mixed outcomes, the pattern is consistent: **failing traces are longer.** Failing agents run more bash commands, produce longer trajectories, and make more tool calls. The difference is statistically significant (p < 0.001). A naive analysis would conclude: *"excessive activity early on predicts failure."*
 
@@ -73,7 +73,7 @@ This conclusion is **completely wrong** as a behavioral signal.
 
 The problem is **problem difficulty confounding**. Hard tasks naturally produce longer, more active trajectories --- *regardless* of whether the attempt succeeds or fails. An agent working on a complex multi-file refactoring will inherently run more commands than one fixing a simple typo. When we compare all passing runs against all failing runs, we are not comparing behavior --- we are comparing the difficulty distribution of tasks each group happened to encounter. **If you don't control for problem difficulty, you're measuring which problems are hard, not which agent behaviors matter.**
 
-![The Confounding Trap](/images/swe_hypo/confounding_trap.png)
+![The Confounding Trap](../../images/swe_hypo/confounding_trap.png)
 
 The plot above tells the story. The red bars show the naive analysis: when you randomly pair passing and failing runs across different tasks, the failing run has more bash commands **70%** of the time (SWE_Rebench). Looks like a strong signal. Now look at the orange bars: when you compare passing and failing runs **on the exact same task**, the "signal" collapses to **53%** --- barely above a coin flip. The -17 percentage point collapse means almost the entire signal was just problem difficulty in disguise.
 
@@ -85,7 +85,7 @@ The core challenge: how do you tell whether an agent behavior actually matters, 
 
 We formalize this into a two-stage verification framework:
 
-![Method Diagram](/images/swe_hypo/method_diagram.png)
+![Method Diagram](../../images/swe_hypo/method_diagram.png)
 
 **Stage 1: Global Chi-Squared Test.** We define a binary behavioral feature (e.g., "fewer than 40% of early bash commands are test runs") and compute its association with pass/fail outcomes across all traces using a chi-squared test with odds ratios. This establishes whether the signal has any aggregate predictive power.
 
@@ -111,7 +111,7 @@ On the full 77,169-trace SWE_Rebench dataset, we tested 30+ hypotheses. Only six
 
 **Result:** Within-issue concordance = **56.3%**, n_pairs = 12,286. On the full dataset, passing agents allocate 45% of their early bash commands to testing, while failing agents allocate only 36%.
 
-![Test Fraction Violin](/images/swe_hypo/test_fraction_violin.png)
+![Test Fraction Violin](../../images/swe_hypo/test_fraction_violin.png)
 
 The violin plots above show the distribution of early test fraction across all three splits. The pattern is strikingly consistent: **in every split, passing runs have a higher fraction of test-related bash commands.** The distributions shift rightward for passing agents --- they dedicate more of their early work to running tests.
 
@@ -127,7 +127,7 @@ The finding has a direct analogy to human software engineering: **Test-Driven De
 
 This is a complementary view of Signal 1, using a lower threshold. Together, they paint a clear picture: **the balance between exploration and verification in the early phase is a critical predictor of success.**
 
-![Cross-Split Test Fraction](/images/swe_hypo/cross_split_test_fraction.png)
+![Cross-Split Test Fraction](../../images/swe_hypo/cross_split_test_fraction.png)
 
 What makes this signal particularly powerful is that it **generalizes across all three dataset splits**:
 
@@ -153,7 +153,7 @@ This was a surprise. At the 2K-sample scale, this signal looked borderline. At 7
 
 **Result:** Within-issue concordance = **63.7%**, n_pairs = 2,428. Agents editing 3+ files early have a 35.1% pass rate vs. 58.7% for agents editing fewer files.
 
-![Multi-File Scatter Dose-Response](/images/swe_hypo/multi_file_scatter.png)
+![Multi-File Scatter Dose-Response](../../images/swe_hypo/multi_file_scatter.png)
 
 This is a new signal we discovered by testing human SWE principles --- and it is one of our strongest, even after controlling for problem difficulty. The *Single Responsibility Principle*, a cornerstone of human software engineering, states that changes should be focused. Our data shows this transfers powerfully to AI agents: **on the same task**, agents that scatter edits across many files early are far more likely to fail than agents that stay focused.
 
@@ -166,7 +166,7 @@ What makes this signal compelling is the **dose-response relationship**: the mor
 | 4+ files | 67.7% | 934 |
 | 5+ files | 71.4% | 322 |
 
-![Cross-Split Multi-File Scatter](/images/swe_hypo/scatter_cross_split.png)
+![Cross-Split Multi-File Scatter](../../images/swe_hypo/scatter_cross_split.png)
 
 The signal also **generalizes across all three dataset splits** with remarkably similar concordance (58-63% at the 3-file threshold). This is not a dataset quirk --- it is a robust behavioral pattern. An agent that sprays edits across multiple files early is probably confused about where the bug actually is. Focused agents fix one thing at a time.
 
@@ -198,7 +198,7 @@ Conversely, the "repeated bash command" signal went from insignificant at 2K (52
 
 Beyond the binary hypothesis tests, we measured a powerful raw behavioral signal: **does the agent run a test before making its first code edit?**
 
-![Test Before Edit](/images/swe_hypo/test_before_edit.png)
+![Test Before Edit](../../images/swe_hypo/test_before_edit.png)
 
 | Split | Pass: Test First | Fail: Test First | Pass: Edit First | Fail: Edit First |
 |---|---|---|---|---|
@@ -212,7 +212,7 @@ In SWE_Rebench, 91.4% of passing runs test before editing, versus 86.3% of faili
 
 How early can we detect the signal? We measured test fraction at different trajectory windows:
 
-![Test Fraction by Window](/images/swe_hypo/test_fraction_by_window.png)
+![Test Fraction by Window](../../images/swe_hypo/test_fraction_by_window.png)
 
 The signal is detectable even at the **10% mark** of the trajectory, though it strengthens as more data accumulates. This means that an early-stopping system could begin making predictions very early in the agent's run.
 
@@ -220,7 +220,7 @@ The signal is detectable even at the **10% mark** of the trajectory, though it s
 
 This is perhaps the most surprising part of our study. We systematically tested 15 behavioral features inspired by well-known human software engineering principles. We expected most of them to hold. **Most of them don't.**
 
-![Human SWE Principles](/images/swe_hypo/human_principles.png)
+![Human SWE Principles](../../images/swe_hypo/human_principles.png)
 
 ### Principles That Transfer
 
@@ -265,7 +265,7 @@ A few principles showed no within-issue signal in either direction:
 
 To make these patterns concrete, consider this real example from our dataset. The task is issue #419 on `sepal_ui`, attempted by the same agent scaffold twice --- once succeeding, once failing.
 
-![Tale of Two Traces](/images/swe_hypo/tale_of_two_traces.png)
+![Tale of Two Traces](../../images/swe_hypo/tale_of_two_traces.png)
 
 **The passing run** begins:
 ```
@@ -300,7 +300,7 @@ This single example crystallizes every statistical pattern we found: TDD works, 
 
 ## The Graveyard: Signals That Fooled Smaller Studies
 
-![Hypothesis Scatter](/images/swe_hypo/hypothesis_scatter.png)
+![Hypothesis Scatter](../../images/swe_hypo/hypothesis_scatter.png)
 
 Equally instructive are the hypotheses that *failed* our problem-difficulty control. The scatter plot above shows every hypothesis we tested, plotted by global significance (x-axis) versus same-problem concordance (y-axis). The green stars in the upper-right are genuine behavioral signals --- they predict success even on the same problem. The red dots in the lower-right are **false positives** --- they look significant globally but collapse once you control for problem difficulty.
 
@@ -316,7 +316,7 @@ The graveyard underscores two lessons: (1) you must control for problem difficul
 
 ## Dependency Installation: A Cautionary Tale
 
-![Dependency Pattern](/images/swe_hypo/dep_pattern.png)
+![Dependency Pattern](../../images/swe_hypo/dep_pattern.png)
 
 Here is where our small-sample analysis (2K traces) got it *wrong*. At 2K traces, "test before installing dependencies" looked like our strongest within-issue signal (65.4% concordance). We were ready to write the headline: "Reproduce before you fix."
 
