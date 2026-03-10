@@ -2,7 +2,7 @@
 title: "We Analyzed 413,000 AI Agent Traces. Here's What Separates the Ones That Succeed."
 date: 2026-03-08
 description: "A systematic behavioral analysis of 413K SWE agent trajectories totaling ~17 billion tokens — revealing which human SWE principles transfer to AI agents, which ones reverse, and why the most obvious analysis is dead wrong."
-author: "Hanchen Li, Joey Gonzalez, and Collaborators"
+author: "Hanchen Li, Alvin Cheung, Joey Gonzalez, and Collaborators"
 tags: ["LLM", "Agent", "SWE-bench", "Behavioral Analysis", "Software Engineering", "AI Agents", "Trace Analysis", "CoderForge"]
 categories: ["research"]
 cover:
