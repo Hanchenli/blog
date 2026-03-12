@@ -101,7 +101,7 @@ On the full SWE_Rebench split (77,169 traces, 3,381 mixed-outcome issues), this 
 
 We call a hypothesis **significant** only when it passes *both* tests: global p < 0.05 AND within-issue concordance > 55%. **Every finding reported below survives this difficulty control.** Most hypotheses do not --- they look significant globally but collapse to chance once you compare the same problem.
 
-## The Results: Six Significant Behavioral Signals
+## The Results: Five Significant Behavioral Signals
 
 On the full 77,169-trace SWE_Rebench dataset, we tested 30+ hypotheses. Only six survived both the global test *and* the problem-difficulty control. All six operate on only the **first 30% of the trajectory** --- meaning these signals are detectable well before the agent finishes, and they predict success even when comparing runs on the exact same problem.
 
@@ -193,28 +193,6 @@ One of the most sobering lessons from this study: **behavioral analysis at small
 The "long initial think" signal is the most cautionary case. At 2K traces, it showed 59.5% concordance --- comfortably above our 55% threshold, borderline significant. At 77K, it collapsed to 51.0% --- indistinguishable from chance. **A study on 2,000 traces would have published this as a real finding.** It is not.
 
 Conversely, the "repeated bash command" signal went from insignificant at 2K (52.3%) to our *second-strongest* signal at 77K (59.6%). A smaller study would have missed it entirely. The lesson: behavioral trace analysis requires scale. The signals are real but subtle, and only emerge clearly with large datasets and proper deconfounding.
-
-### The Test-First Timing Signal
-
-Beyond the binary hypothesis tests, we measured a powerful raw behavioral signal: **does the agent run a test before making its first code edit?**
-
-![Test Before Edit](../../images/swe_hypo/test_before_edit.png)
-
-| Split | Pass: Test First | Fail: Test First | Pass: Edit First | Fail: Edit First |
-|---|---|---|---|---|
-| SWE_Rebench | **91.4%** | 86.3% | 8.6% | 13.7% |
-| SWE_Smith | **88.0%** | 85.9% | 12.0% | 14.1% |
-| R2E_Gym | **58.6%** | 54.2% | 41.4% | 45.8% |
-
-In SWE_Rebench, 91.4% of passing runs test before editing, versus 86.3% of failing runs. The gap is consistent across splits. When an agent edits code before running any test, it is significantly more likely to fail.
-
-### The Window Effect
-
-How early can we detect the signal? We measured test fraction at different trajectory windows:
-
-![Test Fraction by Window](../../images/swe_hypo/test_fraction_by_window.png)
-
-The signal is detectable even at the **10% mark** of the trajectory, though it strengthens as more data accumulates. This means that an early-stopping system could begin making predictions very early in the agent's run.
 
 ## Which Human SWE Principles Transfer to AI Agents?
 
