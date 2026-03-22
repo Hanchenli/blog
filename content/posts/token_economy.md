@@ -21,23 +21,19 @@ TocOpen: false
 > 4. Tokens may be this generation's broadband — genuinely needed eventually, but the current demand inflated by exploration budgets. There is real usage, but the usage might not be effective or sustainable.
 > 5. The question isn't whether AI is transformative. The question is how much of today's token demand is long-lasting, and how much is exploration money that vanishes once economy tightens.
 
-# The Revenue Numbers Look Amazing
-
-I went to Nvidia GTC this year. Everyone is doing inference and the token economy is booming: 
-
-[Cursor](https://www.cursor.com/) went from $100M to **$2B in annualized revenue** in under 24 months — the [fastest scaling in B2B SaaS history](https://techcrunch.com/2026/03/02/cursor-has-reportedly-surpassed-2b-in-annualized-revenue/). [Anthropic](https://www.anthropic.com/) crossed [**$14B ARR** in February 2026](https://www.saastr.com/anthropic-just-hit-14-billion-in-arr-up-from-1-billion-just-14-months-ago/), up from $1B just 14 months earlier. [OpenAI](https://openai.com/) tripled revenue to [**$20B** in 2025](https://www.pymnts.com/artificial-intelligence-2/2026/openais-annual-recurring-revenue-tripled-to-20-billion-in-2025/) and is tracking $25B annualized in early 2026.
+# The Amazing Revenue Numbers 
 
 Jensen Huang, at [GTC 2026](https://www.cnbc.com/2026/03/16/2-of-our-biggest-takeaways-from-nvidia-ceo-jensen-huangs-gtc-keynote-speech.html), declared:
 
 > "The future data center is a token factory. The logic is simple: how many tokens you can produce determines how much revenue you can generate."
 
-He projects over [**$1 trillion** in AI infrastructure demand through 2027](https://fortune.com/2026/03/17/jensen-huang-ai-infrastructure-buildout-1-trillion-dollars/). He's already talking about giving every engineer a ["token budget"](https://www.cnbc.com/2026/03/20/nvidia-ai-agents-tokens-human-workers-engineer-jobs-unemployment-jensen-huang.html) alongside their base salary:
-
 > "I could totally imagine in the future every single engineer will need an annual token budget. I'm going to give them probably half of [their base pay] on top of it as tokens so that they could be amplified 10 times."
 
-Nvidia posted [**$215.9B in FY2026 revenue**](https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2025), up 65% year-over-year.
+He is not wrong. The numbers are staggering.
 
-These numbers are real. The revenue is real. The usage is real. The chips are shipping. Nobody is making this up.
+[Cursor](https://www.cursor.com/) went from $100M to **$2B in annualized revenue** in under 24 months — the [fastest scaling in B2B SaaS history](https://techcrunch.com/2026/03/02/cursor-has-reportedly-surpassed-2b-in-annualized-revenue/). [Anthropic](https://www.anthropic.com/) crossed [**$14B ARR** in February 2026](https://www.saastr.com/anthropic-just-hit-14-billion-in-arr-up-from-1-billion-just-14-months-ago/), up from $1B just 14 months earlier. [OpenAI](https://openai.com/) tripled revenue to [**$20B** in 2025](https://www.pymnts.com/artificial-intelligence-2/2026/openais-annual-recurring-revenue-tripled-to-20-billion-in-2025/) and is tracking $25B annualized in early 2026.
+
+These numbers are real. The revenue is real. The usage is real. The chips are shipping. Suppose nobody is making this up.
 
 So what's the problem?
 
