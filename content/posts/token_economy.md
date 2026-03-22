@@ -1,7 +1,7 @@
 ---
-title: "You"
+title: "Token Revenue are Growing. But That Doesn't Mean We are Not in a Bubble."
 date: 2026-03-21
-description: "Revenue growth at Cursor, Anthropic, and OpenAI looks phenomenal. Nvidia calls it a 'token factory' economy. But a closer look reveals a familiar pattern — one we've seen before, and one that didn't end well."
+description: "The anti-bubble argument is 'but there's real revenue.' There is. But how much of it is exploration money that disappears once someone checks the ROI? Tokens might be this generation's dark fiber."
 author: "Hanchen Li and Claude Code"
 tags: ["AI", "Economics", "Token Economy", "Bubble", "LLM", "Infrastructure"]
 categories: ["general"]
