@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>AI Agents on Hanchen&#39;s Space Bar</title>
-    <link>http://localhost:57765/blog/tags/ai-agents/</link>
+    <link>http://localhost:1313/blog/tags/ai-agents/</link>
     <description>Recent content in AI Agents on Hanchen&#39;s Space Bar</description>
     <generator>Hugo -- 0.152.2</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 08 Mar 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:57765/blog/tags/ai-agents/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/blog/tags/ai-agents/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>We Analyzed 413,000 AI Agent Traces. Here&#39;s What Separates the Ones That Succeed.</title>
-      <link>http://localhost:57765/blog/posts/swe_hypo_blog/</link>
+      <title>We Analyzed 413K AI Agent Runs. Here&#39;s What Separates the Ones That Succeed.</title>
+      <link>http://localhost:1313/blog/posts/swe_hypo_blog/</link>
       <pubDate>Sun, 08 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:57765/blog/posts/swe_hypo_blog/</guid>
+      <guid>http://localhost:1313/blog/posts/swe_hypo_blog/</guid>
       <description>A systematic behavioral analysis of 413K SWE agent trajectories totaling ~17 billion tokens — revealing which human SWE principles transfer to AI agents, which ones reverse, and why the most obvious analysis is dead wrong.</description>
     </item>
   </channel>

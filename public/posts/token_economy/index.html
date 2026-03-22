@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><script src="/blog/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=blog/livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>You | Hanchen&#39;s Space Bar</title>
+<meta name="keywords" content="AI, Economics, Token Economy, Bubble, LLM, Infrastructure">
+<meta name="description" content="Revenue growth at Cursor, Anthropic, and OpenAI looks phenomenal. Nvidia calls it a &#39;token factory&#39; economy. But a closer look reveals a familiar pattern — one we&#39;ve seen before, and one that didn&#39;t end well.">
+<meta name="author" content="Hanchen Li and Claude Code">
+<link rel="canonical" href="http://localhost:1313/blog/posts/token_economy/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.12d075fb361717557fefde57d93db59c2ce2143ebfcc84ea38467edf4e444ce7.css" integrity="sha256-EtB1&#43;zYXF1V/795X2T21nCziFD6/zITqOEZ&#43;305ETOc=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/blog/images/website_logo.png">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/blog/images/website_logo.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/blog/images/website_logo.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/blog/images/website_logo.png">
+<link rel="mask-icon" href="http://localhost:1313/blog/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/blog/posts/token_economy/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+<style>
+    body {
+        background: url('/blog/images/background.png') no-repeat center center fixed !important;
+        -webkit-background-size: cover !important;
+        -moz-background-size: cover !important;
+        -o-background-size: cover !important;
+        background-size: cover !important;
+    }
+</style>
+
+<style>
+    body.dark {
+        background: url('/blog/images/dark_bg.png') no-repeat center center fixed !important;
+        -webkit-background-size: cover !important;
+        -moz-background-size: cover !important;
+        -o-background-size: cover !important;
+        background-size: cover !important;
+    }
+</style>
+<style>
+     
+    body:has(.post-single),
+    body:has(.post-content) {
+        background-image: url('/blog/images/background.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+    }
+    body.dark:has(.post-single),
+    body.dark:has(.post-content) {
+        background-image: url('/blog/images/dark_bg.png');
+    }
+</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JEDR6E5EV4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+  gtag("config", "G-JEDR6E5EV4");
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JEDR6E5EV4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+  gtag("config", "G-JEDR6E5EV4");
+</script><meta property="og:url" content="http://localhost:1313/blog/posts/token_economy/">
+  <meta property="og:site_name" content="Hanchen&#39;s Space Bar">
+  <meta property="og:title" content="You">
+  <meta property="og:description" content="Revenue growth at Cursor, Anthropic, and OpenAI looks phenomenal. Nvidia calls it a &#39;token factory&#39; economy. But a closer look reveals a familiar pattern — one we&#39;ve seen before, and one that didn&#39;t end well.">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-03-21T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-03-21T00:00:00+00:00">
+    <meta property="article:tag" content="AI">
+    <meta property="article:tag" content="Economics">
+    <meta property="article:tag" content="Token Economy">
+    <meta property="article:tag" content="Bubble">
+    <meta property="article:tag" content="LLM">
+    <meta property="article:tag" content="Infrastructure">
+    <meta property="og:image" content="http://localhost:1313/blog/images/token_economy/main.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://localhost:1313/blog/images/token_economy/main.png">
+<meta name="twitter:title" content="You">
+<meta name="twitter:description" content="Revenue growth at Cursor, Anthropic, and OpenAI looks phenomenal. Nvidia calls it a &#39;token factory&#39; economy. But a closer look reveals a familiar pattern — one we&#39;ve seen before, and one that didn&#39;t end well.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "http://localhost:1313/blog/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "You",
+      "item": "http://localhost:1313/blog/posts/token_economy/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "You",
+  "name": "You",
+  "description": "Revenue growth at Cursor, Anthropic, and OpenAI looks phenomenal. Nvidia calls it a 'token factory' economy. But a closer look reveals a familiar pattern — one we've seen before, and one that didn't end well.",
+  "keywords": [
+    "AI", "Economics", "Token Economy", "Bubble", "LLM", "Infrastructure"
+  ],
+  "articleBody": " TL;DR\nAI token revenue is growing at historic rates — Cursor hit $2B ARR in 24 months, Anthropic crossed $14B ARR in 14 months. The “Anti-Bubble School” argues this proves the token economy is real and sustainable. But much of this revenue may be driven by a temporary exploration phase — companies overspending to “not miss the AI revolution” without validated ROI for projects. This pattern still resembles the dark fiber phenomenon. In the late 1990s, we built vast broadband infrastructure before anyone had Netflix or YouTube. The technology was right. The timeline was wrong. The investors went bankrupt. Tokens may be this generation’s broadband — genuinely needed eventually, but the current demand inflated by exploration budgets. There is real usage, but the usage might not be effective or sustainable. The question isn’t whether AI is transformative. The question is how much of today’s token demand is long-lasting, and how much is exploration money that vanishes once economy tightens. The Revenue Numbers Look Amazing I went to Nvidia GTC this year. Everyone is doing inference and the token economy is booming:\nCursor went from $100M to $2B in annualized revenue in under 24 months — the fastest scaling in B2B SaaS history. Anthropic crossed $14B ARR in February 2026, up from $1B just 14 months earlier. OpenAI tripled revenue to $20B in 2025 and is tracking $25B annualized in early 2026.\nJensen Huang, at GTC 2026, declared:\n“The future data center is a token factory. The logic is simple: how many tokens you can produce determines how much revenue you can generate.”\nHe projects over $1 trillion in AI infrastructure demand through 2027. He’s already talking about giving every engineer a “token budget” alongside their base salary:\n“I could totally imagine in the future every single engineer will need an annual token budget. I’m going to give them probably half of [their base pay] on top of it as tokens so that they could be amplified 10 times.”\nNvidia posted $215.9B in FY2026 revenue, up 65% year-over-year.\nThese numbers are real. The revenue is real. The usage is real. The chips are shipping. Nobody is making this up.\nSo what’s the problem?\nThe problem is that current token usage doesn’t necessarily mean they are effective. Revenue tells you how much people are spending. It doesn’t tell you how much value they’re getting back.\nRevenue Growth ≠ Healthy Economy Here’s the core argument of this post: revenue growth, by itself, tells you nothing about whether the token economy is sustainable.\nRevenue tells you how much people are spending. It doesn’t tell you how much value they’re getting back. And right now, there are two very different forces driving token spending:\nValidated demand: companies spending on AI because it generates measurable returns. Examples including AI-driven customer service that reduces headcount, autonomous coding agents that replaces software engineering hours, or AI-assisted commercial generation. Exploration demand: companies spending because they have to try. It could be side projects in the company that burns hundres of thousands of dollars a month on tokens without eventually converting to any business value, just approved by management to “explore opportunities”. These exploration projects may never ship or generate revenue in the end. They are experiments, not production. My argument: a significant chunk of today’s token revenue is exploration demand, not validated demand.\nThink about it from first principles. Before AI, would a VP of Engineering approve $500K/month in engineering/compute resources for a project without a business case? Without testing market fit? Almost never. Budget processes existed precisely to prevent that.\nBut AI broke the budget process. The capabilities improved so fast — Opus 4.6 does things that were science fiction six months ago — that normal ROI discipline went out the window. Of course everyone needs to try. Of course the money flows. But “we need to try this” is not the same as “this is generating value.”\nAn anecdote that I heard recently: an engineer at a top tech company is burning at a speed of over $1 million USD if counted annually on AI tokens. The validated business value so far? Zero. It could bring values that is worth much more than the cost, but how many percentages of our vibe coded projects will bring values in the end? We don’t know, but people are racing in token consumption to not lose.\nThis is not an isolated anecdote:\n42% of companies scrapped most of their AI initiatives in 2025, up from 17% the year before Only 5% of AI pilot programs achieve rapid revenue acceleration (MIT, August 2025) The average sunk cost per abandoned AI project: $4.2 million For many of the experiments that people are conducting, the question is still “What can we do with this?” rather than “What value will this bring?” The fact that we’re still asking the former at scale suggests that a lot of today’s token demand is driven by exploration budgets, not production budgets. The moment the CFO asks “what did we get for this?” is the moment that exploration demand will be forced to answer the latter question.\nVibe Coding and the Illusion of Speed Nowhere is the exploration-vs-production gap more visible than in vibe coding.\nI’ve vibe coded. It’s exhilarating. You describe what you want, the AI writes it, you iterate in minutes instead of days. 92% of US developers now use AI coding tools daily. The speed is real.\nBut here’s the question nobody’s asking loud enough: what percentage of vibe-coded projects actually ship to production and generate revenue?\nBefore AI, you would never throw $50K/month at building a product without first validating that someone wanted it. You’d talk to customers. You’d build an MVP slowly, painfully — and that slowness was a feature, not a bug. It forced you to think about whether the thing was worth building at all.\nNow the bottleneck is gone. Code is practically free. So people build first and ask questions later. The speed feels like productivity. But speed without direction is just expensive wandering.\nIt’s like ordering from the entire menu at a new restaurant because you just got a raise. You’ll eat well tonight. But you’re not going to order like this every night once you look at your bank statement one week later.\nThe graph above illustrates this discrepancy. There are two curves of token demand: exploration-driven demand (which peaks and then declines as companies finish experimenting and budgets tighten) and productivity-validated demand (which starts slow but grows steadily as real use cases crystallize). The danger zone is the gap between them — the period where exploration demand dries up before productivity demand has grown enough to replace it.\nThe Jevons Paradox Trap The popular counter-argument is this: “But tokens are getting cheaper! Demand will explode regardless!”\nAnd tokens are getting cheaper. Dramatically so. The cost per million tokens for GPT-3.5-equivalent performance fell from $20 in late 2022 to $0.07 in October 2024 — a 280x decrease in two years. The decline is accelerating.\nThis is where people invoke the Jevons Paradox: when a resource gets cheaper, total usage increases so much that total spending actually goes up. Coal became more efficient in the 1860s; Britain used more coal, not less. Bandwidth got cheaper; we used exponentially more. Surely the same applies to tokens.\nAnd so far, it has. Even as per-token costs dropped 1,000x, total enterprise AI spending surged 320% in 2025 alone.\nBut here’s the catch: Jevons Paradox only works when the underlying utility is real and elastic. Coal was genuinely useful — every pound powered real factories, real trains. Bandwidth was genuinely useful — every megabit carried real video, real commerce. The cheaper resource unlocked real economic value that people would willingly pay for.\nHere’s an analogy. Imagine a gym that drops its monthly fee from $100 to $1. Membership will explode. Total revenue might even go up. But maybe people do not want to go to gym at all! It takes time for the habits to grow in people. It will probably be the same thing with AI. Before people become AI native and the support for AI is mature enough, the effective usage ceiling will be limited.\nDark Fiber: We’ve Seen This Movie Before Tokens are this generation’s broadband. And I mean that in both the good way and the terrifying way.\nIn the late 1990s, telecom companies laid 80+ million miles of fiber optic cable across the United States. The thesis was compelling: internet traffic was doubling every 100 days (a claim by WorldCom that turned out to be fabricated — the real rate was annual doubling). The revenue charts for infrastructure companies looked incredible. Investors poured billions in.\nFour years after the bubble burst, 85-95% of that fiber remained dark — carrying no traffic, generating no revenue. Corning’s stock went from ~$100 to ~$1. WorldCom went bankrupt.\nBut here’s the twist that makes this story relevant, not just cautionary: the fiber eventually got used. A decade later, Netflix, YouTube, and the cloud economy ran on those exact same cables. We genuinely needed all that bandwidth. The technology was right. The demand was real — eventually. But the timeline was wrong, and the investors who built for 2010 demand in 2000 mostly went bankrupt before anyone had invented streaming.\nThe parallel to tokens is almost exact. I genuinely believe tokens will be as fundamental to the next economy as bandwidth is to the current one. Every developer will consume more tokens than today. Jensen’s vision of “token factories” will come true. However, the current ecosystem is still in the “dark fiber” phase.\nLet’s take software engineering as an example. Vibe coded projects deteriorate once you start adding new features. Our github repository descriptions were never for AI to read. There is little descriptions of what a repo should do and should not do (since open source projects usually expand their scope). There is no standard way to describe the relationship between different repos. Thus, when we vibe code a huge project, the design boundaries quickly break down and the complexity skyrockets. It will be fine for researchers who write their code for a specific paper, but it will be a nightmare for production software engineering.\nSo Which Stage Are We In? I think we’re somewhere between the gold rush and the audit.\nThe excitement is real and justified — frontier models keep getting better, genuinely new capabilities keep appearing, and there are domains where the productivity gains are undeniable. People write code with AI every day. It’s not a gimmick. When I’m in the flow with Claude Code, I’m legitimately 3-5x faster on certain tasks. (Claude Code wrote this sentence itself XD.)\nBut I do spend most of my tokens on random projects that highly likely will become a waste of code. These projects are fun to build, but I would not pay even hundreds of dollars a month for them if I had to pay out of pocket. I have the luxury to experiment with tokens because of the subsidy from Anthropic and my lab subscription.\nI expect similar situations to happen in enterprises. Without the generosity of the exploration budget, many of the projects that are currently burning tokens would never have been approved in the first place.\nThe graph above frames the question. We are somewhere between Euphoria and Profit Taking — the point where the curve could either keep climbing toward a soft landing or tip over into correction. Which path we take depends on a single thing: whether the real use cases — the Netflix and YouTube equivalents of the token economy — show up before the exploration money runs out.\nConclusion This post is not to predict a crash but to share a more reasonable analogy that I find for the current token economy. People have been arguing whether we are in a similar position to the dot-com bubble and the “anti-bubble school” argument has always been that “there is revenue!” This blog post tries to analyze one step deeper into the revenue story.\nAt least the usage is still growing in 2026 March.\nDisclaimer: This blog post was created with help from Claude Code. Views are solely from the author and do not reflect employer values. This is not financial advice.\n",
+  "wordCount" : "2046",
+  "inLanguage": "en",
+  "image":"http://localhost:1313/blog/images/token_economy/main.png","datePublished": "2026-03-21T00:00:00Z",
+  "dateModified": "2026-03-21T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Hanchen Li and Claude Code"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/blog/posts/token_economy/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Hanchen's Space Bar",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/blog/images/website_logo.png"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/blog/" accesskey="h" title="Hanchen&#39;s Space Bar (Alt + H)">
+                    <img src="http://localhost:1313/blog/images/logo.png" alt="" aria-label="logo"
+                        height="70">Hanchen&#39;s Space Bar</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+        </ul>
+    </nav>
+</header>
+
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      You
+    </h1>
+    <div class="post-description">
+      Revenue growth at Cursor, Anthropic, and OpenAI looks phenomenal. Nvidia calls it a &#39;token factory&#39; economy. But a closer look reveals a familiar pattern — one we&#39;ve seen before, and one that didn&#39;t end well.
+    </div>
+    <div class="post-meta"><span title='2026-03-21 00:00:00 +0000 UTC'>March 21, 2026</span>&nbsp;·&nbsp;Hanchen Li and Claude Code
+
+</div>
+  </header> 
+<figure class="entry-cover">
+        <img loading="eager" src="http://localhost:1313/blog/images/token_economy/main.png" alt="Token Economy">
+        
+</figure><div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#the-revenue-numbers-look-amazing" aria-label="The Revenue Numbers Look Amazing">The Revenue Numbers Look Amazing</a></li>
+                <li>
+                    <a href="#revenue-growth--healthy-economy" aria-label="Revenue Growth ≠ Healthy Economy">Revenue Growth ≠ Healthy Economy</a></li>
+                <li>
+                    <a href="#vibe-coding-and-the-illusion-of-speed" aria-label="Vibe Coding and the Illusion of Speed">Vibe Coding and the Illusion of Speed</a></li>
+                <li>
+                    <a href="#the-jevons-paradox-trap" aria-label="The Jevons Paradox Trap">The Jevons Paradox Trap</a></li>
+                <li>
+                    <a href="#dark-fiber-weve-seen-this-movie-before" aria-label="Dark Fiber: We&rsquo;ve Seen This Movie Before">Dark Fiber: We&rsquo;ve Seen This Movie Before</a></li>
+                <li>
+                    <a href="#so-which-stage-are-we-in" aria-label="So Which Stage Are We In?">So Which Stage Are We In?</a></li>
+                <li>
+                    <a href="#conclusion" aria-label="Conclusion">Conclusion</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><blockquote>
+<p><strong>TL;DR</strong></p>
+<ol>
+<li>AI token revenue is growing at historic rates — Cursor hit $2B ARR in 24 months, Anthropic crossed $14B ARR in 14 months. The &ldquo;Anti-Bubble School&rdquo; argues this proves the token economy is real and sustainable.</li>
+<li>But much of this revenue may be driven by a temporary exploration phase — companies overspending to &ldquo;not miss the AI revolution&rdquo; without validated ROI for projects.</li>
+<li>This pattern still resembles the dark fiber phenomenon. In the late 1990s, we built vast broadband infrastructure before anyone had Netflix or YouTube. The technology was right. The timeline was wrong. The investors went bankrupt.</li>
+<li>Tokens may be this generation&rsquo;s broadband — genuinely needed eventually, but the current demand inflated by exploration budgets. There is real usage, but the usage might not be effective or sustainable.</li>
+<li>The question isn&rsquo;t whether AI is transformative. The question is how much of today&rsquo;s token demand is long-lasting, and how much is exploration money that vanishes once economy tightens.</li>
+</ol>
+</blockquote>
+<h1 id="the-revenue-numbers-look-amazing">The Revenue Numbers Look Amazing<a hidden class="anchor" aria-hidden="true" href="#the-revenue-numbers-look-amazing">#</a></h1>
+<p>I went to Nvidia GTC this year. Everyone is doing inference and the token economy is booming:</p>
+<p><a href="https://www.cursor.com/">Cursor</a> went from $100M to <strong>$2B in annualized revenue</strong> in under 24 months — the <a href="https://techcrunch.com/2026/03/02/cursor-has-reportedly-surpassed-2b-in-annualized-revenue/">fastest scaling in B2B SaaS history</a>. <a href="https://www.anthropic.com/">Anthropic</a> crossed <a href="https://www.saastr.com/anthropic-just-hit-14-billion-in-arr-up-from-1-billion-just-14-months-ago/"><strong>$14B ARR</strong> in February 2026</a>, up from $1B just 14 months earlier. <a href="https://openai.com/">OpenAI</a> tripled revenue to <a href="https://www.pymnts.com/artificial-intelligence-2/2026/openais-annual-recurring-revenue-tripled-to-20-billion-in-2025/"><strong>$20B</strong> in 2025</a> and is tracking $25B annualized in early 2026.</p>
+<p>Jensen Huang, at <a href="https://www.cnbc.com/2026/03/16/2-of-our-biggest-takeaways-from-nvidia-ceo-jensen-huangs-gtc-keynote-speech.html">GTC 2026</a>, declared:</p>
+<blockquote>
+<p>&ldquo;The future data center is a token factory. The logic is simple: how many tokens you can produce determines how much revenue you can generate.&rdquo;</p>
+</blockquote>
+<p>He projects over <a href="https://fortune.com/2026/03/17/jensen-huang-ai-infrastructure-buildout-1-trillion-dollars/"><strong>$1 trillion</strong> in AI infrastructure demand through 2027</a>. He&rsquo;s already talking about giving every engineer a <a href="https://www.cnbc.com/2026/03/20/nvidia-ai-agents-tokens-human-workers-engineer-jobs-unemployment-jensen-huang.html">&ldquo;token budget&rdquo;</a> alongside their base salary:</p>
+<blockquote>
+<p>&ldquo;I could totally imagine in the future every single engineer will need an annual token budget. I&rsquo;m going to give them probably half of [their base pay] on top of it as tokens so that they could be amplified 10 times.&rdquo;</p>
+</blockquote>
+<p>Nvidia posted <a href="https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2025"><strong>$215.9B in FY2026 revenue</strong></a>, up 65% year-over-year.</p>
+<p>These numbers are real. The revenue is real. The usage is real. The chips are shipping. Nobody is making this up.</p>
+<p>So what&rsquo;s the problem?</p>
+<p>The problem is that <strong>current token usage doesn&rsquo;t necessarily mean they are effective</strong>. Revenue tells you how much people are <em>spending</em>. It doesn&rsquo;t tell you how much <em>value</em> they&rsquo;re getting back.</p>
+<p><img alt="Comparison" loading="lazy" src="../../images/token_economy/iteration.png"></p>
+<h1 id="revenue-growth--healthy-economy">Revenue Growth ≠ Healthy Economy<a hidden class="anchor" aria-hidden="true" href="#revenue-growth--healthy-economy">#</a></h1>
+<p>Here&rsquo;s the core argument of this post: <strong>revenue growth, by itself, tells you nothing about whether the token economy is sustainable.</strong></p>
+<p>Revenue tells you how much people are <em>spending</em>. It doesn&rsquo;t tell you how much <em>value</em> they&rsquo;re getting back. And right now, there are two very different forces driving token spending:</p>
+<ol>
+<li><strong>Validated demand</strong>: companies spending on AI because it generates measurable returns. Examples including AI-driven customer service that reduces headcount, autonomous coding agents that replaces software engineering hours, or AI-assisted commercial generation.</li>
+<li><strong>Exploration demand</strong>: companies spending because they <em>have to try</em>. It could be side projects in the company that burns hundres of thousands of dollars a month on tokens without eventually converting to any business value, just approved by management to &ldquo;explore opportunities&rdquo;. These exploration projects may never ship or generate revenue in the end. They are experiments, not production.</li>
+</ol>
+<p>My argument: <strong>a significant chunk of today&rsquo;s token revenue is exploration demand, not validated demand.</strong></p>
+<p>Think about it from first principles. Before AI, would a VP of Engineering approve $500K/month in engineering/compute resources for a project without a business case? Without testing market fit? Almost never. Budget processes existed precisely to prevent that.</p>
+<p>But AI broke the budget process. The capabilities improved so fast — Opus 4.6 does things that were science fiction six months ago — that normal ROI discipline went out the window. Of course everyone needs to try. Of course the money flows. But &ldquo;we need to try this&rdquo; is not the same as &ldquo;this is generating value.&rdquo;</p>
+<p>An anecdote that I heard recently: an engineer at a top tech company is burning at a speed of <strong>over $1 million USD</strong> if counted annually on AI tokens. The validated business value so far? Zero. It could bring values that is worth much more than the cost, but how many percentages of our vibe coded projects will bring values in the end? We don&rsquo;t know, but people are racing in token consumption to not lose.</p>
+<p>This is not an isolated anecdote:</p>
+<ul>
+<li><a href="https://beam.ai/agentic-insights/why-42-of-ai-projects-show-zero-roi-(and-how-to-be-in-the-58-)"><strong>42% of companies</strong> scrapped most of their AI initiatives</a> in 2025, up from 17% the year before</li>
+<li>Only <a href="https://fortune.com/2025/08/18/mit-report-95-percent-generative-ai-pilots-at-companies-failing-cfo/"><strong>5% of AI pilot programs</strong> achieve rapid revenue acceleration</a> (MIT, August 2025)</li>
+<li>The average sunk cost per abandoned AI project: <a href="https://www.pertamapartners.com/insights/ai-project-failure-statistics-2026"><strong>$4.2 million</strong></a></li>
+</ul>
+<p>For many of the experiments that people are conducting, the question is still &ldquo;What can we do with this?&rdquo; rather than &ldquo;What value will this bring?&rdquo; The fact that we&rsquo;re still asking the former at scale suggests that a lot of today&rsquo;s token demand is driven by exploration budgets, not production budgets. The moment the CFO asks &ldquo;what did we get for this?&rdquo; is the moment that exploration demand will be forced to answer the latter question.</p>
+<h1 id="vibe-coding-and-the-illusion-of-speed">Vibe Coding and the Illusion of Speed<a hidden class="anchor" aria-hidden="true" href="#vibe-coding-and-the-illusion-of-speed">#</a></h1>
+<p>Nowhere is the exploration-vs-production gap more visible than in vibe coding.</p>
+<p>I&rsquo;ve vibe coded. It&rsquo;s exhilarating. You describe what you want, the AI writes it, you iterate in minutes instead of days. <a href="https://www.secondtalent.com/resources/vibe-coding-statistics/">92% of US developers</a> now use AI coding tools daily. The speed is real.</p>
+<p>But here&rsquo;s the question nobody&rsquo;s asking loud enough: <strong>what percentage of vibe-coded projects actually ship to production and generate revenue?</strong></p>
+<p>Before AI, you would never throw $50K/month at building a product without first validating that someone wanted it. You&rsquo;d talk to customers. You&rsquo;d build an MVP slowly, painfully — and that slowness was a <em>feature</em>, not a bug. It forced you to think about whether the thing was worth building at all.</p>
+<p>Now the bottleneck is gone. Code is practically free. So people build first and ask questions later. The speed feels like productivity. But speed without direction is just expensive wandering.</p>
+<p>It&rsquo;s like ordering from the entire menu at a new restaurant because you just got a raise. You&rsquo;ll eat well tonight. But you&rsquo;re not going to order like this every night once you look at your bank statement one week later.</p>
+<p><img alt="The Two Curves of AI Token Demand" loading="lazy" src="../../images/token_economy/two_curves.png"></p>
+<p>The graph above illustrates this discrepancy. There are two curves of token demand: exploration-driven demand (which peaks and then declines as companies finish experimenting and budgets tighten) and productivity-validated demand (which starts slow but grows steadily as real use cases crystallize). The danger zone is the gap between them — the period where exploration demand dries up before productivity demand has grown enough to replace it.</p>
+<h1 id="the-jevons-paradox-trap">The Jevons Paradox Trap<a hidden class="anchor" aria-hidden="true" href="#the-jevons-paradox-trap">#</a></h1>
+<p>The popular counter-argument is this: &ldquo;But tokens are getting cheaper! Demand will explode regardless!&rdquo;</p>
+<p>And tokens <em>are</em> getting cheaper. Dramatically so. The cost per million tokens for GPT-3.5-equivalent performance fell from <strong>$20 in late 2022</strong> to <strong>$0.07 in October 2024</strong> — a <a href="https://epoch.ai/data-insights/llm-inference-price-trends"><strong>280x decrease</strong> in two years</a>. The decline is accelerating.</p>
+<p>This is where people invoke the <a href="https://en.wikipedia.org/wiki/Jevons_paradox">Jevons Paradox</a>: when a resource gets cheaper, total usage increases so much that total spending actually goes up. Coal became more efficient in the 1860s; Britain used more coal, not less. Bandwidth got cheaper; we used exponentially more. Surely the same applies to tokens.</p>
+<p>And so far, it has. Even as per-token costs dropped 1,000x, <a href="https://www.arturmarkus.com/the-inference-cost-paradox-why-generative-ai-spending-surged-320-in-2025-despite-per-token-costs-dropping-1000x-and-what-it-means-for-your-ai-budget-in-2026/">total enterprise AI spending surged 320%</a> in 2025 alone.</p>
+<p>But here&rsquo;s the catch: <strong>Jevons Paradox only works when the underlying utility is real and elastic.</strong> Coal was genuinely useful — every pound powered real factories, real trains. Bandwidth was genuinely useful — every megabit carried real video, real commerce. The cheaper resource unlocked real economic value that people would willingly pay for.</p>
+<p>Here&rsquo;s an analogy. Imagine a gym that drops its monthly fee from $100 to $1. Membership will explode. Total revenue might even go up. But maybe people do not want to go to gym at all! It takes time for the habits to grow in people. It will probably be the same thing with AI. Before people become AI native and the support for AI is mature enough, the effective usage ceiling will be limited.</p>
+<h1 id="dark-fiber-weve-seen-this-movie-before">Dark Fiber: We&rsquo;ve Seen This Movie Before<a hidden class="anchor" aria-hidden="true" href="#dark-fiber-weve-seen-this-movie-before">#</a></h1>
+<p>Tokens are this generation&rsquo;s broadband. And I mean that in both the good way and the terrifying way.</p>
+<p>In the late 1990s, telecom companies laid <strong>80+ million miles of fiber optic cable</strong> across the United States. The thesis was compelling: internet traffic was <a href="https://fortune.com/2025/09/28/ai-dot-com-bubble-parallels-history-explained-companies-revenue-infrastructure/">doubling every 100 days</a> (a claim by WorldCom that turned out to be fabricated — the real rate was annual doubling). The revenue charts for infrastructure companies looked incredible. Investors poured billions in.</p>
+<p>Four years after the bubble burst, <strong>85-95% of that fiber remained dark</strong> — carrying no traffic, generating no revenue. Corning&rsquo;s stock went from ~$100 to ~$1. WorldCom went bankrupt.</p>
+<p>But here&rsquo;s the twist that makes this story relevant, not just cautionary: <strong>the fiber eventually got used.</strong> A decade later, Netflix, YouTube, and the cloud economy ran on those exact same cables. We genuinely <em>needed</em> all that bandwidth. The <strong>technology was right</strong>. The <strong>demand was real — eventually</strong>. But the <strong>timeline was wrong</strong>, and the investors who built for 2010 demand in 2000 mostly went bankrupt before anyone had invented streaming.</p>
+<p>The parallel to tokens is almost exact. I genuinely believe tokens will be as fundamental to the next economy as bandwidth is to the current one. Every developer will consume more tokens than today. Jensen&rsquo;s vision of &ldquo;token factories&rdquo; will come true. However, the current ecosystem is still in the &ldquo;dark fiber&rdquo; phase.</p>
+<p>Let&rsquo;s take software engineering as an example. Vibe coded projects deteriorate once you start adding new features. Our github repository descriptions were never for AI to read. There is little descriptions of what a repo should do and should not do (since open source projects usually expand their scope). There is no standard way to describe the relationship between different repos. Thus, when we vibe code a huge project, the design boundaries quickly break down and the complexity skyrockets. It will be fine for researchers who write their code for a specific paper, but it will be a nightmare for production software engineering.</p>
+<h1 id="so-which-stage-are-we-in">So Which Stage Are We In?<a hidden class="anchor" aria-hidden="true" href="#so-which-stage-are-we-in">#</a></h1>
+<p><img alt="The Minsky Moment" loading="lazy" src="../../images/token_economy/minsky_stages.png"></p>
+<p>I think we&rsquo;re somewhere between the gold rush and the audit.</p>
+<p>The excitement is real and justified — frontier models keep getting better, genuinely new capabilities keep appearing, and there are domains where the productivity gains are undeniable. People write code with AI every day. It&rsquo;s not a gimmick. When I&rsquo;m in the flow with Claude Code, I&rsquo;m legitimately 3-5x faster on certain tasks. (Claude Code wrote this sentence itself XD.)</p>
+<p>But I do spend most of my tokens on random projects that highly likely will become a waste of code. These projects are fun to build, but I would not pay even hundreds of dollars a month for them if I had to pay out of pocket. I have the luxury to experiment with tokens because of the subsidy from Anthropic and my lab subscription.</p>
+<p>I expect similar situations to happen in enterprises. Without the generosity of the exploration budget, many of the projects that are currently burning tokens would never have been approved in the first place.</p>
+<p>The graph above frames the question. We are somewhere between Euphoria and Profit Taking — the point where the curve could either keep climbing toward a soft landing or tip over into correction. Which path we take depends on a single thing: whether the real use cases — the Netflix and YouTube equivalents of the token economy — show up before the exploration money runs out.</p>
+<h1 id="conclusion">Conclusion<a hidden class="anchor" aria-hidden="true" href="#conclusion">#</a></h1>
+<p>This post is not to predict a crash but to share a more reasonable analogy that I find for the current token economy. People have been arguing whether we are in a similar position to the dot-com bubble and the &ldquo;anti-bubble school&rdquo; argument has always been that &ldquo;there is revenue!&rdquo; This blog post tries to analyze one step deeper into the revenue story.</p>
+<p>At least the usage is still growing in 2026 March.</p>
+<p><em>Disclaimer: This blog post was created with help from Claude Code. Views are solely from the author and do not reflect employer values. This is not financial advice.</em></p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/blog/tags/ai/">AI</a></li>
+      <li><a href="http://localhost:1313/blog/tags/economics/">Economics</a></li>
+      <li><a href="http://localhost:1313/blog/tags/token-economy/">Token Economy</a></li>
+      <li><a href="http://localhost:1313/blog/tags/bubble/">Bubble</a></li>
+      <li><a href="http://localhost:1313/blog/tags/llm/">LLM</a></li>
+      <li><a href="http://localhost:1313/blog/tags/infrastructure/">Infrastructure</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="http://localhost:1313/blog/">Hanchen&#39;s Space Bar</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>
