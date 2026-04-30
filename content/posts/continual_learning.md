@@ -14,60 +14,59 @@ TocOpen: false
 
 ---
 
-I had the priviledge to attend ICLR 2026 this year due to the generous support from UCB Sky Lab. I helped to present Agentic Context Engineering at the main conference plus two oral presentations Lifelong Agent and MemAgent workshops. So my experience mainly centered around agent memory and continual learning. I am writing this reflection mainly to summarize my takeways from conversations with other researchers. Hope this blog strikes a string with fellow readers and does not strike strings with companies' legal teams for leaked information. 
+I had the privilege of attending ICLR 2026 this year thanks to generous support from UCB Sky Lab. I helped present Agentic Context Engineering at the main conference, as well as two oral presentations at the Lifelong Agent and MemAgent workshops. As a result, much of my experience centered on agent memory and continual learning. I am writing this reflection to summarize my takeaways from conversations with other researchers. I hope this blog strikes a chord with fellow readers and not with any companies' legal teams over leaked information.
 
-The blog will be consisted of three parts. 1. Continual Learning. 2. The triangle of Model, Harness, and environments. 3. Why Skills are potentially bad format, and how we could fix it.
+This blog consists of three parts: 1. continual learning, 2. the triangle of models, harnesses, and environments, and 3. why skills may be a problematic format and how we could improve them.
 
 ## Reclassifying Evolving Agents or Continual Learning
-<!-- Add graph about three examples -->
-After the terms become popular, the classification becomes increasingly vague due to the mentioning of such words in numerous papers. I believe that many works are essentially targeting different use scenarios, though they consider themselves continual learning in the title. 
+As these terms have become more popular, their classification has also become increasingly vague because they now appear in many different kinds of papers. I believe many of these works are actually targeting different use cases, even though they describe themselves as continual learning in the title.
 
-For example, let's consider two scenarios. The first case would be an agent trying to solve a particular task in hard benchmarks like Frontier CS [repo](https://github.com/FrontierCS/Frontier-CS). The agent can iterate on its solution, and the final goal is to achieve a better score on that specific problem. The second one would just be people are using ChatGPT, and we are trying to improve the model to get better user retention based on all the traces. By intuition, these two scenarios are very different (in resource constraints, methodology). However, both could potentially be called "evolving intelligence". How should we separate just by looking at the problems themselves?
+For example, consider two scenarios. In the first, an agent is trying to solve a particular task on a hard benchmark such as Frontier CS [repo](https://github.com/FrontierCS/Frontier-CS). The agent can iterate on its solution, and the goal is to achieve a better score on that specific problem. In the second, people are using ChatGPT, and we are trying to improve the model to increase user retention based on aggregate traces. Intuitively, these two scenarios are very different in both resource constraints and methodology. However, both could still be described as "evolving intelligence." How should we distinguish them by looking at the problems themselves?
 
-The most satisfying classification criteria that I found: how much the agent assumes about future tasks that it will improve for the future while executing for the current one.
+The most satisfying classification criterion I found is this: how much the agent assumes about future tasks while improving itself on the current one.
 
-In an OpenEvolve solving Frontier CS question setup, the agent is fully aware of the future problem that it tries to solve since it is the same one, which makes repetitively experimenting with solutions rather enticing. All the takeways that are accumulated in the current run will be directly applicable in the future.
+In an OpenEvolve-style Frontier CS setup, the agent is fully aware of the future problem it is trying to solve because that future problem is the same one. That makes repeated experimentation with solutions especially attractive. All of the takeaways accumulated in the current run will be directly applicable in future runs.
 
-In the evaluation setup as such as the one used in [ACE](https://arxiv.org/abs/2510.04618), [Combee](https://arxiv.org/abs/2604.04247), or [GEPA](https://arxiv.org/abs/2507.19457), the future knowledge is only about the problem type, but the full description would not be provided during the update process. For example, we would be running the training on a speficic agent use case such as a finance domain task to generate a system prompt. This makes overfitting a problem (note the comparison with the previous case), but the agent would not need to update its ability in general problem solving. It only needs to adapt to the specific format of the problems.
+In evaluation setups such as those used in [ACE](https://arxiv.org/abs/2510.04618), [Combee](https://arxiv.org/abs/2604.04247), or [GEPA](https://arxiv.org/abs/2507.19457), future knowledge is limited to the problem type; the full task description is not available during the update process. For example, we might train on a specific agent use case, such as a finance-domain task, to generate a system prompt. This makes overfitting a real concern compared with the previous case, but the agent does not need to improve its general problem-solving ability. It only needs to adapt to a specific class of problems.
 
-For the more general case of Cursor or ChatGPT updating its model checkpoint for all users, the scenario is different again. Probably the only assumption we can make about future tasks is that users will be proposing coding/personal assistant style questions. This means that task specific details generated in each scenarion should probably  be omitted, since the same task would most likely not be repeated. In this case, weight update is probably the most effective way.
+For the more general case of Cursor or ChatGPT updating its model checkpoint for all users, the scenario is different again. Probably the only assumption we can make about future tasks is that users will continue to ask coding or personal-assistant-style questions. This means that task-specific details generated in each scenario should probably be omitted, since the exact same task is unlikely to be repeated. In this case, updating the weights is probably the most effective approach.
 
-These three examples demonstrate that by making clear of the assumption about future task knoweledge, the problem of continual learning or self-improving agents could be cleanly separated into categories. This potentially reduces confusion in disucssions or peer reviews.
+These three examples suggest that if we make our assumptions about future task knowledge explicit, the problem of continual learning or self-improving agents can be separated more cleanly into categories. That could reduce confusion in discussions and peer review.
 
 
 ## The Three Pillars of Evolving Agents: Models, Harness, and Environments
 ![Pillars](../../images/agent_kv/pillars.png)
-In one of my conversations after MemAgent workshop (with Benjamin), another researher proposed a view of seeing different directions for improving agents: model checkpoint, harness engineering, and feedback from environment. It was a short dicussion but I find the three pillars highly conclusive. Thus I am reusing the abstraction but filling in my own understanding here. 
+In one of my conversations after the MemAgent workshop, another researcher proposed a useful way to think about different directions for improving agents: model checkpoints, harness engineering, and feedback from the environment. It was a short discussion, but I found the three pillars highly compelling. I am reusing that abstraction here while filling in my own understanding.
 
-Model checkpoints are the basis for agents. It is simply the base LLMs that run on inference engines. 
+Model checkpoints are the foundation of agents. They are simply the base LLMs running on inference engines.
 
-Harness and environment are usually discussed interleavingly. But improvement in retrieval models could hardly be classified as harness engineering. Thus, we could seperate them into environment. The distinction would be harness determines the format of inputs to the model checkpoints, while feedback from environment determines the content of the inputs. For example, adding a step that incorporates skills into agent would be harness engineering, but determining how to best retrieve the relative skill (ex. through RAG) would be environment. 
+Harness and environment are often discussed together, but improvements in retrieval models can hardly be classified as harness engineering. So it is useful to separate them. The distinction is that the harness determines the format of inputs to the model checkpoint, while feedback from the environment determines the content of those inputs. For example, adding a step that incorporates skills into an agent would be harness engineering, while determining how to retrieve the relevant skill, for instance through RAG, would fall under the environment.
 
-In many scenarios, harness engineering methods are dirty fixes for model checkpoints. For example, the only reason to spin up sequential subagent is probably because the model becomes forgettable and inefficient with ever-increasing context length. In an ideal world where RNN works perfectly, maybe the agent could simply keep feeding the text to the model. We would not need to do anything like ACE if the models would internalize all its past experiences. The very fact that these methods exist hints us that our model checkpoints truly lack the capabilities to do them on their own. 
+In many scenarios, harness engineering methods are really patchwork fixes for model checkpoints. For example, one reason to spin up sequential subagents is that the model becomes forgetful and inefficient as context length grows. In an ideal world where recurrent architectures worked perfectly, an agent could simply keep feeding text into the model. We would not need methods like ACE if models could internalize all of their past experience on their own. The very fact that these methods exist suggests that our current model checkpoints still lack those capabilities.
 
-Unfortunately model checkpoints updates much slower than the harness. How much would the next generation of models fix these capabilty issues? We would have to wait for the frontier labs to figure them out. But the final landscape may be something similar to a meta-harness that auto-adapts to new models rapidly before the models update their weights again.
+Unfortunately, model checkpoint updates move much more slowly than harness changes. How much will the next generation of models fix these capability gaps? We will have to wait for the frontier labs to find out. But the final landscape may look something like a meta-harness that rapidly adapts to new models before the models update their weights again.
 
-On the other hand, feedback from environment remains irreplaceble. If a model has never had access to the news, it simply would not be able to react towards it.
+On the other hand, feedback from the environment remains irreplaceable. If a model has never had access to the news, it simply cannot respond to it.
 
 ## How Do We Fix Agent Skills?
 <!-- Skill -> updated skill -->
-It would make little sense to discuss checkpoint in academia.
-Let us discuss the biggest thing in harness/environment at the moment, agent skills.
+It would make little sense to focus on checkpoints in academia.
+So let us discuss one of the biggest topics in the harness and environment space at the moment: agent skills.
 
-Here is why I think the current format of skill could be improved:
-1. Skills are not modification-friendly. They are markdown files that each section is self-contained. Ideally, for an agent flow, you would want to update skills from time to time. But currently the only way out is by rewrite sections.
-2. Skills may not be RL-friendly. At this point we should be fairly confident that companies like Anthropic would post-train their model to use the Skills format better. However, at inference time skills are usually composite. It may cause 
+Here is why I think the current skill format could be improved:
+1. Skills are not modification-friendly. They are markdown files in which each section is largely self-contained. Ideally, in an agent workflow, you would want to update skills over time. Right now, however, the main option is to rewrite whole sections.
+2. Skills may not be especially RL-friendly. At this point, we should be fairly confident that companies like Anthropic will post-train their models to use the skill format more effectively. However, at inference time, skills are usually compositional rather than atomic. That makes credit assignment harder and may make optimization less efficient.
 
-Looking forward, we could probably re-design agent skills to fix the above problems. Some initial ideas are: 
-1. We can make certain sections of Skills appendable. For example, in some sections
-2. Good work
+Looking forward, we could probably redesign agent skills to address these problems. Some initial ideas are:
+1. Make certain sections of skills appendable, so an agent can accumulate new observations without rewriting the entire file.
+2. Separate stable instructions from learned or frequently updated content, which would make revision and optimization cleaner.
 
-Someone from industry at ICLR were seeking collarboration from researchers on how to improve agent skills. The conversation inspired this section.  I argue that as researchers, we should instead explore a better format for context plugins before labs dumb billions of dollar in RL for skills.
+Someone from industry at ICLR was looking for research collaboration on how to improve agent skills, and that conversation inspired this section. My view is that, as researchers, we should explore better formats for context plugins before labs pour billions of dollars into RL for today's skill format.
 
 
 
 ### Acknowledgement
-This blog was mainly written on Hanchen's flight back from Panama City to SFO. This time claude code is locked up in the Cyber The ideas are from discussions with people who I met in the conferences, including but not limited to Idan, Benjamin, Yihao, Qizheng.
-The definition of "evolve" was discussed by previous blogs by Joseph Gonzalez [here](). Here we are giving a more clear metric for separating these scenarios. 
+This blog was mainly written on Hanchen's flight back from Panama City to SFO. This time, Claude Code was locked away in the cyber void. The ideas here come from discussions with people I met at the conference, including but not limited to Idan, Benjamin, Yihao, and Qizheng.
+The definition of "evolve" was discussed in previous blogs by Joseph Gonzalez [here](). Here, I am proposing a clearer metric for separating these scenarios.
 
 
