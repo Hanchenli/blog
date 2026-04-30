@@ -49,14 +49,14 @@ Unfortunately, model checkpoint updates move much more slowly than harness chang
 
 On the other hand, feedback from the environment remains irreplaceable. If a model has never had access to the news, it simply cannot respond to it.
 
-## How Do We Fix Agent Skills?
+## How Do We Improve Agent Skills?
 <!-- Skill -> updated skill -->
 It would make little sense to focus on checkpoints in academia.
 So let us discuss one of the biggest topics in the harness and environment space at the moment: agent skills.
 
 Here is why I think the current skill format could be improved:
 1. Skills are not modification-friendly. They are markdown files in which each section is largely self-contained. Ideally, in an agent workflow, you would want to update skills over time. Right now, however, the main option is to rewrite whole sections.
-2. Skills may not be especially RL-friendly. At this point, we should be fairly confident that companies like Anthropic will post-train their models to use the skill format more effectively. However, at inference time, skills are usually compositional rather than atomic. That makes credit assignment harder and may make optimization less efficient.
+2. Skills may not be very RL-friendly. At this point, we should be fairly confident that companies like Anthropic will post-train their models to use the skill format more effectively. However, at inference time, skills are usually compositional rather than atomic. That makes credit assignment harder and may make optimization less efficient.
 
 Looking forward, we could probably redesign agent skills to address these problems. Some initial ideas are:
 1. Make certain sections of skills appendable, so an agent can accumulate new observations without rewriting the entire file.
@@ -68,6 +68,5 @@ Someone from industry at ICLR was looking for research collaboration on how to i
 
 ### Acknowledgement
 This blog was mainly written on Hanchen's flight back from Panama City to SFO. This time, Claude Code was locked away in the cyber void. The ideas here come from discussions with people I met at the conference, including but not limited to Idan, Benjamin, Yihao, and Qizheng.
-The definition of "evolve" was discussed in previous blogs by Joseph Gonzalez [here](). Here, I am proposing a clearer metric for separating these scenarios.
 
 
