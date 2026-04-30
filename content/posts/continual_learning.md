@@ -1,5 +1,5 @@
 ---
-title: "ICLR 2026 Reflections on Self-Improving AI: Reclassifying Continual Learning and the Separation of Models, Harness, and Environments"
+title: "Hanchen's ICLR 2026 Reflections on Self-Improving AI"
 date: 2026-04-30
 description: "This blog reflects on the author's experience at ICLR 2026, focusing on self-improving AI. It discusses the reclassification of continual learning based on assumptions about future tasks and introduces the three pillars of evolving agents: models, harness, and environments."
 author: "Hanchen Li"
