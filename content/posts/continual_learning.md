@@ -16,8 +16,6 @@ TocOpen: false
 
 I had the privilege of attending ICLR 2026 this year thanks to generous support from UCB Sky Lab. I helped present Agentic Context Engineering at the main conference, as well as two oral presentations at the Lifelong Agent and MemAgent workshops. As a result, much of my experience centered on agent memory and continual learning. I am writing this reflection to summarize my takeaways from conversations with other researchers. I hope this blog strikes a chord with fellow readers and not with any companies' legal teams over leaked information.
 
-This blog consists of three parts: 1. continual learning, 2. the triangle of models, harnesses, and environments, and 3. why skills may be a problematic format and how we could improve them.
-
 ## Reclassifying Evolving Agents or Continual Learning
 ![Tasks](../../images/continual_learning/tasks.png)
 As these terms have become more popular, their classification has also become increasingly vague because they now appear in many different kinds of papers. I believe many of these works are actually targeting different use cases, even though they describe themselves as continual learning in the title.
