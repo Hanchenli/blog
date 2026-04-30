@@ -1,12 +1,12 @@
 ---
-title: "ICLR 2026 Refelctions on Self-Improving AI: Reclassifying Continual Learning and Fixing Agent Skills"
-date: 2025-01-27
+title: "ICLR 2026 Reflections on Self-Improving AI: Reclassifying Continual Learning and Fixing Agent Skills"
+date: 2025-04-30
 description: ""
 author: "Hanchen Li"
 tags: ["Continual Learning", "Context Engineering", "Reflections", "Self-Improving", "Agents"]
 categories: ["general"]
 cover:
-    image: images/agent_future/main.png
+    image: images/continual_learning/brazil.png
     alt: ""
     relative: false
 ShowToc: true
@@ -22,22 +22,21 @@ The blog will be consisted of three parts. 1. Continual Learning. 2. The triangl
 <!-- Add graph about three examples -->
 After the terms become popular, the classification becomes increasingly vague due to the mentioning of such words in numerous papers. I believe that many works are essentially targeting different use scenarios, though they consider themselves continual learning in the title. 
 
-For example, let's consider two scenarios. The first case would be an agent trying to solve a particular task in hard benchmarks like Frontier CS [repo](). The agent can iterate on its solution, and the final goal is to achieve a better score on that specific problem. The second one would just be people are using ChatGPT, and we are trying to improve the model to get better user retention based on all the traces. By intuition, these two scenarios are very different (in resource constraints, methodology). However, both could potentially be called "evolving intelligence". How should we separate just by looking at the problems themselves?
+For example, let's consider two scenarios. The first case would be an agent trying to solve a particular task in hard benchmarks like Frontier CS [repo](https://github.com/FrontierCS/Frontier-CS). The agent can iterate on its solution, and the final goal is to achieve a better score on that specific problem. The second one would just be people are using ChatGPT, and we are trying to improve the model to get better user retention based on all the traces. By intuition, these two scenarios are very different (in resource constraints, methodology). However, both could potentially be called "evolving intelligence". How should we separate just by looking at the problems themselves?
 
 The most satisfying classification criteria that I found: how much the agent assumes about future tasks that it will improve for the future while executing for the current one.
 
 In an OpenEvolve solving Frontier CS question setup, the agent is fully aware of the future problem that it tries to solve since it is the same one, which makes repetitively experimenting with solutions rather enticing. All the takeways that are accumulated in the current run will be directly applicable in the future.
 
-In the evaluation setup as such as the one used in [ACE](), [Combee](), or [GEPA](), the future knowledge is only about the problem type, but the full description would not be provided during the update process. For example, we would be running the training on a speficic agent use case such as a finance domain task to generate a system prompt. This makes overfitting a problem (note the comparison with the previous case), but the agent would not need to update its ability in general problem solving. It only needs to adapt to the specific format of the problems.
+In the evaluation setup as such as the one used in [ACE](https://arxiv.org/abs/2510.04618), [Combee](https://arxiv.org/abs/2604.04247), or [GEPA](https://arxiv.org/abs/2507.19457), the future knowledge is only about the problem type, but the full description would not be provided during the update process. For example, we would be running the training on a speficic agent use case such as a finance domain task to generate a system prompt. This makes overfitting a problem (note the comparison with the previous case), but the agent would not need to update its ability in general problem solving. It only needs to adapt to the specific format of the problems.
 
 For the more general case of Cursor or ChatGPT updating its model checkpoint for all users, the scenario is different again. Probably the only assumption we can make about future tasks is that users will be proposing coding/personal assistant style questions. This means that task specific details generated in each scenarion should probably  be omitted, since the same task would most likely not be repeated. In this case, weight update is probably the most effective way.
 
 These three examples demonstrate that by making clear of the assumption about future task knoweledge, the problem of continual learning or self-improving agents could be cleanly separated into categories. This potentially reduces confusion in disucssions or peer reviews.
 
 
-
 ## The Three Pillars of Evolving Agents: Models, Harness, and Environments
-<!-- Three pillar graph -->
+![Pillars](../../images/agent_kv/pillars.png)
 In one of my conversations after MemAgent workshop (with Benjamin), another researher proposed a view of seeing different directions for improving agents: model checkpoint, harness engineering, and feedback from environment. It was a short dicussion but I find the three pillars highly conclusive. Thus I am reusing the abstraction but filling in my own understanding here. 
 
 Model checkpoints are the basis for agents. It is simply the base LLMs that run on inference engines. 
@@ -48,7 +47,7 @@ In many scenarios, harness engineering methods are dirty fixes for model checkpo
 
 Unfortunately model checkpoints updates much slower than the harness. How much would the next generation of models fix these capabilty issues? We would have to wait for the frontier labs to figure them out. But the final landscape may be something similar to a meta-harness that auto-adapts to new models rapidly before the models update their weights again.
 
-On the other hand, feedback from environment remains irreplaceble. If a model has never had access to the news, it simply would not be able to react towards it. (unless we have an oracle like xx in the [Foundation]()). 
+On the other hand, feedback from environment remains irreplaceble. If a model has never had access to the news, it simply would not be able to react towards it.
 
 ## How Do We Fix Agent Skills?
 <!-- Skill -> updated skill -->
