@@ -1,6 +1,6 @@
 ---
 title: "ICLR 2026 Reflections on Self-Improving AI: Reclassifying Continual Learning and Fixing Agent Skills"
-date: 2025-04-30
+date: 2026-04-30
 description: ""
 author: "Hanchen Li"
 tags: ["Continual Learning", "Context Engineering", "Reflections", "Self-Improving", "Agents"]
@@ -19,6 +19,7 @@ I had the privilege of attending ICLR 2026 this year thanks to generous support 
 This blog consists of three parts: 1. continual learning, 2. the triangle of models, harnesses, and environments, and 3. why skills may be a problematic format and how we could improve them.
 
 ## Reclassifying Evolving Agents or Continual Learning
+![Tasks](../../images/continual_learning/tasks.png)
 As these terms have become more popular, their classification has also become increasingly vague because they now appear in many different kinds of papers. I believe many of these works are actually targeting different use cases, even though they describe themselves as continual learning in the title.
 
 For example, consider two scenarios. In the first, an agent is trying to solve a particular task on a hard benchmark such as Frontier CS [repo](https://github.com/FrontierCS/Frontier-CS). The agent can iterate on its solution, and the goal is to achieve a better score on that specific problem. In the second, people are using ChatGPT, and we are trying to improve the model to increase user retention based on aggregate traces. Intuitively, these two scenarios are very different in both resource constraints and methodology. However, both could still be described as "evolving intelligence." How should we distinguish them by looking at the problems themselves?
@@ -35,7 +36,7 @@ These three examples suggest that if we make our assumptions about future task k
 
 
 ## The Three Pillars of Evolving Agents: Models, Harness, and Environments
-![Pillars](../../images/agent_kv/pillars.png)
+![Pillars](../../images/continual_learning/pillars.png)
 In one of my conversations after the MemAgent workshop, another researcher proposed a useful way to think about different directions for improving agents: model checkpoints, harness engineering, and feedback from the environment. It was a short discussion, but I found the three pillars highly compelling. I am reusing that abstraction here while filling in my own understanding.
 
 Model checkpoints are the foundation of agents. They are simply the base LLMs running on inference engines.
