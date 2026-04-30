@@ -1,7 +1,7 @@
 ---
-title: "ICLR 2026 Reflections on Self-Improving AI: Reclassifying Continual Learning and Fixing Agent Skills"
+title: "ICLR 2026 Reflections on Self-Improving AI: Reclassifying Continual Learning and the Separation of Models, Harness, and Environments"
 date: 2026-04-30
-description: ""
+description: "This blog reflects on the author's experience at ICLR 2026, focusing on self-improving AI. It discusses the reclassification of continual learning based on assumptions about future tasks and introduces the three pillars of evolving agents: models, harness, and environments."
 author: "Hanchen Li"
 tags: ["Continual Learning", "Context Engineering", "Reflections", "Self-Improving", "Agents"]
 categories: ["general"]
@@ -49,8 +49,8 @@ Unfortunately, model checkpoint updates move much more slowly than harness chang
 
 On the other hand, feedback from the environment remains irreplaceable. If a model has never had access to the news, it simply cannot respond to it.
 
-## How Do We Improve Agent Skills?
-<!-- Skill -> updated skill -->
+<!-- ## How Do We Improve Agent Skills?
+<!-- Skill -> updated skill 
 It would make little sense to focus on checkpoints in academia.
 So let us discuss one of the biggest topics in the harness and environment space at the moment: agent skills.
 
@@ -62,7 +62,7 @@ Looking forward, we could probably redesign agent skills to address these proble
 1. Make certain sections of skills appendable, so an agent can accumulate new observations without rewriting the entire file.
 2. Separate stable instructions from learned or frequently updated content, which would make revision and optimization cleaner.
 
-Someone from industry at ICLR was looking for research collaboration on how to improve agent skills, and that conversation inspired this section. My view is that, as researchers, we should explore better formats for context plugins before labs pour billions of dollars into RL for today's skill format.
+Someone from industry at ICLR was looking for research collaboration on how to improve agent skills, and that conversation inspired this section. My view is that, as researchers, we should explore better formats for context plugins before labs pour billions of dollars into RL for today's skill format. -->
 
 
 
