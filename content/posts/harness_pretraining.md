@@ -1,5 +1,5 @@
 ---
-title: "Harness is a fight for your Instincts in Pretraining."
+title: "Harness is Closer to Pretrain than RL--A Data Flywheel point of view"
 date: 2069-02-20
 description: ""
 author: "Hanchen Li"
