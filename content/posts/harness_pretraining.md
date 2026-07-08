@@ -14,7 +14,7 @@ TocOpen: false
 ---
 
 ![Data flywheel for coding agents](../../images/harness_pretrain/overview.png)
-The normal order of looking at the whole agent pipeline follows a temporal order:  pretrain, midtrain, posttrain. And then, almost as an afterthought, the harness comes. First you train the model, then you build the harness. 
+The usual way that people look at the agent life cycle follows a temporal order:  pretrain, midtrain, posttrain. And then, almost as an afterthought, the harness comes. First you train the model, then you build the harness. 
 
 However, in this post we will argue that the harness and pretraining, the two ends of the pipeline, are secretly holding hands. And this comes in two directions:
 1. From a training point of view, the harness defines what trajectories the data flywheel collects, and therefore what the next pretraining run eats.
