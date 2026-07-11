@@ -22,7 +22,7 @@ However, in this post we will argue that the harness and pretraining, the two en
 
 In this post, I will explore some of the ideas that have been going around my head :
 
-- **RL is potentially only important for adapting to a harness**. And once the harness is good enough, the data flywheel can take over and scale with users trajectories.
+- **Harness might need to be designed before RL**. And once the harness is ready to be shipped, the data flywheel can take over and scale with users trajectories.
 - **Current pretraining bakes in biases like "my context is correct"** This makes them powerful prediction machines but breaking them for better outcome is manual work done in the harness.
 - There are **two ways to fix these biases: encode the correction in the harness, or distill rational human actions into the weights.** They look like rivals, but the flywheel connects them — the harness fix comes first because it generates the data the distillation fix needs.
 
@@ -34,7 +34,7 @@ I use "harness" in the same sense as my [ICLR reflections post](../continual_lea
 
 Let's first go through what a data flywheel is. The very defining precursor is Tesla FSD. Although the self driving technology was not perfect in the beginning, every car is a data-collection device: when the driver intervenes or disengages, the moment could get flagged and folded into the next training run. Deployment produces data, data produces a better model, a better model justifies wider deployment. The product is part of the data pipeline.
 
-Coding agents run the same loop. Claude Code and Cursor sessions produce trajectories. All the context the model saw, and all the user interactions could be used in future training. Filter for the good or successful trajectories and you have SFT data that works on top of your existing agent plus harness
+Coding agents run the same loop. Claude Code and Cursor sessions produce trajectories. All the context the model saw, and all the user interactions could be used in future training. Filter for the good or successful trajectories and you have SFT data that works on top of your existing agent plus harness.
 
 ![Data flywheel for coding agents](../../images/harness_pretrain/flywheel.png)
 
@@ -47,7 +47,7 @@ Compare this against RL as a way of improving the same agent:
 - **Benefit:** every user session is a candidate, and training remains relatively simple without the need to tune fragile staleness or prepare complex RL infrastructure.
 - **Downside:** it needs users first, so a weak cold-start agent may not generate useful trajectories since users would not use it at all.
 
-Thus, the true use of RL might be to only help the agent become good enough for people to use once new capabilities are added. After that, the flywheel scales with user data until saturation. **RL starts the flywheel; the harness is the flywheel.**
+Thus one role of RL is to help the agent become good enough for people to use once new capabilities are added, especially before a new harness becomes generally available to the public. The flywheel can then scale with user data. **RL bootstraps and disciplines; the harness is the flywheel.**
 
 ![RL bootstraps, the flywheel compounds](../../images/harness_pretrain/rl_vs_flywheel.png)
 
@@ -77,7 +77,7 @@ So if I write "The earth will explode in 2030" in the context, the model will tr
 
 Imagine this: you asked a model for a CUDA kernel, and at some point it wrote a Triton version. From then on it will continue in Python essentially forever, even if CUDA is faster. Why? I argue that because in pretraining data, **a file that is half Python is almost certainly all Python. It is a Python file!** Language-switching mid-document is vanishingly rare in the corpus, so once the trajectory enters Python, the prior for staying there is overwhelming. The model isn't being stubborn; it is doing exactly what next-token prediction on real files taught it to do.
 
-Can we post-train it to not follow this pattern? Maybe, but it might be super inefficient to get rid of this behavior since the prior is so strong that changing languages midway is very low probability event! Since RL does not introduces new capabilities, it might require many many failing rollouts to get a positive reward.
+Can we post-train it to not follow this pattern? SFT on a handful of corrected trajectories might not be enough. RL can actively suppress the wrong continuation, not just add rare positive examples; but with such a dominant prior, it may still take many rollouts before the penalty signal wins since correct demonstrates will come very rarely.
 
 
 ### The Symbolic Layer above Pretraining Reflexes
