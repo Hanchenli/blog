@@ -69,7 +69,7 @@ Lots of interesting future work fits here: measuring transfer across harnesses, 
 
 ## Pretrain → Harness
 
-### Bias in Pretrain
+### Bias in Pretraining
 
 The reverse link starts from a fact about pretraining method: we teach the model that what the context says is correct and you should say more. This actually transfers a hidden bias into the model: it is trained to trust its context.
 
