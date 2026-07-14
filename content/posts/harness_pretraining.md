@@ -107,4 +107,4 @@ The harness and pretraining are holding hands in both directions: the harness de
 
 
 ### Acknowledgement
-This blog is not a reflection of employer values. Just some random thoughts that I tried to put together and might contain scientific errors. But it will be scientific (it can be proved wrong) ;)
+We thank Qizheng Zhang for the feedback on the initial draft of the blog. This blog is not a reflection of employer values. Just some random thoughts that I tried to put together in free time.
