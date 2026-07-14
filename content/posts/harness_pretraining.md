@@ -1,7 +1,7 @@
 ---
-title: "Why Pretraining brings Harness Problem: A Data Flywheel Perspective"
-date: 2026-07-08
-description: "Explaining the hidden links between harness"
+title: "What if Harness Comes Before Pretraining? A View from the Data Flywheel"
+date: 2026-07-13
+description: "Explaining the hidden links between harness and pretraining"
 author: "Hanchen Li"
 tags: ["Agents", "Harness", "Pretraining", "Skills", "Context Engineering", "Self-Improving"]
 categories: ["general"]
