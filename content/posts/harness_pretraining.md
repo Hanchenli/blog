@@ -1,5 +1,5 @@
 ---
-title: "What if Harness Comes Before Pretraining? A View from the Data Flywheel"
+title: "What if Harness Comes Before Pretraining? A Data Flywheel Perspective"
 date: 2026-07-13
 description: "Explaining the hidden links between harness and pretraining"
 author: "Hanchen Li"
