@@ -17,6 +17,8 @@ TocOpen: false
 Token cheaper and cheaper, if people release API will be distilled.
 What left unimpacted? Stake (resources needed to exchange besides tokens)
 
+I am not leopold and I don't want to buy galaxies. So I will keep my post short.
+
 ## On Labs
 Research -> High Stake senarios -> example, prediction, bio, security, ....
 
@@ -42,3 +44,4 @@ Netscape was created 1994, Google was created in 1998, stock market peaked in 20
 The great buildout is still ongoing.
 We are still early in the whole new AI economy. 
 Have less FOMO and enjoy more of your valuable stake: time :\)
+
