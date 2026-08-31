@@ -1,6 +1,6 @@
 ---
 title: "The Second Half of Agent Economy: Token Abundance and Stake Scarcity"
-date: 2026-08-31
+date: 2029-08-31
 description: ""
 author: "Hanchen Li"
 tags: ["Agents", "Harness", "Pretraining", "Skills", "Context Engineering", "Self-Improving"]
